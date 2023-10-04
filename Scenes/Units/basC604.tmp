@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwciaemefunni"]
+
+[ext_resource type="Script" path="res://Scenes/Units/Unit.gd" id="1_8vjxj"]
+[ext_resource type="Texture2D" uid="uid://bgnep1j35nu2i" path="res://Resources/Characters/Default.png" id="2_pco76"]
+[ext_resource type="Script" path="res://AI.gd" id="3_20nej"]
+[ext_resource type="Script" path="res://Scenes/UI.gd" id="4_eajtp"]
+[ext_resource type="Texture2D" uid="uid://b8fjuehmljstu" path="res://Resources/UI/sword.png" id="5_ulkvv"]
+[ext_resource type="Texture2D" uid="uid://c64qctevddt4t" path="res://Resources/UI/shield.png" id="6_o8kmm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xlmmh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pco76")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ue4tf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pco76")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BaseUnit" type="Node2D"]
+script = ExtResource("1_8vjxj")
+sprite_frames = SubResource("SpriteFrames_xlmmh")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ue4tf")
+
+[node name="AI" type="Node" parent="."]
+script = ExtResource("3_20nej")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_eajtp")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 14.0
+offset_right = 32.0
+offset_bottom = 40.0
+color = Color(0.439216, 0.439216, 0.439216, 0.156863)
+metadata/_edit_use_anchors_ = true
+
+[node name="StatsContainer" type="HBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 14.0
+offset_right = 120.0
+offset_bottom = 64.0
+scale = Vector2(0.511399, 0.511399)
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="AttTexture" type="TextureRect" parent="UI/StatsContainer"]
+layout_mode = 2
+texture = ExtResource("5_ulkvv")
+
+[node name="AttLabel" type="Label" parent="UI/StatsContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="DefTexture" type="TextureRect" parent="UI/StatsContainer"]
+layout_mode = 2
+texture = ExtResource("6_o8kmm")
+
+[node name="DefLabel" type="Label" parent="UI/StatsContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="HPBar" type="ProgressBar" parent="UI"]
+layout_mode = 0
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = -21.0
+value = 100.0
+metadata/_edit_use_anchors_ = true

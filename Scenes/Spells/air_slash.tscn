@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbk5sv07273r"]
+
+[ext_resource type="Script" path="res://Scenes/Spells/air_slash.gd" id="1_0va8o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q2t0q"]
+animations = []
+
+[node name="AirSlash" type="Node2D"]
+script = ExtResource("1_0va8o")
+srange = 10
+radius = 0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q2t0q")
+animation = &""

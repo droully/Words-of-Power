@@ -1,0 +1,452 @@
+[gd_scene load_steps=38 format=3 uid="uid://bl8iglk1xnwbs"]
+
+[ext_resource type="Script" path="res://BattleManager.gd" id="1_5o2ef"]
+[ext_resource type="Texture2D" uid="uid://clcckii0evvcf" path="res://Resources/Spritesheet/Battleground.png" id="1_di1cw"]
+[ext_resource type="Script" path="res://Battlefield.gd" id="2_1g4q8"]
+[ext_resource type="Texture2D" uid="uid://cml1v15d86kyu" path="res://Resources/Spritesheet/Highlight.png" id="2_hed0d"]
+[ext_resource type="Texture2D" uid="uid://wspxr3ru27yk" path="res://Resources/Spritesheet/Coordinates.png" id="3_f53dl"]
+[ext_resource type="Script" path="res://UIManager.gd" id="6_tbgf5"]
+[ext_resource type="PackedScene" uid="uid://dwciaemefunni" path="res://unit.tscn" id="7_7ta1y"]
+[ext_resource type="Texture2D" uid="uid://cjqvx668pb1br" path="res://Resources/Characters/Free Cow Sprites.png" id="8_y8e2q"]
+[ext_resource type="Texture2D" uid="uid://b2bienbgx41je" path="res://Resources/Characters/Basic Charakter Spritesheet.png" id="9_b2kxl"]
+[ext_resource type="PackedScene" uid="uid://qlgl3l1q2u5m" path="res://Resources/book.tscn" id="9_lilio"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4ky1"]
+texture = ExtResource("1_di1cw")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+0:13/0 = 0
+1:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+0:14/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+0:15/0 = 0
+1:15/0 = 0
+2:15/0 = 0
+3:15/0 = 0
+0:16/0 = 0
+2:16/0 = 0
+3:16/0 = 0
+0:17/0 = 0
+1:17/0 = 0
+2:17/0 = 0
+3:17/0 = 0
+0:18/0 = 0
+1:18/0 = 0
+2:18/0 = 0
+3:18/0 = 0
+0:19/0 = 0
+1:19/0 = 0
+2:19/0 = 0
+3:19/0 = 0
+0:20/0 = 0
+1:20/0 = 0
+2:20/0 = 0
+3:20/0 = 0
+0:21/0 = 0
+1:21/0 = 0
+2:21/0 = 0
+3:21/0 = 0
+0:22/0 = 0
+1:22/0 = 0
+2:22/0 = 0
+3:22/0 = 0
+0:23/0 = 0
+1:23/0 = 0
+2:23/0 = 0
+3:23/0 = 0
+0:24/0 = 0
+1:24/0 = 0
+2:24/0 = 0
+3:24/0 = 0
+0:25/0 = 0
+1:25/0 = 0
+2:25/0 = 0
+1:16/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8hrpe"]
+texture = ExtResource("2_hed0d")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7w7mk"]
+texture = ExtResource("3_f53dl")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+3:2/0/custom_data_0 = NodePath("Enemy")
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+3:4/0/custom_data_0 = NodePath("Player")
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_bi6qu"]
+tile_size = Vector2i(64, 64)
+custom_data_layer_0/name = "UnitTracking"
+custom_data_layer_0/type = 22
+sources/1 = SubResource("TileSetAtlasSource_8hrpe")
+sources/0 = SubResource("TileSetAtlasSource_a4ky1")
+sources/2 = SubResource("TileSetAtlasSource_7w7mk")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2m22"]
+atlas = ExtResource("8_y8e2q")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8davw"]
+atlas = ExtResource("8_y8e2q")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13i1n"]
+atlas = ExtResource("8_y8e2q")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgado"]
+atlas = ExtResource("8_y8e2q")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp8e7"]
+atlas = ExtResource("8_y8e2q")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mlju6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2m22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8davw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13i1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgado")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp8e7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5oa62"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eknn7"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u086u"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l26ci"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkjff"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grtm4"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gndok"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g27n"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5y0o"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thed0"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o38si"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq7oc"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u30ym"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yygki"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qsy3"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23vvb"]
+atlas = ExtResource("9_b2kxl")
+region = Rect2(144, 144, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jtc68"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5oa62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eknn7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u086u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l26ci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkjff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grtm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gndok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1g27n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5y0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thed0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o38si")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq7oc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u30ym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yygki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qsy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23vvb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BattleScene" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -352.0
+offset_top = -272.0
+offset_right = -312.0
+offset_bottom = -232.0
+scale = Vector2(56.9114, 31.4082)
+color = Color(0.101961, 0.180392, 0.0588235, 1)
+metadata/_edit_lock_ = true
+
+[node name="Battlefield" type="TileMap" parent="."]
+position = Vector2(128, 128)
+tile_set = SubResource("TileSet_bi6qu")
+format = 2
+layer_0/name = "Base"
+layer_0/tile_data = PackedInt32Array(0, 0, 12, 65536, 65536, 9, 131072, 65536, 9, 196608, 0, 12, 262144, 0, 12, 327680, 0, 12, 393216, 0, 12, 1, 0, 12, 65537, 65536, 9, 131073, 65536, 9, 196609, 0, 12, 262145, 196608, 10, 327681, 196608, 10, 393217, 196608, 10, 2, 0, 12, 65538, 0, 12, 131074, 0, 12, 196610, 0, 12, 262146, 196608, 10, 327682, 196608, 10, 393218, 196608, 10, 3, 0, 12, 65539, 0, 12, 131075, 0, 12, 196611, 0, 12, 262147, 196608, 10, 327683, 196608, 10, 393219, 196608, 10, 4, 0, 12, 65540, 0, 12, 131076, 65536, 6, 196612, 65536, 6, 262148, 65536, 6, 327684, 65536, 6, 393220, 196608, 10, 5, 0, 12, 65541, 65536, 6, 131077, 65536, 6, 196613, 65536, 6, 262149, 65536, 6, 327685, 65536, 6, 393221, 65536, 6, 6, 0, 12, 65542, 0, 12, 131078, 0, 12, 196614, 0, 12, 262150, 0, 12, 327686, 0, 12, 393222, 0, 12)
+layer_1/name = "Highlight"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Meta"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array(65536, 2, 1, 0, 2, 0, 1, 65538, 0, 131072, 2, 2, 196608, 2, 3, 262144, 2, 4, 327680, 2, 5, 393216, 2, 6, 65537, 65538, 1, 131073, 65538, 2, 196609, 65538, 3, 262145, 65538, 4, 327681, 65538, 5, 393217, 65538, 6, 2, 131074, 0, 65538, 131074, 1, 131074, 131074, 2, 196610, 131074, 3, 262146, 131074, 4, 327682, 131074, 5, 393218, 131074, 6, 3, 196610, 0, 65539, 196610, 1, 131075, 196610, 2, 196611, 196610, 3, 262147, 196610, 4, 327683, 196610, 5, 393219, 196610, 6, 4, 262146, 0, 65540, 262146, 1, 131076, 262146, 2, 196612, 262146, 3, 262148, 262146, 4, 327684, 262146, 5, 393220, 262146, 6, 5, 327682, 0, 65541, 327682, 1, 131077, 327682, 2, 196613, 327682, 3, 262149, 327682, 4, 327685, 327682, 5, 393221, 327682, 6, 6, 393218, 0, 65542, 393218, 1, 131078, 393218, 2, 196614, 393218, 3, 262150, 393218, 4, 327686, 393218, 5, 393222, 393218, 6)
+script = ExtResource("2_1g4q8")
+
+[node name="Enemy" parent="Battlefield" instance=ExtResource("7_7ta1y")]
+position = Vector2(232, 152)
+att = 10
+def = 2
+sprite_frames = SubResource("SpriteFrames_mlju6")
+side = "Enemy"
+
+[node name="Player" parent="Battlefield" instance=ExtResource("7_7ta1y")]
+position = Vector2(232, 280)
+att = 10
+def = 5
+sprite_frames = SubResource("SpriteFrames_jtc68")
+side = "Player"
+
+[node name="UIManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_tbgf5")
+
+[node name="Book" parent="UIManager" instance=ExtResource("9_lilio")]
+position = Vector2(776, 296)
+scale = Vector2(1.00102, 1)
+
+[node name="ActionsContainer" type="VBoxContainer" parent="UIManager"]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 176.0
+offset_right = 994.0
+offset_bottom = 242.0
+scale = Vector2(1.76908, 1.76279)
+
+[node name="Move" type="Button" parent="UIManager/ActionsContainer"]
+layout_mode = 2
+text = "Move"
+
+[node name="Attack" type="Button" parent="UIManager/ActionsContainer"]
+layout_mode = 2
+text = "Attack"
+
+[node name="TurnContainer" type="HBoxContainer" parent="UIManager"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 40.0
+offset_right = 168.0
+offset_bottom = 80.0
+scale = Vector2(2.95551, 0.651991)
+
+[node name="PlayerTurnUI" type="ColorRect" parent="UIManager/TurnContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+color = Color(0.133333, 0.137255, 1, 1)
+
+[node name="EnemyTurnUI" type="ColorRect" parent="UIManager/TurnContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+color = Color(1, 0, 0.0313726, 1)
+
+[node name="BattleManager" type="Node" parent="."]
+script = ExtResource("1_5o2ef")
+
+[connection signal="word_calculated" from="UIManager/Book" to="Battlefield/Player" method="_on_book_word_calculated"]
+[connection signal="pressed" from="UIManager/ActionsContainer/Move" to="UIManager" method="_on_move_pressed"]
+[connection signal="pressed" from="UIManager/ActionsContainer/Move" to="BattleManager" method="_on_move_pressed"]
+[connection signal="pressed" from="UIManager/ActionsContainer/Attack" to="UIManager" method="_on_attack_pressed"]
+[connection signal="pressed" from="UIManager/ActionsContainer/Attack" to="BattleManager" method="_on_attack_pressed"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://qlgl3l1q2u5m"]
+
+[ext_resource type="Script" path="res://Scenes/book.gd" id="1_slrus"]
+[ext_resource type="Texture2D" uid="uid://b1o7tul6khqc4" path="res://Resources/Book.png" id="1_u3uns"]
+[ext_resource type="Script" path="res://Resources/LetterStats.gd" id="3_lbufv"]
+
+[node name="Book" type="Node2D"]
+script = ExtResource("1_slrus")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(176, 136)
+scale = Vector2(0.266667, 0.266667)
+texture = ExtResource("1_u3uns")
+
+[node name="WordInput" type="LineEdit" parent="."]
+offset_left = 72.0
+offset_top = 64.0
+offset_right = 139.063
+offset_bottom = 95.0
+text = "Casa"
+metadata/_edit_use_anchors_ = true
+
+[node name="WordLabel" type="RichTextLabel" parent="."]
+offset_left = 64.0
+offset_top = 120.0
+offset_right = 152.0
+offset_bottom = 160.0
+theme_override_colors/default_color = Color(0, 0.188235, 0.568627, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+text = "test"
+
+[node name="LetterStats" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_lbufv")
+
+[connection signal="text_submitted" from="WordInput" to="." method="_on_word_text_text_submitted"]
