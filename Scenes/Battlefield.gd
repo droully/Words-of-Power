@@ -16,8 +16,7 @@ var last_highlighted_tile = Vector2i(-1, -1)
 func _ready():
 	set_layer_modulate(Layer.Meta,Color(1, 1, 1, 0))
 	
-	player.unit_moved.connect(_on_unit_moved)
-	enemy.unit_moved.connect(_on_unit_moved)
+	Events.unit_moved.connect(_on_unit_moved)
 	
 	place_unit_on_tile(enemy,3,2)
 	place_unit_on_tile(player,3,4)
@@ -110,11 +109,3 @@ func _on_unit_moved(unit,from_coord:Vector2,to_coord:Vector2):
 	from_cell.set_custom_data("UnitTracking",null)
 	to_cell.set_custom_data("UnitTracking",unit)
 
-
-
-func _on_book_word_calculated(total_att, total_def):
-	pass # Replace with function body.
-
-
-func _on_spell_pressed():
-	pass # Replace with function body.

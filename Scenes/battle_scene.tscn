@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bl8iglk1xnwbs"]
+[gd_scene load_steps=39 format=3 uid="uid://bl8iglk1xnwbs"]
 
 [ext_resource type="Script" path="res://Scenes/BattleManager.gd" id="1_5o2ef"]
 [ext_resource type="Texture2D" uid="uid://clcckii0evvcf" path="res://Resources/Spritesheet/Battleground.png" id="1_di1cw"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dwciaemefunni" path="res://Scenes/Units/base_unit.tscn" id="7_7ta1y"]
 [ext_resource type="Texture2D" uid="uid://cjqvx668pb1br" path="res://Resources/Characters/Free Cow Sprites.png" id="8_y8e2q"]
 [ext_resource type="Texture2D" uid="uid://b2bienbgx41je" path="res://Resources/Characters/Basic Charakter Spritesheet.png" id="9_b2kxl"]
-[ext_resource type="PackedScene" uid="uid://qlgl3l1q2u5m" path="res://Resources/book.tscn" id="9_lilio"]
 [ext_resource type="Script" path="res://Scenes/ActionsContainer.gd" id="11_8u568"]
 [ext_resource type="Script" path="res://Scenes/AnimationManager.gd" id="12_dt3ki"]
 
@@ -406,10 +405,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6_tbgf5")
 
-[node name="Book" parent="UIManager" instance=ExtResource("9_lilio")]
-position = Vector2(800, 294)
-scale = Vector2(1.00102, 1)
-
 [node name="ActionsContainer" type="VBoxContainer" parent="UIManager"]
 layout_mode = 0
 offset_left = 592.0
@@ -447,8 +442,6 @@ script = ExtResource("1_5o2ef")
 [node name="AnimationManager" type="Node" parent="."]
 script = ExtResource("12_dt3ki")
 
-[connection signal="word_calculated" from="UIManager/Book" to="Battlefield" method="_on_book_word_calculated"]
-[connection signal="word_calculated" from="UIManager/Book" to="Battlefield/Player" method="_on_book_word_calculated"]
 [connection signal="spell_button_pressed" from="UIManager/ActionsContainer" to="BattleManager" method="_on_spell_button_pressed"]
 [connection signal="pressed" from="UIManager/ActionsContainer/Move" to="UIManager" method="_on_move_pressed"]
 [connection signal="pressed" from="UIManager/ActionsContainer/Move" to="BattleManager" method="_on_move_pressed"]

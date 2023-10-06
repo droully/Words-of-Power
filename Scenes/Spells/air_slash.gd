@@ -13,8 +13,7 @@ func targeting(target_tile):
 		targets.append(BF.get_unit_in_tile(tile))
 	return targets
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func effect(target):
+func effect(target,callback):
 	var arg_dict ={"target":target,"dir":dir,"distance":1}
-	emit_signal("spell_effect","push",arg_dict)
-
+	callback.call("push",arg_dict)
+	return arg_dict

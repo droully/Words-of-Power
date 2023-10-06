@@ -11,21 +11,19 @@ var ongoing_animations : Array
 # Called when the node enters the scene tree for the first time.
 func _ready():
 
-	BM.player.unit_move_anim_end.connect(_on_object_finished_animation)
-	BM.enemy.unit_move_anim_end.connect(_on_object_finished_animation)
-	BM.player.unit_move_anim_start.connect(_on_object_started_animation)
-	BM.enemy.unit_move_anim_start.connect(_on_object_started_animation)
+	Events.unit_move_anim_end.connect(_on_object_finished_animation)
+	Events.unit_move_anim_start.connect(_on_object_started_animation)
 	
-	BM.spell_cast.connect(_on_spell_cast)
-	
+	Events.spell_cast_anim_start.connect(_on_object_started_animation)
+	Events.spell_cast_anim_end.connect(_on_object_finished_animation)
 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
-func check_anim_state(ongoing_animations):
+func check_anim_state():
 	if len(ongoing_animations)>0:
 		anim_state = AnimationState.Ongoing
 	else:
@@ -33,16 +31,15 @@ func check_anim_state(ongoing_animations):
 
 func _on_object_started_animation(object):
 	ongoing_animations.append(object)
-	check_anim_state(ongoing_animations)
+	check_anim_state()
 
 func _on_object_finished_animation(object):
 	
 	ongoing_animations.erase(object)
-	check_anim_state(ongoing_animations)
+	check_anim_state()
 	
-func _on_spell_cast(spell):
-	spell.spell_cast_anim_start.connect(_on_object_started_animation)
-	spell.spell_cast_anim_end.connect(_on_object_finished_animation)
+
+
 	
 
 		

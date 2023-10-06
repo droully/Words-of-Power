@@ -18,9 +18,6 @@ class_name Unit
 var tile_position: Vector2i
 
 
-signal unit_moved(unit,from_coord,to_coord)
-signal unit_move_anim_start(unit)
-signal unit_move_anim_end(unit)
 
 func _ready():
 	$Sprite.sprite_frames = sprite_frames
@@ -31,11 +28,11 @@ func move_to(to_coord:Vector2):
 	tween.finished.connect(_on_finished_animation)
 	#a absoluto 
 	var from_coord= position #
-	emit_signal("unit_move_anim_start",self)
+	Events.emit_signal("unit_move_anim_start",self)
 	tween.tween_property(self, "position", to_coord, .3).set_trans(Tween.TRANS_BACK)
 	
 #	position=to_coord	#position:absoluto
-	emit_signal("unit_moved",self,from_coord,to_coord)
+	Events.emit_signal("unit_moved",self,from_coord,to_coord)
 	
 
 
@@ -55,4 +52,4 @@ func die():
 	queue_free() # or handle in another way
 
 func _on_finished_animation():
-	emit_signal("unit_move_anim_end",self)
+	Events.emit_signal("unit_move_anim_end",self)

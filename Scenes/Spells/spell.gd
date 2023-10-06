@@ -17,17 +17,12 @@ var BF
 var caster:Unit
 var target_pos:Vector2
 
-signal spell_cast_anim_start(spell)
-signal spell_cast_anim_end(spell)
 
-signal spell_effect(arg_dict)
-
-
-func initialize(Battlefield,_caster:Unit,_target_pos:Vector2):
-	BF=Battlefield
-	caster=_caster
-	target_pos=_target_pos
-
+func initialize(_Battlefield,_caster:Unit,_target_pos:Vector2):
+	self.BF=_Battlefield
+	self.caster=_caster
+	self.target_pos=_target_pos
+	
 func animation():
 	pass
 
@@ -38,7 +33,6 @@ func targeting(target_tile):
 		targets.append(BF.get_unit_in_tile(tile))
 	return targets
 	
-func effect(target):
-	var arg_dict ={"target":target, "damage":damage}
-	emit_signal("spell_effect","attack",arg_dict)
+func effect(target,callback):
+	pass
 

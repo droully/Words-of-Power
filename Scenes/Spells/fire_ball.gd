@@ -10,13 +10,13 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func animation():
 	var anim_speed = 200
 
-	emit_signal("spell_cast_anim_start",self)
+	Events.emit_signal("spell_cast_anim_start",self)
 	anim_player.animation_finished.connect(_on_finished_animation)
 	var anim = anim_player.get_animation("traveling")
 	var pos_track = anim.find_track(".:position",0)
@@ -29,15 +29,15 @@ func animation():
 
 	anim_player.play("traveling")
 	anim_player.queue("exploding")
-	
-	
+
 
 func _on_finished_animation(anim_name):
 
 	if anim_name== "exploding":
-		emit_signal("spell_cast_anim_end",self)
+		Events.emit_signal("spell_cast_anim_end",self)
 		queue_free()
 	
-func effect(target):
-	var arg_dict ={"target":target, "damage":damage}
-	emit_signal("spell_effect","attack",arg_dict)
+func effect(target,callback):
+	var arg_dict ={"order":"attack","target":target, "damage":damage}
+	callback.call("attack",arg_dict)
+	return arg_dict

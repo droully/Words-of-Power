@@ -14,3 +14,18 @@ config/name="Words of Power"
 run/main_scene="res://Scenes/battle_scene.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout=""
+
+[autoload]
+
+Events="*res://Scenes/Events.gd"
+
+[input]
+
+undo={
+"deadzone": 0.5,
+"events": []
+}
