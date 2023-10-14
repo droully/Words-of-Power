@@ -1,6 +1,8 @@
 extends Node
 
 
+signal spell_button_pressed(spell_name)
+
 signal spell_cast_anim_start(spell)
 signal spell_cast_anim_end(spell)
 

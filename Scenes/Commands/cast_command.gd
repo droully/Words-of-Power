@@ -18,17 +18,20 @@ func execute():
 	spell.initialize(BF,caster,BF.map_to_local(target_tile))
 	BF.add_child(spell)
 	spell.hide()
-
-
+	#spell.valid_target_tile(callback)
 
 	if BF.distance(target_tile,caster.tile_position)>spell.srange:
 		return false
+		
 	spell.show()
+	
+	#targets=spell.get_targets(callback)
 	var targets = spell.targeting(target_tile)
-
+	
+	
 	for target in targets:
 		if target:
 			spell.effect(target,callback)
-
+	#affect target
 	spell.animation()
 	return true

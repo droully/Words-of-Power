@@ -12,9 +12,9 @@ class_name Unit
 @export var def: int = 5
 @export var speed: int = 2
 
-
 @export var sprite_frames: SpriteFrames
 @export var side: String
+
 var tile_position: Vector2i
 
 
@@ -23,13 +23,20 @@ func _ready():
 	$Sprite.sprite_frames = sprite_frames
 	ui.refresh(self)
 	
-func move_to(to_coord:Vector2):
+func set_attributes(_tile_position:Vector2i,_position):
+	tile_position = _tile_position
+	position = _position
+func move_to(path):
+	var to_coord=path[-1]
+	var from_coord= position 
+	
 	var tween = create_tween()
 	tween.finished.connect(_on_finished_animation)
-	#a absoluto 
-	var from_coord= position #
+	
 	Events.emit_signal("unit_move_anim_start",self)
-	tween.tween_property(self, "position", to_coord, .3).set_trans(Tween.TRANS_BACK)
+	
+	for point in path.slice(1):
+		tween.tween_property(self, "position", point, .3)
 	
 #	position=to_coord	#position:absoluto
 	Events.emit_signal("unit_moved",self,from_coord,to_coord)

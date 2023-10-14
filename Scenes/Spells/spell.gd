@@ -24,15 +24,10 @@ func initialize(_Battlefield,_caster:Unit,_target_pos:Vector2):
 	self.target_pos=_target_pos
 	
 func animation():
-	pass
+	return null
 
-func targeting(target_tile):
-	var target_tiles=BF.tiles_in_aoe(target_tile, radius)
-	var targets = []
-	for tile in target_tiles:
-		targets.append(BF.get_unit_in_tile(tile))
-	return targets
+func targeting(_target_tile):
+	return null
 	
-func effect(target,callback):
-	pass
-
+func effect(_target,_callback):
+	return null

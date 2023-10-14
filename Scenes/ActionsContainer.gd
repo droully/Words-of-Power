@@ -17,5 +17,5 @@ func _ready():
 	# Add your logic here to cast the spell or whatever you'd like to do.
 		button.pressed.connect(_on_spell_button_pressed.bind(spells_Name[i]))
 
-func _on_spell_button_pressed(spell_name):
-	emit_signal("spell_button_pressed",spell_name)
+func _on_spell_button_pressed(spell_name):	
+	Events.emit_signal("spell_button_pressed",Utils.get_spell_by_name(spell_name))

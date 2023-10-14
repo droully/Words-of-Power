@@ -21,7 +21,8 @@ buses/default_bus_layout=""
 
 [autoload]
 
-Events="*res://Scenes/Events.gd"
+Events="*res://Scenes/Scripts/Events.gd"
+Utils="*res://Scenes/Scripts/Utils.gd"
 
 [input]
 

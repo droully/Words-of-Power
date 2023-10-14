@@ -12,6 +12,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+	
+func targeting(target_tile):
+	var target_tiles=BF.tiles_in_aoe(target_tile, radius)
+	var targets = []
+	for tile in target_tiles:
+		targets.append(BF.get_unit_in_tile(tile))
+	return targets
 
 func animation():
 	var anim_speed = 200
@@ -38,6 +45,8 @@ func _on_finished_animation(anim_name):
 		queue_free()
 	
 func effect(target,callback):
+	#target.take_damage(damage)
+	
 	var arg_dict ={"order":"attack","target":target, "damage":damage}
 	callback.call("attack",arg_dict)
 	return arg_dict
