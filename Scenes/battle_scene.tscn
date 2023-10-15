@@ -390,13 +390,15 @@ script = ExtResource("2_1g4q8")
 [node name="Enemy" parent="Battlefield" instance=ExtResource("7_7ta1y")]
 position = Vector2(232, 152)
 unit_name = "enemy"
-def = 2
+def = 0
+speed = 1
 sprite_frames = SubResource("SpriteFrames_mlju6")
 side = "Enemy"
 
 [node name="Player" parent="Battlefield" instance=ExtResource("7_7ta1y")]
 position = Vector2(232, 280)
 unit_name = "player"
+def = 0
 sprite_frames = SubResource("SpriteFrames_jtc68")
 side = "Player"
 

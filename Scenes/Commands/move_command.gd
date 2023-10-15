@@ -13,7 +13,8 @@ func _init(_unit, _target_tile, _battlefield):
 
 func execute():
 	original_tile = unit.tile_position  # Store the original position before the move
-	return BF.place_unit_on_tile(unit, target_tile.x, target_tile.y)
-
+	if target_tile in unit.walkable_tiles(BF):	
+		return BF.place_unit_on_tile(unit, target_tile.x, target_tile.y)
+	return false
 func undo():
 	BF.place_unit_on_tile(unit, original_tile.x, original_tile.y)

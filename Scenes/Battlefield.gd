@@ -15,7 +15,7 @@ var limit_max=Vector2i(6,6)
 var last_highlighted_tile = Vector2i(-1, -1)
 
 func _ready():
-	set_layer_modulate(Layer.PerTileData,Color(1, 1, 1, 0))
+	#set_layer_modulate(Layer.PerTileData,Color(1, 1, 1, 0))
 	Events.unit_moved.connect(_on_unit_moved)
 	
 	grid.region= Rect2i(0, 0, 7, 7)
@@ -73,15 +73,33 @@ func tiles_in_aoe_no_astar(center_tile: Vector2i, radius:int) -> Array:
 				tiles.append(tile)
 	return tiles
 
-func tiles_in_aoe(center_tile: Vector2i, radius:int):
+func tiles_in_aoe(center_tile: Vector2i, radius:int, return_solid_tiles=true, return_units=true):
+
 	var tiles_no_astar = tiles_in_aoe_no_astar(center_tile,radius)
 	var tiles = []
+
+	var tiles_to_solid =[]
+	if not return_units:
+		for tile_to_solid in tiles_no_astar:
+			if get_unit_in_tile(tile_to_solid):
+				grid.set_point_solid(tile_to_solid)
+				tiles_to_solid.append(tile_to_solid)
+
 	for tile in tiles_no_astar:
+		if not return_solid_tiles and grid.is_point_solid(tile):
+			continue 
+		if not return_units and get_unit_in_tile(tile):
+			continue
+
 		var path = grid.get_point_path(center_tile,tile)
-		if (len(path)-1<=radius) and not grid.is_point_solid(tile):
-			tiles.append(tile)
+		if (len(path)-1>radius):
+			continue
+		tiles.append(tile)
+
+	for tile_to_desolid in tiles_to_solid:
+		grid.set_point_solid(tile_to_desolid,false)
 	return tiles
-	
+
 func tiles_in_line(center_tile: Vector2i, dir: Vector2i, length: int) -> Array:
 	var tiles: Array = []
 

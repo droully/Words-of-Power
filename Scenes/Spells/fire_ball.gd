@@ -6,19 +6,17 @@ extends Spell
 func _ready():
 	pass
 
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 	
-func targeting(target_tile):
-	var target_tiles=BF.tiles_in_aoe(target_tile, radius)
-	var targets = []
-	for tile in target_tiles:
-		targets.append(BF.get_unit_in_tile(tile))
-	return targets
+
+func targeteable_tiles(_caster=caster,_BF=BF):
+	return _BF.tiles_in_aoe(_caster.tile_position,srange,false,true)
+	
+func affected_tiles(target_tile,_caster=caster,_BF=BF):
+	if _BF.grid.is_point_solid(target_tile):
+		return []
+	return _BF.tiles_in_aoe(target_tile, radius,false,true)
 
 func animation():
 	var anim_speed = 200
@@ -44,9 +42,6 @@ func _on_finished_animation(anim_name):
 		Events.emit_signal("spell_cast_anim_end",self)
 		queue_free()
 	
-func effect(target,callback):
-	#target.take_damage(damage)
-	
-	var arg_dict ={"order":"attack","target":target, "damage":damage}
-	callback.call("attack",arg_dict)
-	return arg_dict
+func callbackOnHit(target):
+	target.take_damage(damage)
+	target.add_status_effect(burning_effect.new())

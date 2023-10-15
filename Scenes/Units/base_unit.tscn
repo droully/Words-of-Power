@@ -79,3 +79,5 @@ offset_right = 48.0
 offset_bottom = -21.0
 value = 100.0
 metadata/_edit_use_anchors_ = true
+
+[node name="StatusEffects" type="Node" parent="."]

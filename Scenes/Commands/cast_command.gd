@@ -7,31 +7,32 @@ var target_tile
 var BF
 var callback
 
-func _init(_caster:Unit,_spell:Spell,_target_tile,_battlefield,_callback):
+
+func _init(_caster:Unit,_spell:Spell,_target_tile,_battlefield):
 	self.caster = _caster
 	self.spell = _spell
 	self.target_tile = _target_tile
 	self.BF = _battlefield
-	self.callback=_callback
-	
+
 func execute():
 	spell.initialize(BF,caster,BF.map_to_local(target_tile))
 	BF.add_child(spell)
+
 	spell.hide()
 	#spell.valid_target_tile(callback)
-
-	if BF.distance(target_tile,caster.tile_position)>spell.srange:
+	if target_tile not in spell.targeteable_tiles():
 		return false
 		
 	spell.show()
-	
-	#targets=spell.get_targets(callback)
-	var targets = spell.targeting(target_tile)
-	
-	
-	for target in targets:
-		if target:
-			spell.effect(target,callback)
+
+	var affected_tiles = spell.affected_tiles(target_tile,caster,BF)
+
+	for tile in affected_tiles:
+		var unit_target= BF.get_unit_in_tile(tile)
+		if unit_target:
+			if spell.has_method("callbackOnHit"):
+				spell.callbackOnHit(unit_target)
+				spell.affected_targets.append(unit_target)
 	#affect target
 	spell.animation()
 	return true

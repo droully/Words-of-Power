@@ -17,6 +17,8 @@ var BF
 var caster:Unit
 var target_pos:Vector2
 
+var affected_targets =[]
+
 
 func initialize(_Battlefield,_caster:Unit,_target_pos:Vector2):
 	self.BF=_Battlefield
@@ -26,8 +28,10 @@ func initialize(_Battlefield,_caster:Unit,_target_pos:Vector2):
 func animation():
 	return null
 
-func targeting(_target_tile):
+func targeteable_tiles(_BF):
 	return null
 	
+func affected_tiles(_target_tile,_caster,_BF):
+	return null
 func effect(_target,_callback):
 	return null

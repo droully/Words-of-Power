@@ -8,7 +8,7 @@ extends Node
 
 @onready var turn_queue = [player, enemy] 
 
-enum BattleState {Turn,Anim}
+enum BattleState {Status,Turn,Anim}
 var battle_state = BattleState.Turn
 
 enum UserActionState {None,Move,Cast}
@@ -24,21 +24,33 @@ func _ready():
 	Events.spell_button_pressed.connect(_on_spell_button_pressed)
 	
 func _process(_delta):
-	if battle_state==BattleState.Anim:
-		if AM.anim_state == AM.AnimationState.Finished:
-			next_turn()
-	else:
-		var current= turn_queue[0]
-		match current:
+	var current_unit= turn_queue[0]
+	if battle_state == BattleState.Status:
+		process_status(current_unit)
+
+	if battle_state==BattleState.Turn:
+		match current_unit:
 			player:
 				player_turn()
 			enemy:
 				enemy_turn()
-				
+	if battle_state==BattleState.Anim:
+		if AM.anim_state == AM.AnimationState.Finished:
+			next_turn()
+			
+func process_status(unit):
+	var status_list=unit.get_node("StatusEffects").get_children()
+	
+	for status in status_list:
+		status.apply_effect()
+	for status in status_list:
+		status.check_duration()
+	battle_state=BattleState.Turn
+	
 func next_turn():
 			var last=turn_queue.pop_front()
 			turn_queue.append(last)
-			battle_state=BattleState.Turn
+			battle_state=BattleState.Status
 
 func player_turn():
 	if player_chose_action:
@@ -58,9 +70,8 @@ func enemy_turn():
 	if order["action"]=="cast":			
 		
 		var spell=Utils.get_spell_by_name(order["spell"])
-		var castCommand = CastCommand.new(enemy,spell,order["target"], BF,_on_unit_affected)
+		var castCommand = CastCommand.new(enemy,spell,order["target"], BF)
 		setCommand(castCommand)
-		Events.spell_effect.connect(_on_unit_affected)
 		executeCommand()
 		battle_state=BattleState.Anim
 
@@ -73,6 +84,7 @@ func _input(event):
 				if move_input(event):
 					player_chose_action = true
 			UserActionState.Cast:
+				
 				if cast_input(event):
 					player_chose_action = true
 
@@ -89,40 +101,20 @@ func move_input(event):
 		elif executeCommand(): 
 			user_action_state=UserActionState.None
 			return true
-			
+
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			user_action_state=UserActionState.None
-	
+
 func cast_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var cursor_position = BF.mouse_to_tile(event.position)
-		var castCommand = CastCommand.new(player,spell_to_cast,cursor_position, BF,_on_unit_affected)
-
+		var castCommand = CastCommand.new(player,spell_to_cast,cursor_position, BF)
 		setCommand(castCommand)
 		if executeCommand():
 			user_action_state=UserActionState.None
 			return true
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			user_action_state=UserActionState.None
-
-
-
-func push(unit, direction: Vector2i):	
-	var target_tile = unit.tile_position + direction  # chequear colisiones
-	var moveCommand = MoveCommand.new(unit, target_tile, BF)
-	setCommand(moveCommand)
-	executeCommand()
-
-
-
-
-func _on_unit_affected(effect,arg_dict):
-	match effect:
-		"attack":
-			arg_dict["target"].take_damage(arg_dict["damage"])
-		"push":
-			push(arg_dict["target"],arg_dict["dir"])
-
 
 func setCommand(_command: Command):
 	self.command = _command
