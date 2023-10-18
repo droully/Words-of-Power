@@ -4,28 +4,23 @@ extends Node
 func execute_turn(BM, BF):
 	var player_tile = BM.player.tile_position  
 	var unit_tile = unit.tile_position  
+	
+	
+	var spell=Utils.get_spell_by_name("fire_ball")
+	
+	for tile in spell.targeteable_tiles(unit,BF):
+		if BF.get_unit_in_tile(tile) == BM.player:  # identifies player
+			var castCommand = CastCommand.new(BM.player,spell,tile, BF)
+			return  castCommand
 
-	var distance_to_player = BF.distance(unit_tile, player_tile)
+	var distance_to_player=1000
+	var best_tile=unit.tile_position
+	for tile in unit.walkable_tiles(BF):
+		if BF.distance(tile, player_tile)<distance_to_player:
+			distance_to_player=BF.distance(tile, player_tile)
+			best_tile=tile
+	var moveCommand = MoveCommand.new(unit, best_tile, BF)
+	return moveCommand
 
-	if distance_to_player <= 1:
-		for tile in BF.tiles_in_aoe(unit_tile, true):
-			if BF.get_unit_in_tile(tile) == BM.player:  # identifies player
-				var  order = {"action":"cast","spell":"fire_ball","target":tile}
-				return  order
 
-	if distance_to_player > 1:
-		# Calculate the tile to move to. This is a simplified example.
-		# You could add more logic to choose the best tile to move to.
-		var move_tile = unit_tile
-		if player_tile.x > unit_tile.x:
-			move_tile.x += 1
-		elif player_tile.x < unit_tile.x:
-			move_tile.x -= 1
-		elif player_tile.y > unit_tile.y:
-			move_tile.y += 1
-		elif player_tile.y < unit_tile.y:
-			move_tile.y -= 1
 
-		# Execute the 
-		var  order = {"action":"move","unit":unit,"move_tile":move_tile}
-		return order

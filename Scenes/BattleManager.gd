@@ -42,9 +42,9 @@ func process_status(unit):
 	var status_list=unit.get_node("StatusEffects").get_children()
 	
 	for status in status_list:
-		status.apply_effect()
+		status.per_turn_effect()
 	for status in status_list:
-		status.check_duration()
+		status.pass_turn()
 	battle_state=BattleState.Turn
 	
 func next_turn():
@@ -59,21 +59,10 @@ func player_turn():
 
 func enemy_turn():
 	var ai=enemy.get_node("AI")
-	var order=ai.execute_turn(self,BF) 
-
-	if order["action"]=="move":
-		var moveCommand = MoveCommand.new(order["unit"], order["move_tile"], BF)	
-		setCommand(moveCommand)
-		executeCommand()
-		battle_state=BattleState.Anim
-		
-	if order["action"]=="cast":			
-		
-		var spell=Utils.get_spell_by_name(order["spell"])
-		var castCommand = CastCommand.new(enemy,spell,order["target"], BF)
-		setCommand(castCommand)
-		executeCommand()
-		battle_state=BattleState.Anim
+	var enemy_command=ai.execute_turn(self,BF) 
+	setCommand(enemy_command)
+	executeCommand()
+	battle_state=BattleState.Anim
 
 func _input(event):
 	if Input.is_action_pressed("ui_undo"):

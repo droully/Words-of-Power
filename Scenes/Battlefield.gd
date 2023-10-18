@@ -108,7 +108,31 @@ func tiles_in_line(center_tile: Vector2i, dir: Vector2i, length: int) -> Array:
 		if tile_inside_BF(next_tile):
 			tiles.append(next_tile)
 	return tiles
-	
+
+func tiles_in_cross(center_tile,length)->Array:
+	var tiles: Array = []
+	for y in [1,-1]:
+		var dir = Vector2i(0,y)
+		tiles += tiles_in_line(center_tile,dir,length)
+	for x in [1,-1]:
+		var dir = Vector2i(x,0)
+		tiles += tiles_in_line(center_tile,dir,length)
+	tiles.erase(center_tile)
+	tiles.erase(center_tile)
+	tiles.erase(center_tile)
+	tiles.erase(center_tile)
+	return tiles
+
+func tiles_perpendicular(target_tile,dir,length):
+	var tiles: Array = []
+	var perp= Vector2i(dir.y,-dir.x)
+	for i in range(2*length+1):
+		i= i-length	
+		var next_tile = target_tile + perp * i
+		if tile_inside_BF(next_tile):
+			tiles.append(next_tile)
+	return tiles
+
 func get_direction_from_unit_to_tile(unit: Unit, target_tile: Vector2i) -> Vector2i:
 	var unit_tile = unit.tile_position # Assuming your unit has a 'tile_position' property
 	
@@ -144,8 +168,8 @@ func distance(tile1: Vector2i, tile2: Vector2i):
 	return abs(tile1.x - tile2.x) + abs(tile1.y - tile2.y)
 
 func _on_unit_moved(unit,from_coord:Vector2,to_coord:Vector2):
-	
 	var from_cell = get_cell_in_tile(local_to_map(from_coord))
 	var to_cell = get_cell_in_tile(local_to_map(to_coord))
+	
 	from_cell.set_custom_data("UnitTracking",NodePath())
 	to_cell.set_custom_data("UnitTracking",unit)

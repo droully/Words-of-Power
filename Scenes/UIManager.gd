@@ -5,13 +5,30 @@ extends Control
 @onready var player = get_node("../Battlefield/Player")
 @onready var turn_label= $Turn
 @onready var state_label=$State
-
+@onready var actions_container= $ActionsContainer
 @onready var Layer = BF.Layer
+
+var spells_UI = ["Water Arc","Fire Ball","Air Slash","Earth Bind"]
+var spells_Name = ["water_arc","fire_ball","air_slash","earth_bind"]
 
 var last_highlighted_tile = Vector2i(-1, -1)
 var last_highlighted_tiles: Array = []
 
+signal spell_button_pressed(spell_name)
 
+func _ready():
+ # Replace with the actual path to your VBoxContainer.
+	
+
+	# Create new buttons.
+	for i in range(len(spells_UI)):
+		var button = Button.new()
+		button.text = spells_UI[i] 
+		
+		actions_container.add_child(button)
+	# Add your logic here to cast the spell or whatever you'd like to do.
+		button.pressed.connect(_on_spell_button_pressed.bind(spells_Name[i]))
+		
 func _input(event):
 	match BM.user_action_state:
 		BM.UserActionState.Move:
@@ -82,10 +99,9 @@ func _process(_delta):
 
 			for tiles in BF.all_tiles():
 				BF.set_cell(Layer.Highlight,tiles)
-func _on_spell_pressed():
-	pass
-	#player_chose_action = true
-#	attack_button.disabled = true
+
+func _on_spell_button_pressed(spell_name):	
+	Events.emit_signal("spell_button_pressed",Utils.get_spell_by_name(spell_name))
 
 func _on_move_pressed():
 	pass

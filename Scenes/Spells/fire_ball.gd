@@ -44,4 +44,4 @@ func _on_finished_animation(anim_name):
 	
 func callbackOnHit(target):
 	target.take_damage(damage)
-	target.add_status_effect(burning_effect.new())
+	target.add_status_effect(burning.new())

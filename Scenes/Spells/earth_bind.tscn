@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dffydpgv7dwd1"]
+
+[ext_resource type="Script" path="res://Scenes/Spells/earth_bind.gd" id="1_j4ujd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q2t0q"]
+animations = []
+
+[node name="EarthBind" type="Node2D"]
+script = ExtResource("1_j4ujd")
+srange = 2
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q2t0q")
+animation = &""

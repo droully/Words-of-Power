@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bl8iglk1xnwbs"]
+[gd_scene load_steps=39 format=3 uid="uid://bl8iglk1xnwbs"]
 
 [ext_resource type="Script" path="res://Scenes/BattleManager.gd" id="1_5o2ef"]
 [ext_resource type="Texture2D" uid="uid://clcckii0evvcf" path="res://Resources/Spritesheet/Battleground.png" id="1_di1cw"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dwciaemefunni" path="res://Scenes/Units/base_unit.tscn" id="7_7ta1y"]
 [ext_resource type="Texture2D" uid="uid://cjqvx668pb1br" path="res://Resources/Characters/Free Cow Sprites.png" id="8_y8e2q"]
 [ext_resource type="Texture2D" uid="uid://b2bienbgx41je" path="res://Resources/Characters/Basic Charakter Spritesheet.png" id="9_b2kxl"]
-[ext_resource type="Script" path="res://Scenes/ActionsContainer.gd" id="11_8u568"]
 [ext_resource type="Script" path="res://Scenes/AnimationManager.gd" id="12_dt3ki"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4ky1"]
@@ -416,7 +415,6 @@ offset_top = 128.0
 offset_right = 650.0
 offset_bottom = 194.0
 scale = Vector2(1.76908, 1.76279)
-script = ExtResource("11_8u568")
 
 [node name="Move" type="Button" parent="UIManager/ActionsContainer"]
 layout_mode = 2

@@ -1,15 +1,10 @@
-extends Node
+extends BaseStatus
 
-class_name burning_effect
+class_name burning
 
-var duration = 2
-var damage=5
-@onready var unit = get_parent().get_parent()
+var effect_name="burning"
+@export var damage=5
 
-func apply_effect():
+func per_turn_effect():
 	unit.take_damage(damage,"fire")
-	duration -= 1 
 
-func check_duration():
-	if duration<=0:
-		queue_free()

@@ -28,7 +28,7 @@ func initialize(_Battlefield,_caster:Unit,_target_pos:Vector2):
 func animation():
 	return null
 
-func targeteable_tiles(_BF):
+func targeteable_tiles(_caster=caster,_BF=BF):
 	return null
 	
 func affected_tiles(_target_tile,_caster,_BF):
