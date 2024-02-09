@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Spell2" load_steps=2 format=3 uid="uid://cqosrj0smwxhg"]
+
+[ext_resource type="Script" path="res://Scenes/Spells2/spell2.gd" id="1_vvq4n"]
+
+[resource]
+script = ExtResource("1_vvq4n")
+anim_player = Callable()
+spell_name = "base_spell"
+spell_name_UI = "Base Spell"
+cost = 1
+srange = 1
+duration = 1.0
+damage = 10
+radius = 1

@@ -1,0 +1,128 @@
+[gd_scene load_steps=10 format=3 uid="uid://bl8iglk1xnwbs"]
+
+[ext_resource type="Script" path="res://Scenes/BattleManager/BattleManager.gd" id="1_5o2ef"]
+[ext_resource type="Script" path="res://Scenes/Main/battle_scene.gd" id="1_n5ypq"]
+[ext_resource type="Script" path="res://Scenes/UI/BattleLog.gd" id="3_gbne2"]
+[ext_resource type="PackedScene" uid="uid://dr4etsid43k0k" path="res://Scenes/Battlefields/base_bf.tscn" id="4_dxvth"]
+[ext_resource type="PackedScene" uid="uid://c55dbpqqoj6hu" path="res://Scenes/Units/player.tscn" id="5_j4ubb"]
+[ext_resource type="Script" path="res://Scenes/UI/UIManager.gd" id="6_tbgf5"]
+[ext_resource type="Script" path="res://Scenes/BattleManager/BattleState.gd" id="7_aerr0"]
+[ext_resource type="Script" path="res://Scenes/AnimationManager/AnimationManager.gd" id="12_dt3ki"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_guiso"]
+
+[node name="BattleScene" type="Node2D"]
+script = ExtResource("1_n5ypq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -352.0
+offset_top = -272.0
+offset_right = -312.0
+offset_bottom = -232.0
+scale = Vector2(56.9114, 31.4082)
+color = Color(0.101961, 0.180392, 0.0588235, 1)
+metadata/_edit_lock_ = true
+
+[node name="UIManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_tbgf5")
+
+[node name="ActionsContainer" type="VBoxContainer" parent="UIManager"]
+layout_mode = 0
+offset_left = 592.0
+offset_top = 128.0
+offset_right = 650.0
+offset_bottom = 194.0
+scale = Vector2(1.76908, 1.76279)
+
+[node name="Move" type="Button" parent="UIManager/ActionsContainer"]
+layout_mode = 2
+text = "Move"
+
+[node name="TurnContainer" type="HBoxContainer" parent="UIManager"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 40.0
+offset_right = 168.0
+offset_bottom = 80.0
+scale = Vector2(2.95551, 0.651991)
+
+[node name="PlayerTurnUI" type="ColorRect" parent="UIManager/TurnContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+color = Color(0.133333, 0.137255, 1, 1)
+
+[node name="EnemyTurnUI" type="ColorRect" parent="UIManager/TurnContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+color = Color(1, 0, 0.0313726, 1)
+
+[node name="TurnTracker" type="Control" parent="UIManager"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect2" type="ColorRect" parent="UIManager/TurnTracker"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 24.0
+offset_right = 440.0
+offset_bottom = 64.0
+color = Color(0.309804, 0.533333, 0.411765, 1)
+
+[node name="Turn" type="Label" parent="UIManager/TurnTracker"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 32.0
+offset_right = 320.0
+offset_bottom = 62.0
+label_settings = SubResource("LabelSettings_guiso")
+
+[node name="State" type="Label" parent="UIManager/TurnTracker"]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 32.0
+offset_right = 416.0
+offset_bottom = 62.0
+
+[node name="BattleLog" type="Control" parent="UIManager"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="UIManager/BattleLog"]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 128.0
+offset_right = 1088.0
+offset_bottom = 576.0
+color = Color(0.47451, 0.611765, 0.65098, 1)
+
+[node name="Log" type="RichTextLabel" parent="UIManager/BattleLog"]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 128.0
+offset_right = 1088.0
+offset_bottom = 576.0
+scroll_following = true
+script = ExtResource("3_gbne2")
+
+[node name="Battlefield" parent="." instance=ExtResource("4_dxvth")]
+
+[node name="Player" parent="Battlefield" instance=ExtResource("5_j4ubb")]
+position = Vector2(224, 288)
+
+[node name="BattleManager" type="Node" parent="."]
+script = ExtResource("1_5o2ef")
+
+[node name="BattleState" type="Node" parent="BattleManager"]
+script = ExtResource("7_aerr0")
+
+[node name="AnimationManager" type="Node" parent="."]
+script = ExtResource("12_dt3ki")
+
+[connection signal="pressed" from="UIManager/ActionsContainer/Move" to="UIManager" method="_on_move_pressed"]
+[connection signal="pressed" from="UIManager/ActionsContainer/Move" to="BattleManager" method="_on_move_button_pressed"]

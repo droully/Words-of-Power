@@ -1,41 +1,44 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwciaemefunni"]
+[gd_scene load_steps=7 format=3 uid="uid://c55dbpqqoj6hu"]
 
-[ext_resource type="Script" path="res://Scenes/Units/unit.gd" id="1_wcja8"]
-[ext_resource type="Texture2D" uid="uid://cjqvx668pb1br" path="res://Resources/Characters/Free Cow Sprites.png" id="2_1c2md"]
-[ext_resource type="Script" path="res://Scenes/Units/AI.gd" id="3_7to1a"]
-[ext_resource type="Script" path="res://Scenes/UI/UI.gd" id="4_eajtp"]
+[ext_resource type="Script" path="res://Scenes/Units/unit.gd" id="1_sqie6"]
+[ext_resource type="Texture2D" uid="uid://besdv5kfep6vi" path="res://Resources/Characters/Basic Charakter Actions.png" id="2_shhd3"]
+[ext_resource type="Script" path="res://Scenes/Units/AI.gd" id="3_vjeu6"]
+[ext_resource type="Script" path="res://Scenes/UI/UI.gd" id="4_vavm6"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6bec1"]
-atlas = ExtResource("2_1c2md")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fep6r"]
+atlas = ExtResource("2_shhd3")
+region = Rect2(48, 48, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ue4tf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6bec1")
+"texture": SubResource("AtlasTexture_fep6r")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[node name="BaseUnit" type="Node2D"]
-script = ExtResource("1_wcja8")
+[node name="Player" type="Node2D"]
+script = ExtResource("1_sqie6")
+unit_name = "player"
+priority = 1
+party = "player"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ue4tf")
 metadata/_edit_lock_ = true
 
 [node name="AI" type="Node" parent="."]
-script = ExtResource("3_7to1a")
+script = ExtResource("3_vjeu6")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("4_eajtp")
+script = ExtResource("4_vavm6")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UI"]

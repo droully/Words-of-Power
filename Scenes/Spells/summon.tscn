@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfopf5gegwt4l"]
+
+[ext_resource type="Script" path="res://Scenes/Spells/summon.gd" id="1_5w2d3"]
+[ext_resource type="Texture2D" uid="uid://ck5plgqoxohxr" path="res://Resources/Spells/Blue Effect Bullet Impact Explosion 32x32.png" id="2_eo8bl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iulsv"]
+atlas = ExtResource("2_eo8bl")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h77fu"]
+atlas = ExtResource("2_eo8bl")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1w210"]
+atlas = ExtResource("2_eo8bl")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_342n0"]
+atlas = ExtResource("2_eo8bl")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n0n20"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iulsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h77fu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1w210")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_342n0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Summon" type="Node2D"]
+script = ExtResource("1_5w2d3")
+radius = 0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n0n20")
+frame_progress = 0.390791
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

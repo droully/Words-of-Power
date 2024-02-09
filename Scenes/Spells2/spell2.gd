@@ -1,9 +1,9 @@
-extends Node2D
+extends Resource
 
-class_name Spell
+class_name Spell2
 
-@onready var sprite=$Sprite
-@onready var anim_player= $AnimationPlayer
+@export var sprite:SpriteFrames
+@export var anim_player: Callable
 
 
 @export var spell_name: String = "base_spell"
@@ -13,6 +13,8 @@ class_name Spell
 @export var duration: float = 1
 @export var damage: int = 10
 @export var radius: int = 1
+
+@export var onHit : Effect
 
 
 var BF
@@ -42,15 +44,16 @@ func targeteable_tiles(_caster=caster,_BF=BF):
 	
 func affected_tiles(_target_tile,_caster,_BF):
 	return null
+
 func effect(_target,_callback):
 	return null
 
 func callbackOnHit(_target):
-	return null
+	return onHit.call(_target)
+	
 func callbackOnFloor(_BF,_tile):
 	return null
 	
 func _on_finished_animation(_anim_name):	
 	Events.emit_signal("spell_cast_anim_end",self)	
-	queue_free()
 

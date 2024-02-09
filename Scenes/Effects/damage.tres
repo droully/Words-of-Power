@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Effect" load_steps=2 format=3 uid="uid://0b1xs7b7s0dt"]
+
+[ext_resource type="Script" path="res://Scenes/Effects/effect.gd" id="1_kv5kt"]
+
+[resource]
+script = ExtResource("1_kv5kt")
+effect_name = "damage"

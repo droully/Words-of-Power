@@ -15,20 +15,20 @@ class_name Unit
 @export var speed: int = 2
 @export var shield: int = 0
 @export var max_shield: int = 1
+@export var priority: int = 2
 
+@export var party: String = "enemy"
 
-@export var sprite_frames: SpriteFrames
 @export var side: String
 
 var tile_position: Vector2i
 
 
 func _ready():
-	sprite.sprite_frames = sprite_frames
+	pass
 
-func set_attributes(_tile_position:Vector2i,_position):
-	tile_position = _tile_position
-	position = _position
+func initialize(BF):
+	tile_position = BF.position_to_tile(position)
 	
 func walkable_tiles(BF):
 	return BF.tiles_in_aoe(tile_position,speed,false,false)
@@ -37,7 +37,7 @@ func move_to(path):
 	var to_coord=path[-1]
 	var from_coord= path[0] 
 	
-	Events.emit_signal("unit_moved",self,from_coord,to_coord)
+	Events.emit_signal("unit_moved_global_coord",self,from_coord,to_coord)
 	
 	var tween = create_tween()
 	tween.finished.connect(_on_finished_animation)
@@ -50,13 +50,13 @@ func move_to(path):
 #	position=to_coord	#position:absoluto
 
 
-func take_damage(damage_amount: int,damage_type="neutral"):
+func take_damage(damage_amount: int,_damage_type="neutral"):
 	if shield>0:
 		shield -=1
 		ui.refresh()
 		return
 	
-	damage_amount=damage_amount-self.def
+#	damage_amount=damage_amount-self.def
 	hp -= damage_amount
 	ui.refresh()
 	
@@ -81,6 +81,11 @@ func remove_status_effect(status):
 
 func push( direction: Vector2i,BF):	
 	var target_tile = tile_position + direction  # chequear colisiones
+	var unit_target= BF.get_unit_in_tile(target_tile)
+	if unit_target:
+		take_damage(5)
+		unit_target.take_damage(5)
+		return 
 	return BF.place_unit_on_tile(self, target_tile.x, target_tile.y)
 
 func die():

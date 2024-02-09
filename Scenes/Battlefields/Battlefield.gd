@@ -1,24 +1,37 @@
 extends TileMap
-# A dictionary to track which tiles are occupied and by which units.
-#var occupied_tiles: Dictionary = {}
+
+class_name BattleField
 
 enum Layer {Base,Highlight,PerTileData}
-
-@onready var player=$Player
-@onready var enemy=$Enemy
-@onready var BM = get_node("../BattleManager")
+enum TileSetID {Battleground,Highlight,Coordinates}
 
 var grid= AStarGrid2D.new()
-
-var limit_min=Vector2i(0,0)
-var limit_max=Vector2i(6,6)
 var last_highlighted_tile = Vector2i(-1, -1)
+var size_x
+var size_y
 
 func _ready():
 	#set_layer_modulate(Layer.PerTileData,Color(1, 1, 1, 0))
-	Events.unit_moved.connect(_on_unit_moved)
+	Events.unit_moved_global_coord.connect(_on_unit_moved_global_coord)
+	setup(7,7,[])
+
+func setup(x,y,units):
 	
-	grid.region= Rect2i(0, 0, 7, 7)
+	size_x=x
+	size_y=y
+	
+	set_per_tile_data(size_x,size_y)
+	set_grid(size_x,size_y)	
+	initialize_units(units)
+
+func set_per_tile_data(x_lim,y_lim):
+	for x in range(x_lim):
+		for y in range(y_lim):
+			set_cell(Layer.PerTileData,Vector2i(x,y),TileSetID.Coordinates,Vector2i(x,y))
+
+func set_grid(x_lim,y_lim):
+	grid.region= Rect2i(0, 0, x_lim, y_lim)
+	
 	grid.cell_size = Vector2(64, 64)
 	grid.offset = Vector2(32,32)
 	grid.default_compute_heuristic=1
@@ -29,15 +42,19 @@ func _ready():
 	grid.set_point_solid(Vector2i(2,3))
 	grid.set_point_solid(Vector2i(5,4))
 
+func initialize_units(units):
+	for unit in units:
+		set_unit(unit)
+		
+	for unit in get_children():
+		set_unit(unit)
 
-	create_unit(enemy,3,2)
-	create_unit(player,3,4)
-	
+func spawn_unit():
+	pass
 
-func create_unit(unit, tile_position_x:int, tile_position_y:int):
-	var tile_position=Vector2i(tile_position_x,tile_position_y)
-	unit.set_attributes(tile_position,map_to_local(tile_position))
-	get_cell_in_tile(tile_position).set_custom_data("UnitTracking",unit)
+func set_unit(unit):
+	unit.initialize(self)	
+	get_cell_in_tile(unit.tile_position).set_custom_data("UnitTracking",unit)
 
 func place_unit_on_tile(unit, tile_position_x:int, tile_position_y:int):
 	#acepta posicion en tile desde el 0	
@@ -48,7 +65,7 @@ func place_unit_on_tile(unit, tile_position_x:int, tile_position_y:int):
 		unit.tile_position=tile_position
 		return true
 	return false
-	
+
 func all_tiles():
 	var tiles: Array = []
 	for x in range(0,7):
@@ -56,12 +73,15 @@ func all_tiles():
 			tiles.append(Vector2i(x, y))
 	return tiles
 
-func mouse_to_tile(mouse_position: Vector2):
+func mouse_to_tile(mouse_position: Vector2):	
 	return local_to_map(to_local(mouse_position))
+
+func position_to_tile(pos: Vector2):
+	return local_to_map(pos)
 
 func tile_inside_BF(tile_position: Vector2i):
 	return grid.is_in_boundsv(tile_position)
-	
+
 func tiles_in_aoe_no_astar(center_tile: Vector2i, radius:int) -> Array:
 	var tiles = []
 	for x in range(center_tile.x - radius, center_tile.x + radius + 1):
@@ -153,13 +173,15 @@ func get_direction_from_unit_to_tile(unit: Unit, target_tile: Vector2i) -> Vecto
 	# Not on the same line
 	else:
 		return Vector2i(0, 0)
-	
+
 func get_cell_in_tile(tile_position: Vector2i): 
 	return get_cell_tile_data(Layer.PerTileData,tile_position)
 
 func get_unit_in_tile(tile_position: Vector2i):
 	if tile_inside_BF(tile_position):
+		
 		var unit = get_cell_in_tile(tile_position).get_custom_data("UnitTracking")
+
 		if is_instance_valid(unit):
 			return unit
 	return null
@@ -167,9 +189,13 @@ func get_unit_in_tile(tile_position: Vector2i):
 func distance(tile1: Vector2i, tile2: Vector2i):
 	return abs(tile1.x - tile2.x) + abs(tile1.y - tile2.y)
 
-func _on_unit_moved(unit,from_coord:Vector2,to_coord:Vector2):
-	var from_cell = get_cell_in_tile(local_to_map(from_coord))
-	var to_cell = get_cell_in_tile(local_to_map(to_coord))
+func _on_unit_moved_global_coord(unit,from_coord:Vector2,to_coord:Vector2):
+	var from_cell_coord=local_to_map(from_coord)
+	var to_cell_coord=local_to_map(to_coord)
+	
+	var from_cell = get_cell_in_tile(from_cell_coord)
+	var to_cell = get_cell_in_tile(to_cell_coord)
 	
 	from_cell.set_custom_data("UnitTracking",NodePath())
 	to_cell.set_custom_data("UnitTracking",unit)
+	

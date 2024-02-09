@@ -1,14 +1,14 @@
-[gd_scene load_steps=39 format=3 uid="uid://bl8iglk1xnwbs"]
+[gd_scene load_steps=16 format=3 uid="uid://bl8iglk1xnwbs"]
 
 [ext_resource type="Script" path="res://Scenes/BattleManager.gd" id="1_5o2ef"]
 [ext_resource type="Texture2D" uid="uid://clcckii0evvcf" path="res://Resources/Spritesheet/Battleground.png" id="1_di1cw"]
 [ext_resource type="Script" path="res://Scenes/Battlefield.gd" id="2_1g4q8"]
 [ext_resource type="Texture2D" uid="uid://cml1v15d86kyu" path="res://Resources/Spritesheet/Highlight.png" id="2_hed0d"]
 [ext_resource type="Texture2D" uid="uid://wspxr3ru27yk" path="res://Resources/Spritesheet/Coordinates.png" id="3_f53dl"]
+[ext_resource type="PackedScene" uid="uid://c55dbpqqoj6hu" path="res://Scenes/Units/player.tscn" id="5_j4ubb"]
 [ext_resource type="Script" path="res://Scenes/UIManager.gd" id="6_tbgf5"]
 [ext_resource type="PackedScene" uid="uid://dwciaemefunni" path="res://Scenes/Units/base_unit.tscn" id="7_7ta1y"]
-[ext_resource type="Texture2D" uid="uid://cjqvx668pb1br" path="res://Resources/Characters/Free Cow Sprites.png" id="8_y8e2q"]
-[ext_resource type="Texture2D" uid="uid://b2bienbgx41je" path="res://Resources/Characters/Basic Charakter Spritesheet.png" id="9_b2kxl"]
+[ext_resource type="PackedScene" uid="uid://c36n6wnhpdedu" path="res://Scenes/Units/water_elemental.tscn" id="11_o8mm7"]
 [ext_resource type="Script" path="res://Scenes/AnimationManager.gd" id="12_dt3ki"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4ky1"]
@@ -188,169 +188,6 @@ sources/1 = SubResource("TileSetAtlasSource_8hrpe")
 sources/0 = SubResource("TileSetAtlasSource_a4ky1")
 sources/2 = SubResource("TileSetAtlasSource_7w7mk")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x2m22"]
-atlas = ExtResource("8_y8e2q")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8davw"]
-atlas = ExtResource("8_y8e2q")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_13i1n"]
-atlas = ExtResource("8_y8e2q")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mgado"]
-atlas = ExtResource("8_y8e2q")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jp8e7"]
-atlas = ExtResource("8_y8e2q")
-region = Rect2(32, 32, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_mlju6"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x2m22")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8davw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_13i1n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mgado")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jp8e7")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5oa62"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eknn7"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u086u"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l26ci"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vkjff"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(0, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_grtm4"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(48, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gndok"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(96, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1g27n"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(144, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c5y0o"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(0, 96, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_thed0"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(48, 96, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o38si"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(96, 96, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yq7oc"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(144, 96, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u30ym"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(0, 144, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yygki"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(48, 144, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6qsy3"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(96, 144, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_23vvb"]
-atlas = ExtResource("9_b2kxl")
-region = Rect2(144, 144, 48, 48)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jtc68"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5oa62")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eknn7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u086u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l26ci")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vkjff")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_grtm4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gndok")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1g27n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c5y0o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_thed0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o38si")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yq7oc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u30ym")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yygki")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6qsy3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_23vvb")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="LabelSettings" id="LabelSettings_guiso"]
 
 [node name="BattleScene" type="Node2D"]
@@ -371,35 +208,25 @@ format = 2
 layer_0/name = "Base"
 layer_0/tile_data = PackedInt32Array(0, 0, 12, 65536, 65536, 9, 131072, 65536, 9, 196608, 0, 12, 262144, 0, 12, 327680, 0, 12, 393216, 0, 12, 1, 0, 12, 65537, 65536, 9, 131073, 65536, 9, 196609, 0, 12, 262145, 196608, 10, 327681, 196608, 10, 393217, 196608, 10, 2, 0, 12, 65538, 0, 12, 131074, 0, 12, 196610, 131072, 15, 262146, 196608, 10, 327682, 196608, 10, 393218, 196608, 10, 3, 0, 12, 65539, 0, 12, 131075, 0, 12, 196611, 0, 12, 262147, 196608, 10, 327683, 196608, 10, 393219, 196608, 10, 4, 0, 12, 65540, 0, 12, 131076, 65536, 6, 196612, 65536, 6, 262148, 65536, 6, 327684, 65536, 6, 393220, 196608, 10, 5, 0, 12, 65541, 65536, 6, 131077, 65536, 6, 196613, 65536, 6, 262149, 131072, 15, 327685, 65536, 6, 393221, 65536, 6, 6, 0, 12, 65542, 0, 12, 131078, 0, 12, 196614, 0, 12, 262150, 0, 12, 327686, 0, 12, 393222, 0, 12)
 layer_1/name = "Highlight"
-layer_1/enabled = true
-layer_1/modulate = Color(1, 1, 1, 1)
-layer_1/y_sort_enabled = false
-layer_1/y_sort_origin = 0
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "PerTileData"
-layer_2/enabled = true
-layer_2/modulate = Color(1, 1, 1, 1)
-layer_2/y_sort_enabled = false
-layer_2/y_sort_origin = 0
-layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array(327680, 2, 5, 327681, 65538, 5, 262145, 65538, 4, 196609, 65538, 3, 131073, 65538, 2, 65536, 2, 1, 2, 131074, 0, 131074, 131074, 2, 196610, 131074, 3, 262146, 131074, 4, 327682, 131074, 5, 393218, 131074, 6, 393217, 65538, 6, 393216, 2, 6, 393219, 196610, 6, 327683, 196610, 5, 262147, 196610, 4, 196611, 196610, 3, 196612, 262146, 3, 65541, 327682, 1, 5, 327682, 0, 4, 262146, 0, 3, 196610, 0, 65542, 393218, 1, 131078, 393218, 2, 196614, 393218, 3, 262148, 262146, 4, 327684, 262146, 5, 393220, 262146, 6, 393221, 327682, 6, 327686, 393218, 5, 262150, 393218, 4, 393222, 393218, 6, 262144, 2, 4, 196608, 2, 3, 131072, 2, 2, 65540, 262146, 1, 6, 393218, 0, 0, 2, 0, 1, 65538, 0, 65537, 65538, 1, 65538, 131074, 1, 65539, 196610, 1, 131075, 196610, 2, 131076, 262146, 2, 131077, 327682, 2, 196613, 327682, 3, 262149, 327682, 4, 327685, 327682, 5)
 script = ExtResource("2_1g4q8")
 
+[node name="Player" parent="Battlefield" instance=ExtResource("5_j4ubb")]
+position = Vector2(224, 288)
+
 [node name="Enemy" parent="Battlefield" instance=ExtResource("7_7ta1y")]
-position = Vector2(232, 152)
+position = Vector2(224, 160)
 unit_name = "enemy"
 def = 0
 speed = 1
-sprite_frames = SubResource("SpriteFrames_mlju6")
 side = "Enemy"
 
-[node name="Player" parent="Battlefield" instance=ExtResource("7_7ta1y")]
-position = Vector2(232, 280)
-unit_name = "player"
-def = 0
-sprite_frames = SubResource("SpriteFrames_jtc68")
-side = "Player"
+[node name="WaterElemental" parent="Battlefield" instance=ExtResource("11_o8mm7")]
+position = Vector2(352, 160)
+unit_name = "water_elemental"
 
 [node name="UIManager" type="Control" parent="."]
 layout_mode = 3

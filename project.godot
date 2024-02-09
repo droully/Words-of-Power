@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Words of Power"
-run/main_scene="res://Scenes/battle_scene.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+run/main_scene="res://Scenes/Main/battle_scene.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [audio]

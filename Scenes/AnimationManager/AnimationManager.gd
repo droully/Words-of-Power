@@ -6,7 +6,7 @@ extends Node
 
 enum AnimationState {Finished,Ongoing}
 var anim_state = AnimationState.Finished
-var ongoing_animations : Array
+var ongoing_animations : Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,6 +29,14 @@ func check_anim_state():
 	else:
 		anim_state = AnimationState.Finished
 
+func is_animation_ongoing() -> bool:
+	return anim_state == AnimationState.Ongoing
+	
+	
+	
+func start_animation(object):
+	_on_object_started_animation(object)
+
 func _on_object_started_animation(object):
 	ongoing_animations.append(object)
 	check_anim_state()
@@ -39,7 +47,3 @@ func _on_object_finished_animation(object):
 	check_anim_state()
 	
 
-
-	
-
-		
