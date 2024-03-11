@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c55dbpqqoj6hu"]
 
-[ext_resource type="Script" path="res://Scenes/Units/unit.gd" id="1_sqie6"]
+[ext_resource type="Script" path="res://Scenes/Units/unit.gd" id="1_4igtj"]
 [ext_resource type="Texture2D" uid="uid://besdv5kfep6vi" path="res://Resources/Characters/Basic Charakter Actions.png" id="2_shhd3"]
 [ext_resource type="Script" path="res://Scenes/Units/AI.gd" id="3_vjeu6"]
 [ext_resource type="Script" path="res://Scenes/UI/UI.gd" id="4_vavm6"]
@@ -21,9 +21,9 @@ animations = [{
 }]
 
 [node name="Player" type="Node2D"]
-script = ExtResource("1_sqie6")
+script = ExtResource("1_4igtj")
 unit_name = "player"
-priority = 1
+priority = 0
 party = "player"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]

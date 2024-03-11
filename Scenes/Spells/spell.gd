@@ -18,17 +18,19 @@ class_name Spell
 var BF
 var caster:Unit
 var target_pos:Vector2
+var target_tile:Vector2i
 
 var affected_targets =[]
-
 
 func initialize(_Battlefield,_caster:Unit,_target_pos:Vector2):
 	self.BF=_Battlefield
 	self.caster=_caster
 	self.target_pos=_target_pos
+	self.target_tile=BF.local_to_map(target_pos)
+	
 	
 func affect_tiles():
-	for tile in affected_tiles(BF.local_to_map(target_pos),caster,BF):
+	for tile in affected_tiles(self.target_tile,caster,BF):
 		var unit_target= BF.get_unit_in_tile(tile)
 		if unit_target:
 			callbackOnHit(unit_target)
@@ -37,11 +39,12 @@ func affect_tiles():
 func animation():
 	return 
 
-func targeteable_tiles(_caster=caster,_BF=BF):
+func targetable_tiles(_caster=caster,_BF=BF):
 	return null
 	
 func affected_tiles(_target_tile,_caster,_BF):
 	return null
+ 
 func effect(_target,_callback):
 	return null
 

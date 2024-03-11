@@ -10,6 +10,8 @@ class_name Unit
 @export var unit_name: String = "unit"
 @export var hp: int = 100
 @export var max_hp: int = 100
+@export var temporal_hp: int = 0
+
 @export var att: int = 10
 @export var def: int = 5
 @export var speed: int = 2
@@ -21,14 +23,17 @@ class_name Unit
 
 @export var side: String
 
-var tile_position: Vector2i
+var tile_position: Vector2i = Vector2i(-1,-1)
 
 
 func _ready():
 	pass
 
-func initialize(BF):
-	tile_position = BF.position_to_tile(position)
+func initialize(BF: BattleField):
+	if tile_position == Vector2i(-1,-1):
+		tile_position = BF.position_to_tile(position)
+	if position == Vector2(0,0):
+		position = BF.tile_to_position(tile_position)
 	
 func walkable_tiles(BF):
 	return BF.tiles_in_aoe(tile_position,speed,false,false)

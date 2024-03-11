@@ -3,7 +3,7 @@ extends Spell
 # Called when the node enters the scene tree for the first time.
 
 
-func targeteable_tiles(_caster=caster,_BF=BF):
+func targetable_tiles(_caster=caster,_BF=BF):
 	return _BF.tiles_in_aoe(_caster.tile_position,srange,false,true)
 	
 func affected_tiles(target_tile,_caster=caster,_BF=BF):

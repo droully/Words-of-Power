@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c36n6wnhpdedu"]
 
-[ext_resource type="Script" path="res://Scenes/Units/unit.gd" id="1_6lu6k"]
+[ext_resource type="Script" path="res://Scenes/Units/unit.gd" id="1_buyj8"]
 [ext_resource type="Texture2D" uid="uid://dhutjggh7e2d" path="res://Resources/Enemies/water_elemental.png" id="2_n5d7o"]
 [ext_resource type="Script" path="res://Scenes/Units/AI.gd" id="3_cu8s4"]
 [ext_resource type="Script" path="res://Scenes/UI/UI.gd" id="4_nw51x"]
@@ -17,7 +17,7 @@ animations = [{
 }]
 
 [node name="WaterElemental" type="Node2D"]
-script = ExtResource("1_6lu6k")
+script = ExtResource("1_buyj8")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1.14441e-05, 0)

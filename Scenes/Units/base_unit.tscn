@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dwciaemefunni"]
 
-[ext_resource type="Script" path="res://Scenes/Units/unit.gd" id="1_wcja8"]
+[ext_resource type="Script" path="res://Scenes/Units/unit.gd" id="1_v2mmu"]
 [ext_resource type="Texture2D" uid="uid://cjqvx668pb1br" path="res://Resources/Characters/Free Cow Sprites.png" id="2_1c2md"]
 [ext_resource type="Script" path="res://Scenes/Units/AI.gd" id="3_7to1a"]
 [ext_resource type="Script" path="res://Scenes/UI/UI.gd" id="4_eajtp"]
@@ -21,7 +21,8 @@ animations = [{
 }]
 
 [node name="BaseUnit" type="Node2D"]
-script = ExtResource("1_wcja8")
+script = ExtResource("1_v2mmu")
+priority = 1
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ue4tf")

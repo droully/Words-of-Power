@@ -18,12 +18,13 @@ class Cast:
 		self.target_tile = _target_tile
 		self.BF = _battlefield
 		self.fast = _fast
+		
 	func execute():
 		spell.initialize(BF,caster,BF.map_to_local(target_tile))
 		BF.add_child(spell)
 
 		spell.hide()
-		if target_tile not in spell.targeteable_tiles():
+		if target_tile not in spell.targetable_tiles():
 			return false
 		spell.show()
 		Events.emit_signal("command_spell_casted",caster,spell,target_tile)
@@ -50,8 +51,7 @@ class Move:
 
 	func execute():
 		original_tile = unit.tile_position  # Store the original position before the move
-		if target_tile in unit.walkable_tiles(BF):	
-			
+		if target_tile in unit.walkable_tiles(BF):				
 			Events.emit_signal("command_unit_moved",unit,original_tile,target_tile)
 			return BF.place_unit_on_tile(unit, target_tile.x, target_tile.y)
 		return false

@@ -8,9 +8,9 @@ func execute_turn(BM, BF):
 	
 	var spell=Utils.get_spell_by_name("fire_ball")
 	
-	for tile in spell.targeteable_tiles(unit,BF):
+	for tile in spell.targetable_tiles(unit,BF):
 		if BF.get_unit_in_tile(tile) == BM.player:  # identifies player
-			var castCommand = Command.Cast.new(unit,spell,tile, BF,true)
+			var castCommand = Command.Cast.new(unit,spell,tile, BF,false)
 			return  castCommand
 
 	var distance_to_player=BF.distance(unit_tile, player_tile)
@@ -54,7 +54,7 @@ func execute_turn(BM, BF):
 	#var best_score=-1000
 	#var l = []
 	#
-	#for tile in spell.targeteable_tiles(unit,BF):
+	#for tile in spell.targetable_tiles(unit,BF):
 		#var BF2 = BF.duplicate()
 		#var BM2 = duplicate_object(BM)
 		#

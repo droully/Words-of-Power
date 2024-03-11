@@ -2,8 +2,12 @@ extends Node
 
 class_name StateMachine
 
-@onready var BM = $".."
-@onready var current_state=$Start 
+@onready var BM = $"../BattleManager"
+@onready var BF = $"../Battlefield"
+@onready var AM = $"../AnimationManager"
+@onready var UI = $"../UIManager"
+
+@onready var current_state=$Start
 
 var history = []
 var states = {}
@@ -11,7 +15,7 @@ var states = {}
 
 func _ready():
 	for state in get_children():
-		state.FSM = self
+		state.initialize(self)
 		states[state.name] = state
 		if current_state.name !=state.name:
 			remove_child(state)

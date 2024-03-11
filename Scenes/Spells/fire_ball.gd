@@ -8,13 +8,13 @@ func _ready():
 func _process(_delta):
 	pass
 
-func targeteable_tiles(_caster=caster,_BF=BF):
+func targetable_tiles(_caster=caster,_BF=BF):
 	return _BF.tiles_in_aoe(_caster.tile_position,srange,false,true)
 	
-func affected_tiles(target_tile,_caster=caster,_BF=BF):
-	if _BF.grid.is_point_solid(target_tile):
+func affected_tiles(_target_tile,_caster=caster,_BF=BF):
+	if _BF.grid.is_point_solid(_target_tile):
 		return []
-	return _BF.tiles_in_aoe(target_tile, radius,false,true)
+	return _BF.tiles_in_aoe(_target_tile, radius,false,true)
 
 
 func animation():
@@ -36,7 +36,7 @@ func animation():
 	anim_player.queue("exploding")
 
 
-func _on_changed_animation(old_anim_name, new_anim_name):
+func _on_changed_animation(old_anim_name, _new_anim_name):
 	if old_anim_name== "traveling":
 		affect_tiles()
 
@@ -44,6 +44,6 @@ func _on_changed_animation(old_anim_name, new_anim_name):
 
 
 	
-func callbackOnHit(target):
+func callbackOnHit(target:Unit):
 	target.take_damage(damage)
 	target.add_status_effect(burning.new())

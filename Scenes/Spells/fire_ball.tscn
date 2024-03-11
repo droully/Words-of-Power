@@ -1,45 +1,45 @@
 [gd_scene load_steps=16 format=3 uid="uid://bojbtjr8m32ea"]
 
 [ext_resource type="Script" path="res://Scenes/Spells/fire_ball.gd" id="1_c3fe0"]
-[ext_resource type="Texture2D" uid="uid://ct88m72uoyl4h" path="res://Resources/Spells/Red Effect Bullet Impact Explosion 32x32.png" id="2_irme7"]
+[ext_resource type="Texture2D" uid="uid://ct88m72uoyl4h" path="res://Resources/Spells/Red Effect Bullet Impact Explosion 32x32.png" id="2_w3mcn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7nbxj"]
-atlas = ExtResource("2_irme7")
+atlas = ExtResource("2_w3mcn")
 region = Rect2(512, 416, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2q37e"]
-atlas = ExtResource("2_irme7")
+atlas = ExtResource("2_w3mcn")
 region = Rect2(544, 416, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vf04b"]
-atlas = ExtResource("2_irme7")
+atlas = ExtResource("2_w3mcn")
 region = Rect2(576, 416, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bk11f"]
-atlas = ExtResource("2_irme7")
+atlas = ExtResource("2_w3mcn")
 region = Rect2(608, 416, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j0rjr"]
-atlas = ExtResource("2_irme7")
+atlas = ExtResource("2_w3mcn")
 region = Rect2(544, 384, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sg5ur"]
-atlas = ExtResource("2_irme7")
+atlas = ExtResource("2_w3mcn")
 region = Rect2(352, 320, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_potlk"]
-atlas = ExtResource("2_irme7")
+atlas = ExtResource("2_w3mcn")
 region = Rect2(384, 320, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_41nsg"]
-atlas = ExtResource("2_irme7")
+atlas = ExtResource("2_w3mcn")
 region = Rect2(416, 320, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4f3xn"]
-atlas = ExtResource("2_irme7")
+atlas = ExtResource("2_w3mcn")
 region = Rect2(448, 320, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3vdly"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_7v2md"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -162,9 +162,8 @@ damage = 24
 radius = 0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_3vdly")
+sprite_frames = SubResource("SpriteFrames_7v2md")
 animation = &"traveling"
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

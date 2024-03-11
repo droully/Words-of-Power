@@ -20,7 +20,7 @@ func refresh():
 			status_container.get_node("ShieldIcon").queue_free() # Remove the shield node
 
 
-	
+
 	if status_effects.has_node("burning"):
 		if not status_container.has_node("BurningIcon"): # Check if shield node already exists
 			var burning_node = TextureRect.new()

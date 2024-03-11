@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr4etsid43k0k"]
+[gd_scene load_steps=11 format=3 uid="uid://dr4etsid43k0k"]
 
 [ext_resource type="Texture2D" uid="uid://clcckii0evvcf" path="res://Resources/Spritesheet/Battleground.png" id="1_d1pus"]
 [ext_resource type="Texture2D" uid="uid://cml1v15d86kyu" path="res://Resources/Spritesheet/Highlight.png" id="2_75d2p"]
 [ext_resource type="Texture2D" uid="uid://wspxr3ru27yk" path="res://Resources/Spritesheet/Coordinates.png" id="3_3ehtd"]
 [ext_resource type="Script" path="res://Scenes/Battlefields/Battlefield.gd" id="4_f6dyg"]
 [ext_resource type="PackedScene" uid="uid://dwciaemefunni" path="res://Scenes/Units/base_unit.tscn" id="5_jyvp5"]
+[ext_resource type="PackedScene" uid="uid://c36n6wnhpdedu" path="res://Scenes/Units/water_elemental.tscn" id="6_fgkdl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4ky1"]
 texture = ExtResource("1_d1pus")
@@ -1044,8 +1045,15 @@ layer_1/name = "Highlight"
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "PerTileData"
-layer_2/tile_data = PackedInt32Array(0, 2, 0, 65536, 2, 1, 131072, 2, 2, 196608, 2, 3, 262144, 2, 4, 327680, 2, 5, 393216, 2, 6, 1, 65538, 0, 65537, 65538, 1, 131073, 65538, 2, 196609, 65538, 3, 262145, 65538, 4, 327681, 65538, 5, 393217, 65538, 6, 2, 131074, 0, 65538, 131074, 1, 131074, 131074, 2, 196610, 131074, 3, 262146, 131074, 4, 327682, 131074, 5, 393218, 131074, 6, 3, 196610, 0, 65539, 196610, 1, 131075, 196610, 2, 196611, 196610, 3, 262147, 196610, 4, 327683, 196610, 5, 393219, 196610, 6, 4, 262146, 0, 65540, 262146, 1, 131076, 262146, 2, 196612, 262146, 3, 262148, 262146, 4, 327684, 262146, 5, 393220, 262146, 6, 5, 327682, 0, 65541, 327682, 1, 131077, 327682, 2, 196613, 327682, 3, 262149, 327682, 4, 327685, 327682, 5, 393221, 327682, 6, 6, 393218, 0, 65542, 393218, 1, 196614, 393218, 3, 262150, 393218, 4, 327686, 393218, 5, 393222, 393218, 6, 131078, 393218, 2)
+layer_2/tile_data = PackedInt32Array()
 script = ExtResource("4_f6dyg")
 
-[node name="BaseUnit" parent="." instance=ExtResource("5_jyvp5")]
+[node name="Enemy" parent="." instance=ExtResource("5_jyvp5")]
 position = Vector2(224, 160)
+unit_name = "enemy"
+def = 0
+speed = 1
+side = "Enemy"
+
+[node name="WaterElemental" parent="." instance=ExtResource("6_fgkdl")]
+position = Vector2(32, 224)

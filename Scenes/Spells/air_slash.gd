@@ -3,7 +3,7 @@ extends Spell
 var dir 
 
 
-func targeteable_tiles(_caster=caster,_BF=BF):
+func targetable_tiles(_caster=caster,_BF=BF):
 	return _BF.tiles_in_cross(_caster.tile_position,srange)
 
 func affected_tiles(target_tile,_caster=caster,_BF=BF):

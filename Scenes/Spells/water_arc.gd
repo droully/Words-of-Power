@@ -9,7 +9,7 @@ func _process(_delta):
 	pass
 	
 
-func targeteable_tiles(_caster=caster,_BF=BF):
+func targetable_tiles(_caster=caster,_BF=BF):
 	return _BF.tiles_in_cross(_caster.tile_position,srange)
 
 func affected_tiles(target_tile,_caster=caster,_BF=BF):
@@ -20,7 +20,7 @@ func affected_tiles(target_tile,_caster=caster,_BF=BF):
 
 func animation():
 	position=target_pos
-	
+	 
 	Events.emit_signal("spell_cast_anim_start",self)
 	anim_player.animation_finished.connect(_on_finished_animation)
 	

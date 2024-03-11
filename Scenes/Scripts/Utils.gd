@@ -8,6 +8,7 @@ func _ready():
 	
 func switch_scene(res_path):
 	call_deferred("_defferred_switch_scene",res_path)
+	
 func _defferred_switch_scene(res_path):
 	current_scene.free()
 	var s=load(res_path)
@@ -19,9 +20,12 @@ func priority_compare(a:Unit, b:Unit):
 	return a.priority < b.priority
 
 func get_spell_by_name(spell_name: String):
-	var basespell_rsc = load("res://Scenes/Spells/"+spell_name+".tscn").instantiate()
-	var spell = basespell_rsc.duplicate()
+	var spell = load("res://Scenes/Spells/"+spell_name+".tscn").instantiate()
 	return spell
+
+func get_unit_by_name(unit_name: String):
+	var unit = load("res://Scenes/units/"+unit_name+".tscn").instantiate()
+	return unit
 
 func array_unique(array: Array) -> Array:
 	var unique: Array = []

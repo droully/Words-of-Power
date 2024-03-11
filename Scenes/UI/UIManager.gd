@@ -1,9 +1,7 @@
 extends Control
 
 @onready var BM = get_node("../BattleManager")
-@onready var BF = get_node("../Battlefield")
-
-@onready var player = get_node("../Battlefield/Player")
+@onready var BF : BattleField = get_node("../Battlefield")
 
 @onready var turn_label= $TurnTracker/Turn
 @onready var state_label=$TurnTracker/State
@@ -13,7 +11,7 @@ extends Control
 var spells_UI = ["Water Arc","Fire Ball","Air Slash","Earth Bind"]
 var spells_Name = ["water_arc","fire_ball","air_slash","earth_bind"]
 
-var last_highlighted_tile = Vector2i(-1, -1)
+
 var last_highlighted_tiles: Array = []
 
 signal spell_button_pressed(spell_name)
@@ -21,6 +19,7 @@ signal spell_button_pressed(spell_name)
 func _ready():
  # Replace with the actual path to your VBoxContainer.
 	# Create new buttons.
+	
 	for i in range(len(spells_UI)):
 		var button = Button.new()
 		button.text = spells_UI[i] 
@@ -28,26 +27,19 @@ func _ready():
 		actions_container.add_child(button)
 	# Add your logic here to cast the spell or whatever you'd like to do.
 		button.pressed.connect(_on_spell_button_pressed.bind(spells_Name[i]))
-		
-func _input(event):
-	match BM.user_action_state:
-		BM.UserActionState.Move:
-			move_highlight(event)
-		BM.UserActionState.Cast:
-			cast_highlight(event)
-#		_:
-#			BF.set_cell(Highlight_Layer,last_highlighted_tile)
 
+
+func _input(_event):
+	pass
+	
 func move_highlight(event):
 	if event is InputEventMouseMotion :
 		var tile_position = BF.mouse_to_tile(event.position)
-		for tile in last_highlighted_tiles:
-			BF.set_cell(Highlight_Layer,tile)#reset
+		BF.reset_highlight(last_highlighted_tiles)
 		
-		if  tile_position in player.walkable_tiles(BF):	
-			var path = BF.grid.get_id_path(player.tile_position,tile_position)
-			for tile in path:
-				BF.set_cell(Highlight_Layer,tile,1,Vector2i(0,0)) #Vector2i(0,0): amarillo
+		if  tile_position in BM.current_unit.walkable_tiles(BF):	
+			var path = BF.grid.get_id_path(BM.current_unit.tile_position,tile_position)
+			BF.highlight_tiles(path,Vector2i(0,0))
 			last_highlighted_tiles = path
 		else:
 			last_highlighted_tiles = []
@@ -55,12 +47,10 @@ func move_highlight(event):
 func cast_highlight(event):
 	if event is InputEventMouseMotion :
 		var tile_position = BF.mouse_to_tile(event.position)
-		for tile in last_highlighted_tiles:
-			BF.set_cell(Highlight_Layer,tile)#reset
-		# Clear the previously highlighted tile (set it to -1 which means no tile)
-		BF.set_cell(Highlight_Layer,last_highlighted_tile)
+		BF.reset_highlight(last_highlighted_tiles)
+		
 		if BF.tile_inside_BF(tile_position):
-			var affected_tiles= BM.spell_to_cast.affected_tiles(tile_position,player,BF)
+			var affected_tiles= BM.spell_to_cast.affected_tiles(tile_position,BM.current_unit,BF)
 			for tile in affected_tiles:
 				BF.set_cell(Highlight_Layer,tile,1,Vector2i(1,0))
 
@@ -68,37 +58,26 @@ func cast_highlight(event):
 		else:
 			last_highlighted_tiles = []  # Reset
 
+func deploy_highlight(event):
+	if event is InputEventMouseMotion :
+		var tile_position = BF.mouse_to_tile(event.position)
+		
+		if tile_position in BF.deployment_area:
+			BM.player.position=BF.tile_to_position(tile_position)
+
 func _process(_delta):
-	turn_label.text=BM.turn_queue[0].unit_name
+	
+	
+	if len(BM.turn_queue)>0:
+		turn_label.text=BM.turn_queue[0].unit_name
 	state_label.text=BM.BS.current_state.name
+	
+	var TurnQueue=$TurnQueue
+	var tq=PackedStringArray([])
+	for unit in BM.turn_queue:
+		tq.append(unit.unit_name)
+	TurnQueue.text=" ".join(tq)
 
-	match BM.turn_queue[0].party:
-		"player":
-			$TurnContainer/EnemyTurnUI.hide()
-			$TurnContainer/PlayerTurnUI.show()
-
-		"enemy":
-			$TurnContainer/PlayerTurnUI.hide()
-			$TurnContainer/EnemyTurnUI.show()
-
-	match BM.user_action_state:
-		BM.UserActionState.Move:
-			for tile in player.walkable_tiles(BF):
-				if BF.get_cell_source_id(Highlight_Layer, tile) !=-1:
-					pass
-				else:
-					BF.set_cell(Highlight_Layer,tile,1,Vector2i(2,0))
-
-		BM.UserActionState.Cast:
-			for tile in BM.spell_to_cast.targeteable_tiles(player,BF):
-				if BF.get_cell_source_id(Highlight_Layer, tile) !=-1:
-					pass
-				else:
-					BF.set_cell(Highlight_Layer,tile,1,Vector2i(2,0))
-		_:
-
-			for tiles in BF.all_tiles():
-				BF.set_cell(Highlight_Layer,tiles)
 
 func _on_spell_button_pressed(spell_name):	
 	Events.emit_signal("spell_button_pressed",Utils.get_spell_by_name(spell_name))

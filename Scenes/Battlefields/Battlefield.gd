@@ -5,11 +5,12 @@ class_name BattleField
 enum Layer {Base,Highlight,PerTileData}
 enum TileSetID {Battleground,Highlight,Coordinates}
 
+var Highlight_Layer = Layer.Highlight
 var grid= AStarGrid2D.new()
-var last_highlighted_tile = Vector2i(-1, -1)
 var size_x
 var size_y
 
+var deployment_area = tiles_in_box(2,4,4,5)
 func _ready():
 	#set_layer_modulate(Layer.PerTileData,Color(1, 1, 1, 0))
 	Events.unit_moved_global_coord.connect(_on_unit_moved_global_coord)
@@ -20,7 +21,8 @@ func setup(x,y,units):
 	size_x=x
 	size_y=y
 	
-	set_per_tile_data(size_x,size_y)
+	#set_per_tile_data(size_x,size_y)
+	set_layer_z_index(Layer.PerTileData,-1)
 	set_grid(size_x,size_y)	
 	initialize_units(units)
 
@@ -42,18 +44,22 @@ func set_grid(x_lim,y_lim):
 	grid.set_point_solid(Vector2i(2,3))
 	grid.set_point_solid(Vector2i(5,4))
 
-func initialize_units(units):
+func initialize_units(units:Array):
 	for unit in units:
 		set_unit(unit)
 		
 	for unit in get_children():
 		set_unit(unit)
 
-func spawn_unit():
-	pass
+func spawn_unit(unit : Unit,tile_position,turn_queue):
 
-func set_unit(unit):
-	unit.initialize(self)	
+	turn_queue.append(unit)
+	unit.tile_position = tile_position
+	set_unit(unit)
+	return true
+
+func set_unit(unit : Unit):
+	unit.initialize(self)
 	get_cell_in_tile(unit.tile_position).set_custom_data("UnitTracking",unit)
 
 func place_unit_on_tile(unit, tile_position_x:int, tile_position_y:int):
@@ -78,6 +84,9 @@ func mouse_to_tile(mouse_position: Vector2):
 
 func position_to_tile(pos: Vector2):
 	return local_to_map(pos)
+
+func tile_to_position(tile_pos: Vector2i):
+	return map_to_local(tile_pos)
 
 func tile_inside_BF(tile_position: Vector2i):
 	return grid.is_in_boundsv(tile_position)
@@ -120,6 +129,13 @@ func tiles_in_aoe(center_tile: Vector2i, radius:int, return_solid_tiles=true, re
 		grid.set_point_solid(tile_to_desolid,false)
 	return tiles
 
+func tiles_in_box(x_start,y_start,x_end,y_end):
+	var tiles = []
+	for x in range(x_start, x_end + 1):
+		for y in range(y_start, y_end + 1):
+			tiles.append(Vector2i(x, y))
+	return tiles
+
 func tiles_in_line(center_tile: Vector2i, dir: Vector2i, length: int) -> Array:
 	var tiles: Array = []
 
@@ -152,6 +168,15 @@ func tiles_perpendicular(target_tile,dir,length):
 		if tile_inside_BF(next_tile):
 			tiles.append(next_tile)
 	return tiles
+
+func highlight_tiles(tiles,mask_atlas_coord:Vector2i):
+	for tile in tiles:		
+		if get_cell_source_id(Highlight_Layer, tile) ==-1:
+			set_cell(Highlight_Layer,tile,1,mask_atlas_coord)
+
+func reset_highlight(tiles: Array = all_tiles()):
+	for tile in tiles:
+		set_cell(Highlight_Layer,tile)
 
 func get_direction_from_unit_to_tile(unit: Unit, target_tile: Vector2i) -> Vector2i:
 	var unit_tile = unit.tile_position # Assuming your unit has a 'tile_position' property
