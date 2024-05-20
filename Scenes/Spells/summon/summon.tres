@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=2 format=3 uid="uid://c422kbpfepkia"]
+
+[ext_resource type="Script" path="res://Scenes/Spells/spell_data.gd" id="1_lnawh"]
+
+[resource]
+script = ExtResource("1_lnawh")
+spell_name = "summon"
+spell_name_UI = "Summon"
+cost = 1
+srange = null
+duration = null
+damage = null
+radius = 1
+targeting = null
+affecting = null

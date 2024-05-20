@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyib678q55wlf"]
+
+[ext_resource type="PackedScene" uid="uid://dwciaemefunni" path="res://Scenes/Units/base_unit/base_unit.tscn" id="1_vl421"]
+[ext_resource type="Resource" uid="uid://c0dm1idrd68y" path="res://Scenes/Units/sanguisuge/sanguisuge.tres" id="2_a1ygi"]
+[ext_resource type="Texture2D" uid="uid://bggqthfvi6cx7" path="res://Resources/Enemies/sanguisuge.png" id="2_mb07s"]
+
+[node name="Sanguisuge" instance=ExtResource("1_vl421")]
+unit_data = ExtResource("2_a1ygi")
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_mb07s")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://bufeaxtit3fr1"]
+
+[ext_resource type="PackedScene" uid="uid://dwciaemefunni" path="res://Scenes/Units/base_unit/base_unit.tscn" id="1_4kamo"]
+[ext_resource type="Resource" uid="uid://r54tvn3epmtl" path="res://Scenes/Units/blood_reed/blood_reed.tres" id="2_gd3x0"]
+[ext_resource type="Texture2D" uid="uid://brb87l4iyedw4" path="res://Resources/Enemies/blood_reed.png" id="3_eefy6"]
+
+[node name="BloodReed" instance=ExtResource("1_4kamo")]
+unit_data = ExtResource("2_gd3x0")
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_eefy6")

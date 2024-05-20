@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://2jfs83fgxv2c"]
+
+[ext_resource type="PackedScene" uid="uid://dwciaemefunni" path="res://Scenes/Units/base_unit/base_unit.tscn" id="1_q1vop"]
+[ext_resource type="Resource" uid="uid://bbqia3ep586c6" path="res://Scenes/Units/player/player.tres" id="2_bky61"]
+[ext_resource type="Texture2D" uid="uid://rtj6h8s6px02" path="res://Resources/Enemies/player.png" id="3_xcqgg"]
+
+[node name="Player" instance=ExtResource("1_q1vop")]
+unit_data = ExtResource("2_bky61")
+party = "player"
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_xcqgg")

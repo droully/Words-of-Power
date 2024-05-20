@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=3 format=3 uid="uid://bbqia3ep586c6"]
+
+[ext_resource type="Script" path="res://Scenes/Units/base_unit/unit_data.gd" id="1_yrgs6"]
+[ext_resource type="Texture2D" uid="uid://rtj6h8s6px02" path="res://Resources/Enemies/player.png" id="2_ko0wt"]
+
+[resource]
+script = ExtResource("1_yrgs6")
+unit_name = "player"
+hp = 100
+max_hp = 100
+temporal_hp = 0
+att = 10
+def = 5
+speed = 1
+shield = 0
+max_shield = 1
+priority = 2
+tags = Array[String]([])
+sprite = ExtResource("2_ko0wt")

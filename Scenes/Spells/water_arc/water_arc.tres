@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=2 format=3 uid="uid://xcqm6hkuq8ec"]
+
+[ext_resource type="Script" path="res://Scenes/Spells/spell_data.gd" id="1_wbtjw"]
+
+[resource]
+script = ExtResource("1_wbtjw")
+spell_name = "water_arc"
+spell_name_UI = "Water Arc"
+player_usable = true
+cost = null
+srange = 3
+duration = null
+damage = null
+radius = null
+targeting = 3
+affecting = 2

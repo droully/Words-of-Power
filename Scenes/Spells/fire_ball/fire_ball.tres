@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=2 format=3 uid="uid://rrnl1klufgd8"]
+
+[ext_resource type="Script" path="res://Scenes/Spells/spell_data.gd" id="1_jwjd5"]
+
+[resource]
+script = ExtResource("1_jwjd5")
+spell_name = "fire_ball"
+spell_name_UI = "Fire Ball"
+player_usable = true
+cost = null
+srange = 2
+duration = null
+damage = 24
+radius = null
+targeting = null
+affecting = null

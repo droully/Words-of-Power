@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=4 format=3 uid="uid://bn7i3fnhbvo0k"]
+
+[ext_resource type="Script" path="res://Scenes/Units/base_unit/AI.gd" id="1_spx55"]
+[ext_resource type="Script" path="res://Scenes/Units/base_unit/unit_data.gd" id="1_wx68j"]
+[ext_resource type="Texture2D" uid="uid://dfoebsetmgtbh" path="res://Resources/Enemies/base_unit.png" id="2_g48f6"]
+
+[resource]
+script = ExtResource("1_wx68j")
+unit_name = "unit"
+hp = 100
+max_hp = 100
+temporal_hp = 0
+AI = ExtResource("1_spx55")
+att = 10
+def = 5
+speed = 1
+shield = 0
+max_shield = 1
+priority = 2
+tags = Array[String](["insect"])
+sprite = ExtResource("2_g48f6")

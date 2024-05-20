@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=3 format=3 uid="uid://dk44gm3vejf48"]
+
+[ext_resource type="Script" path="res://Scenes/Units/base_unit/unit_data.gd" id="1_yi6n4"]
+[ext_resource type="Texture2D" uid="uid://blbp6fj3dsj4i" path="res://Resources/Enemies/snake.png" id="2_nj05i"]
+
+[resource]
+script = ExtResource("1_yi6n4")
+unit_name = "unit"
+hp = 100
+max_hp = 100
+temporal_hp = 0
+att = 10
+def = 5
+speed = 1
+shield = 0
+max_shield = 1
+priority = 2
+tags = Array[String](["insect"])
+sprite = ExtResource("2_nj05i")

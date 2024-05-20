@@ -28,3 +28,4 @@ layout_mode = 2
 text = "Level4"
 
 [connection signal="pressed" from="VBoxContainer/Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/Level2" to="." method="_on_level_2_pressed"]

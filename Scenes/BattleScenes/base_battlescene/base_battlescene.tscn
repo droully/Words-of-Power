@@ -1,0 +1,217 @@
+[gd_scene load_steps=19 format=3 uid="uid://bl8iglk1xnwbs"]
+
+[ext_resource type="Script" path="res://Scenes/Managers/BattleManager.gd" id="1_5o2ef"]
+[ext_resource type="Script" path="res://Scenes/BattleScenes/base_battlescene/battlescene.gd" id="1_ppw18"]
+[ext_resource type="Script" path="res://Scenes/Managers/StateMachine.gd" id="2_0fcss"]
+[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Start.gd" id="2_31kk1"]
+[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Deploy.gd" id="3_emtwa"]
+[ext_resource type="Script" path="res://Scenes/UI/BattleLog.gd" id="3_gbne2"]
+[ext_resource type="PackedScene" uid="uid://dr4etsid43k0k" path="res://Scenes/Battlefields/base_battlefield/base_battlefield.tscn" id="4_dxvth"]
+[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Status.gd" id="4_n7lyx"]
+[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Turn.gd" id="5_4sts2"]
+[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Anim.gd" id="6_6fjw4"]
+[ext_resource type="Script" path="res://Scenes/UI/UIManager.gd" id="6_tbgf5"]
+[ext_resource type="Script" path="res://Scenes/Managers/BattleState/End.gd" id="7_se17b"]
+[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Inter.gd" id="9_rlkip"]
+[ext_resource type="Script" path="res://Scenes/Managers/AnimationManager.gd" id="12_dt3ki"]
+[ext_resource type="Script" path="res://Scenes/Scripts/Spellbook.gd" id="15_pm17h"]
+[ext_resource type="Script" path="res://Scenes/Managers/AnimState/Free.gd" id="16_tbdb7"]
+[ext_resource type="Script" path="res://Scenes/Managers/AnimState/Ongoing.gd" id="17_wkk3s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_guiso"]
+
+[node name="BattleScene" type="Node2D"]
+script = ExtResource("1_ppw18")
+
+[node name="BackGround" type="ColorRect" parent="."]
+offset_left = -352.0
+offset_top = -272.0
+offset_right = -312.0
+offset_bottom = -232.0
+scale = Vector2(56.9114, 31.4082)
+color = Color(0.101961, 0.180392, 0.0588235, 1)
+metadata/_edit_lock_ = true
+
+[node name="BattleManager" type="Node" parent="."]
+script = ExtResource("1_5o2ef")
+
+[node name="BattleState" type="Node" parent="BattleManager"]
+script = ExtResource("2_0fcss")
+
+[node name="Start" type="Node" parent="BattleManager/BattleState"]
+script = ExtResource("2_31kk1")
+
+[node name="Deploy" type="Node" parent="BattleManager/BattleState"]
+script = ExtResource("3_emtwa")
+
+[node name="Status" type="Node" parent="BattleManager/BattleState"]
+script = ExtResource("4_n7lyx")
+
+[node name="Turn" type="Node" parent="BattleManager/BattleState"]
+script = ExtResource("5_4sts2")
+
+[node name="Anim" type="Node" parent="BattleManager/BattleState"]
+script = ExtResource("6_6fjw4")
+
+[node name="End" type="Node" parent="BattleManager/BattleState"]
+script = ExtResource("7_se17b")
+
+[node name="Inter" type="Node" parent="BattleManager/BattleState"]
+script = ExtResource("9_rlkip")
+
+[node name="Battlefield" parent="." instance=ExtResource("4_dxvth")]
+metadata/_edit_lock_ = true
+
+[node name="Spellbook" type="Node" parent="."]
+script = ExtResource("15_pm17h")
+
+[node name="UIManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_tbgf5")
+
+[node name="ActionsContainer" type="VBoxContainer" parent="UIManager"]
+layout_mode = 0
+offset_left = 592.0
+offset_top = 128.0
+offset_right = 650.0
+offset_bottom = 194.0
+scale = Vector2(1.76908, 1.76279)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Move" type="Button" parent="UIManager/ActionsContainer"]
+layout_mode = 2
+text = "Move"
+
+[node name="TurnQueue" type="TextEdit" parent="UIManager"]
+layout_mode = 2
+offset_left = 328.0
+offset_top = 48.0
+offset_right = 784.0
+offset_bottom = 104.0
+text = "asdasd"
+
+[node name="TurnTracker" type="Control" parent="UIManager"]
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 40.0
+offset_right = 168.0
+offset_bottom = 80.0
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="UIManager/TurnTracker"]
+layout_mode = 0
+offset_right = 184.0
+offset_bottom = 40.0
+color = Color(0.309804, 0.533333, 0.411765, 1)
+
+[node name="Turn" type="Label" parent="UIManager/TurnTracker"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 30.0
+text = "unit turn"
+label_settings = SubResource("LabelSettings_guiso")
+
+[node name="State" type="Label" parent="UIManager/TurnTracker"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 176.0
+offset_bottom = 30.0
+text = "state"
+
+[node name="BattleLog" type="Control" parent="UIManager"]
+anchors_preset = 0
+offset_left = 768.0
+offset_top = 128.0
+offset_right = 808.0
+offset_bottom = 168.0
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UIManager/BattleLog"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 448.0
+color = Color(0.47451, 0.611765, 0.65098, 1)
+
+[node name="Log" type="RichTextLabel" parent="UIManager/BattleLog"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 448.0
+scroll_following = true
+script = ExtResource("3_gbne2")
+
+[node name="BattleStart" type="Control" parent="UIManager"]
+visible = false
+anchors_preset = 0
+offset_top = 192.0
+offset_right = 40.0
+offset_bottom = 232.0
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="BattleStart" type="ColorRect" parent="UIManager/BattleStart"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 200.0
+color = Color(0.690196, 0.345098, 0.415686, 1)
+
+[node name="TextEdit" type="TextEdit" parent="UIManager/BattleStart"]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 66.0
+offset_right = 624.0
+offset_bottom = 106.0
+text = "BATTLE START"
+
+[node name="BattleEnd" type="Control" parent="UIManager"]
+visible = false
+anchors_preset = 0
+offset_top = 192.0
+offset_right = 40.0
+offset_bottom = 232.0
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="BattleEnd" type="ColorRect" parent="UIManager/BattleEnd"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 200.0
+color = Color(0.690196, 0.345098, 0.415686, 1)
+
+[node name="TextEdit" type="TextEdit" parent="UIManager/BattleEnd"]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 66.0
+offset_right = 624.0
+offset_bottom = 106.0
+text = "BATTLE END"
+
+[node name="BattleFieldAnchor" type="Control" parent="UIManager"]
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 168.0
+offset_bottom = 168.0
+metadata/_edit_lock_ = true
+
+[node name="HighlightSprite" type="Sprite2D" parent="UIManager/BattleFieldAnchor"]
+
+[node name="AnimationManager" type="Node" parent="."]
+script = ExtResource("12_dt3ki")
+
+[node name="AnimState" type="Node" parent="AnimationManager"]
+script = ExtResource("2_0fcss")
+
+[node name="Free" type="Node" parent="AnimationManager/AnimState"]
+script = ExtResource("16_tbdb7")
+
+[node name="Ongoing" type="Node" parent="AnimationManager/AnimState"]
+script = ExtResource("17_wkk3s")
+
+[connection signal="pressed" from="UIManager/ActionsContainer/Move" to="BattleManager" method="_on_move_button_pressed"]
+[connection signal="pressed" from="UIManager/ActionsContainer/Move" to="UIManager" method="_on_move_pressed"]

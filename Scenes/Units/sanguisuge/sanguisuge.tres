@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=3 format=3 uid="uid://c0dm1idrd68y"]
+
+[ext_resource type="Script" path="res://Scenes/Units/base_unit/unit_data.gd" id="1_b0jye"]
+[ext_resource type="Texture2D" uid="uid://bggqthfvi6cx7" path="res://Resources/Enemies/sanguisuge.png" id="2_djf62"]
+
+[resource]
+script = ExtResource("1_b0jye")
+unit_name = "unit"
+hp = 100
+max_hp = 100
+temporal_hp = 0
+att = 10
+def = 5
+speed = 2
+shield = 0
+max_shield = 1
+priority = 2
+tags = Array[String](["insect"])
+sprite = ExtResource("2_djf62")

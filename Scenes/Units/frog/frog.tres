@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=3 format=3 uid="uid://cvi2qri5s0swh"]
+
+[ext_resource type="Script" path="res://Scenes/Units/base_unit/unit_data.gd" id="1_hwgkm"]
+[ext_resource type="Texture2D" uid="uid://b8fxbpvyxpth" path="res://Resources/Enemies/frog.png" id="2_7fp4x"]
+
+[resource]
+script = ExtResource("1_hwgkm")
+unit_name = "frog"
+hp = 100
+max_hp = 100
+temporal_hp = 0
+att = 10
+def = 5
+speed = 2
+shield = 0
+max_shield = 1
+priority = 2
+sprite = ExtResource("2_7fp4x")

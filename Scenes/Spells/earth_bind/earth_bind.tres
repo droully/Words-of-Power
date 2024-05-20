@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=2 format=3 uid="uid://csm6ifdthyt0m"]
+
+[ext_resource type="Script" path="res://Scenes/Spells/spell_data.gd" id="1_ss70h"]
+
+[resource]
+script = ExtResource("1_ss70h")
+spell_name = "earth_bind"
+spell_name_UI = "Earth Bind"
+player_usable = true
+cost = 1
+srange = 2
+duration = 1.0
+damage = 10
+radius = 1
+targeting = 0
+affecting = 0
