@@ -23,7 +23,7 @@ func process(_delta):
 	
 	
 func exit():
-	BM.turn_queue = BF.get_children()
+	BM.turn_queue = BF.units.get_children()
 	BM.turn_queue.sort_custom(Utils.priority_compare)
 	
 

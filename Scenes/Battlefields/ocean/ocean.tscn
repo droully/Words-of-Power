@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://clcckii0evvcf" path="res://Resources/Spritesheet/Battleground.png" id="1_lbf8r"]
 [ext_resource type="Texture2D" uid="uid://cml1v15d86kyu" path="res://Resources/Spritesheet/Highlight.png" id="2_kqidk"]
 [ext_resource type="Texture2D" uid="uid://wspxr3ru27yk" path="res://Resources/Spritesheet/Coordinates.png" id="3_a0nq1"]
-[ext_resource type="Script" path="res://Scenes/Battlefields/base_battlefield/Battlefield.gd" id="4_glfeh"]
+[ext_resource type="Script" path="res://Scenes/Battlefields/Battlefield.gd" id="4_glfeh"]
 [ext_resource type="PackedScene" uid="uid://dmqsh3h4xhhmf" path="res://Scenes/Units/water_elemental/water_elemental.tscn" id="5_wolf8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4ky1"]
@@ -1034,24 +1034,20 @@ sources/1 = SubResource("TileSetAtlasSource_8hrpe")
 sources/0 = SubResource("TileSetAtlasSource_a4ky1")
 sources/2 = SubResource("TileSetAtlasSource_7w7mk")
 
-[node name="BaseBattlefield" type="TileMap"]
+[node name="Ocean" type="TileMap"]
 position = Vector2(128, 128)
 tile_set = SubResource("TileSet_tv8un")
 format = 2
 layer_0/name = "Base"
-layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 0, 131072, 131072, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 1, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 0, 262145, 65536, 7, 327681, 65536, 7, 393217, 0, 0, 2, 131072, 0, 65538, 131072, 0, 131074, 0, 0, 196610, 65536, 7, 262146, 0, 1, 327682, 0, 1, 393218, 0, 1, 3, 0, 0, 65539, 196608, 7, 131075, 0, 0, 196611, 0, 0, 262147, 0, 1, 327683, 0, 1, 393219, 0, 1, 4, 0, 17, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262148, 0, 0, 327684, 0, 1, 393220, 0, 1, 5, 0, 17, 65541, 0, 17, 131077, 131072, 0, 196613, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 6, 0, 17, 65542, 0, 17, 131078, 0, 17, 196614, 0, 17, 262150, 0, 17, 327686, 0, 17, 393222, 0, 0)
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 1, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 65536, 3, 393217, 0, 0, 2, 0, 0, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, 262146, 0, 0, 327682, 131072, 4, 393218, 0, 0, 3, 0, 0, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, 262147, 131072, 4, 327683, 65536, 3, 393219, 0, 0, 4, 0, 0, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262148, 65536, 3, 327684, 131072, 4, 393220, 131072, 4, 5, 0, 0, 65541, 0, 0, 131077, 196608, 3, 196613, 196608, 3, 262149, 196608, 3, 327685, 131072, 4, 393221, 131072, 4, 6, 0, 0, 65542, 0, 0, 131078, 196608, 3, 196614, 196608, 3, 262150, 196608, 3, 327686, 196608, 3, 393222, 0, 0)
 layer_1/name = "Highlight"
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "PerTileData"
-layer_2/tile_data = PackedInt32Array()
+layer_2/tile_data = PackedInt32Array(0, 2, 0, 65536, 2, 1, 131072, 2, 2, 196608, 2, 3, 262144, 2, 4, 327680, 2, 5, 393216, 2, 6, 1, 65538, 0, 65537, 65538, 1, 131073, 65538, 2, 196609, 65538, 3, 262145, 65538, 4, 327681, 65538, 5, 393217, 65538, 6, 2, 131074, 0, 65538, 131074, 1, 131074, 131074, 2, 196610, 131074, 3, 262146, 131074, 4, 327682, 131074, 5, 393218, 131074, 6, 3, 196610, 0, 65539, 196610, 1, 131075, 196610, 2, 196611, 196610, 3, 262147, 196610, 4, 327683, 196610, 5, 393219, 196610, 6, 4, 262146, 0, 65540, 262146, 1, 131076, 262146, 2, 196612, 262146, 3, 262148, 262146, 4, 327684, 262146, 5, 393220, 262146, 6, 5, 327682, 0, 65541, 327682, 1, 131077, 327682, 2, 196613, 327682, 3, 262149, 327682, 4, 327685, 327682, 5, 393221, 327682, 6, 6, 393218, 0, 65542, 393218, 1, 196614, 393218, 3, 262150, 393218, 4, 327686, 393218, 5, 393222, 393218, 6, 131078, 393218, 2)
 script = ExtResource("4_glfeh")
 
-[node name="WaterElemental" parent="." instance=ExtResource("5_wolf8")]
-position = Vector2(96, 224)
+[node name="units" type="Node2D" parent="."]
 
-[node name="WaterElemental2" parent="." instance=ExtResource("5_wolf8")]
-position = Vector2(288, 352)
-
-[node name="WaterElemental3" parent="." instance=ExtResource("5_wolf8")]
-position = Vector2(352, 96)
+[node name="WaterElemental3" parent="units" instance=ExtResource("5_wolf8")]
+position = Vector2(352, 352)

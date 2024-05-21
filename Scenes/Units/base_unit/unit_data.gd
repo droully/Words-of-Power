@@ -22,13 +22,14 @@ enum affecting_methods {
 @export var max_hp: int = 100
 @export var temporal_hp: int = 0
 
-@export var AI: Script
 @export var att: int = 10
 @export var def: int = 5
 @export var speed: int = 1
 @export var shield: int = 0
 @export var max_shield: int = 1
 @export var priority: int = 2
+
+@export var AI: Script
 
 @export var tags: Array[String] = []
 @export var sprite: Texture 

@@ -9,3 +9,6 @@ unit_data = ExtResource("2_mo6bn")
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("3_hrvo6")
+
+[node name="AI" parent="." index="1"]
+script = null

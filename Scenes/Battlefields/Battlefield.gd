@@ -5,6 +5,8 @@ class_name BattleField
 enum Layer {Base,Highlight,PerTileData}
 enum TileSetID {Battleground,Highlight,Coordinates}
 
+@onready var units= $units
+
 var Highlight_Layer = Layer.Highlight
 var grid= AStarGrid2D.new()
 var size_x
@@ -14,9 +16,9 @@ var deployment_area = tiles_in_box(2,4,4,5)
 func _ready():
 	#set_layer_modulate(Layer.PerTileData,Color(1, 1, 1, 0))
 	Events.unit_moved_global_coord.connect(_on_unit_moved_global_coord)
-	setup(7,7,[])
+	setup(7,7)
 
-func setup(x,y,units):
+func setup(x,y):
 	
 	size_x=x
 	size_y=y
@@ -24,7 +26,7 @@ func setup(x,y,units):
 	#set_per_tile_data(size_x,size_y)
 	set_layer_z_index(Layer.PerTileData,-1)
 	set_grid(size_x,size_y)	
-	initialize_units(units)
+	initialize_units()
 
 func set_per_tile_data(x_lim,y_lim):
 	for x in range(x_lim):
@@ -44,17 +46,14 @@ func set_grid(x_lim,y_lim):
 	grid.set_point_solid(Vector2i(2,3))
 	grid.set_point_solid(Vector2i(5,4))
 
-func initialize_units(units:Array):
-	for unit in units:
-		set_unit(unit)
-
-	for unit in get_children():
+func initialize_units():
+	for unit in units.get_children():
 		set_unit(unit)
 
 func spawn_unit(unit : Unit,tile_position):
 	unit.tile_position = tile_position
+	units.add_child(unit)
 	unit.initialize(self)
-	add_child(unit)
 	get_cell_in_tile(unit.tile_position).set_custom_data("UnitTracking",unit)
 	return true
 
@@ -102,7 +101,7 @@ func tiles_in_aoe_no_astar(center_tile: Vector2i, radius:int) -> Array:
 				tiles.append(tile)
 	return tiles
 
-func tiles_in_aoe(center_tile: Vector2i, radius:int, return_solid_tiles=true, return_units=true):
+func tiles_in_aoe(center_tile: Vector2i, radius:int, return_solid_tiles=true, return_units=true,return_center=true):
 
 	var tiles_no_astar = tiles_in_aoe_no_astar(center_tile,radius)
 	var tiles = []
@@ -124,6 +123,8 @@ func tiles_in_aoe(center_tile: Vector2i, radius:int, return_solid_tiles=true, re
 		if (len(path)-1>radius):
 			continue
 		tiles.append(tile)
+	if not return_center:
+		tiles.erase(center_tile)
 
 	for tile_to_desolid in tiles_to_solid:
 		grid.set_point_solid(tile_to_desolid,false)

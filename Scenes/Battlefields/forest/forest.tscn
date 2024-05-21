@@ -1,15 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhg7bqpm6q32o"]
+[gd_scene load_steps=10 format=3 uid="uid://b4niqx0ika4y"]
 
-[ext_resource type="Texture2D" uid="uid://clcckii0evvcf" path="res://Resources/Spritesheet/Battleground.png" id="1_67y2t"]
-[ext_resource type="Texture2D" uid="uid://cml1v15d86kyu" path="res://Resources/Spritesheet/Highlight.png" id="2_ri0kr"]
-[ext_resource type="Texture2D" uid="uid://wspxr3ru27yk" path="res://Resources/Spritesheet/Coordinates.png" id="3_ujen8"]
-[ext_resource type="Script" path="res://Scenes/Battlefields/Battlefield.gd" id="4_ogv62"]
-[ext_resource type="PackedScene" uid="uid://bb2r7es2eftuk" path="res://Scenes/Units/frog/frog.tscn" id="5_mm0j1"]
-[ext_resource type="PackedScene" uid="uid://bufeaxtit3fr1" path="res://Scenes/Units/blood_reed/blood_reed.tscn" id="6_evoii"]
-[ext_resource type="PackedScene" uid="uid://dyib678q55wlf" path="res://Scenes/Units/sanguisuge/sanguisuge.tscn" id="7_js6c4"]
+[ext_resource type="Texture2D" uid="uid://clcckii0evvcf" path="res://Resources/Spritesheet/Battleground.png" id="1_b55vh"]
+[ext_resource type="PackedScene" uid="uid://bbn20xwnsrr55" path="res://Scenes/Units/snake/snake.tscn" id="2_22cjr"]
+[ext_resource type="Texture2D" uid="uid://cml1v15d86kyu" path="res://Resources/Spritesheet/Highlight.png" id="2_ymamo"]
+[ext_resource type="Texture2D" uid="uid://wspxr3ru27yk" path="res://Resources/Spritesheet/Coordinates.png" id="3_wo0nu"]
+[ext_resource type="Script" path="res://Scenes/Battlefields/Battlefield.gd" id="4_wqr3h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4ky1"]
-texture = ExtResource("1_67y2t")
+texture = ExtResource("1_b55vh")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0
@@ -116,14 +114,14 @@ texture_region_size = Vector2i(64, 64)
 1:16/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8hrpe"]
-texture = ExtResource("2_ri0kr")
+texture = ExtResource("2_ymamo")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7w7mk"]
-texture = ExtResource("3_ujen8")
+texture = ExtResource("3_wo0nu")
 texture_region_size = Vector2i(68, 29)
 0:0/0 = 0
 1:0/0 = 0
@@ -1036,36 +1034,20 @@ sources/1 = SubResource("TileSetAtlasSource_8hrpe")
 sources/0 = SubResource("TileSetAtlasSource_a4ky1")
 sources/2 = SubResource("TileSetAtlasSource_7w7mk")
 
-[node name="Swamp" type="TileMap"]
+[node name="Forest" type="TileMap"]
 position = Vector2(128, 128)
 tile_set = SubResource("TileSet_tv8un")
 format = 2
 layer_0/name = "Base"
-layer_0/tile_data = PackedInt32Array(0, 131072, 4, 65536, 0, 4, 131072, 131072, 1, 196608, 131072, 1, 262144, 0, 4, 327680, 0, 4, 393216, 131072, 4, 1, 65536, 14, 65537, 131072, 4, 131073, 131072, 1, 196609, 131072, 1, 262145, 131072, 1, 327681, 0, 4, 393217, 0, 4, 2, 131072, 4, 65538, 0, 4, 131074, 0, 4, 196610, 131072, 1, 262146, 131072, 1, 327682, 131072, 1, 393218, 131072, 1, 3, 0, 4, 65539, 131072, 1, 131075, 131072, 1, 196611, 131072, 1, 262147, 131072, 1, 327683, 0, 4, 393219, 0, 4, 4, 131072, 1, 65540, 131072, 1, 131076, 131072, 1, 196612, 131072, 1, 262148, 131072, 1, 327684, 131072, 1, 393220, 131072, 1, 5, 131072, 1, 65541, 131072, 1, 131077, 131072, 1, 196613, 131072, 1, 262149, 0, 15, 327685, 0, 15, 393221, 0, 15, 6, 131072, 1, 65542, 131072, 1, 131078, 131072, 1, 196614, 0, 15, 262150, 0, 15, 327686, 0, 15, 393222, 0, 14)
+layer_0/tile_data = PackedInt32Array(0, 196608, 1, 65536, 196608, 1, 131072, 196608, 1, 196608, 196608, 1, 262144, 196608, 1, 327680, 196608, 1, 393216, 196608, 1, 1, 196608, 1, 65537, 196608, 1, 131073, 196608, 1, 196609, 196608, 1, 262145, 196608, 1, 327681, 196608, 1, 393217, 196608, 1, 2, 196608, 1, 65538, 196608, 1, 131074, 196608, 1, 196610, 196608, 1, 262146, 196608, 1, 327682, 196608, 1, 393218, 196608, 1, 3, 196608, 1, 65539, 196608, 1, 131075, 196608, 1, 196611, 196608, 1, 262147, 196608, 1, 327683, 196608, 1, 393219, 196608, 1, 4, 196608, 1, 65540, 196608, 1, 131076, 196608, 1, 196612, 196608, 1, 262148, 196608, 1, 327684, 196608, 1, 393220, 196608, 1, 5, 196608, 1, 65541, 196608, 1, 131077, 196608, 1, 196613, 196608, 1, 262149, 196608, 1, 327685, 196608, 1, 393221, 196608, 1, 6, 196608, 1, 65542, 196608, 1, 131078, 196608, 1, 196614, 196608, 1, 262150, 196608, 1, 327686, 196608, 1, 393222, 196608, 1)
 layer_1/name = "Highlight"
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "PerTileData"
-layer_2/tile_data = PackedInt32Array()
-script = ExtResource("4_ogv62")
+layer_2/tile_data = PackedInt32Array(0, 2, 0, 65536, 2, 1, 131072, 2, 2, 196608, 2, 3, 262144, 2, 4, 327680, 2, 5, 393216, 2, 6, 1, 65538, 0, 65537, 65538, 1, 131073, 65538, 2, 196609, 65538, 3, 262145, 65538, 4, 327681, 65538, 5, 393217, 65538, 6, 2, 131074, 0, 65538, 131074, 1, 131074, 131074, 2, 196610, 131074, 3, 262146, 131074, 4, 327682, 131074, 5, 393218, 131074, 6, 3, 196610, 0, 65539, 196610, 1, 131075, 196610, 2, 196611, 196610, 3, 262147, 196610, 4, 327683, 196610, 5, 393219, 196610, 6, 4, 262146, 0, 65540, 262146, 1, 131076, 262146, 2, 196612, 262146, 3, 262148, 262146, 4, 327684, 262146, 5, 393220, 262146, 6, 5, 327682, 0, 65541, 327682, 1, 131077, 327682, 2, 196613, 327682, 3, 262149, 327682, 4, 327685, 327682, 5, 393221, 327682, 6, 6, 393218, 0, 65542, 393218, 1, 196614, 393218, 3, 262150, 393218, 4, 327686, 393218, 5, 393222, 393218, 6, 131078, 393218, 2)
+script = ExtResource("4_wqr3h")
 
-[node name="Blood Reed" parent="." instance=ExtResource("6_evoii")]
-position = Vector2(160, 160)
+[node name="units" type="Node2D" parent="."]
 
-[node name="Blood Reed2" parent="." instance=ExtResource("6_evoii")]
-position = Vector2(288, 352)
-
-[node name="Frog" parent="." instance=ExtResource("5_mm0j1")]
-position = Vector2(32, 416)
-
-[node name="Frog2" parent="." instance=ExtResource("5_mm0j1")]
-position = Vector2(96, 32)
-
-[node name="Sanguisuge" parent="." instance=ExtResource("7_js6c4")]
-position = Vector2(32, 224)
-
-[node name="Sanguisuge2" parent="." instance=ExtResource("7_js6c4")]
-position = Vector2(160, 352)
-
-[node name="Sanguisuge3" parent="." instance=ExtResource("7_js6c4")]
-position = Vector2(352, 160)
+[node name="Snake" parent="units" instance=ExtResource("2_22cjr")]
+position = Vector2(156, 160)

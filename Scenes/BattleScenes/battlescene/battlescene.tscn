@@ -1,27 +1,27 @@
 [gd_scene load_steps=19 format=3 uid="uid://bl8iglk1xnwbs"]
 
-[ext_resource type="Script" path="res://Scenes/Managers/BattleManager.gd" id="1_5o2ef"]
-[ext_resource type="Script" path="res://Scenes/BattleScenes/base_battlescene/battlescene.gd" id="1_ppw18"]
-[ext_resource type="Script" path="res://Scenes/Managers/StateMachine.gd" id="2_0fcss"]
-[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Start.gd" id="2_31kk1"]
-[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Deploy.gd" id="3_emtwa"]
-[ext_resource type="Script" path="res://Scenes/UI/BattleLog.gd" id="3_gbne2"]
-[ext_resource type="PackedScene" uid="uid://dr4etsid43k0k" path="res://Scenes/Battlefields/base_battlefield/base_battlefield.tscn" id="4_dxvth"]
-[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Status.gd" id="4_n7lyx"]
-[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Turn.gd" id="5_4sts2"]
-[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Anim.gd" id="6_6fjw4"]
-[ext_resource type="Script" path="res://Scenes/UI/UIManager.gd" id="6_tbgf5"]
-[ext_resource type="Script" path="res://Scenes/Managers/BattleState/End.gd" id="7_se17b"]
-[ext_resource type="Script" path="res://Scenes/Managers/BattleState/Inter.gd" id="9_rlkip"]
-[ext_resource type="Script" path="res://Scenes/Managers/AnimationManager.gd" id="12_dt3ki"]
-[ext_resource type="Script" path="res://Scenes/Scripts/Spellbook.gd" id="15_pm17h"]
-[ext_resource type="Script" path="res://Scenes/Managers/AnimState/Free.gd" id="16_tbdb7"]
-[ext_resource type="Script" path="res://Scenes/Managers/AnimState/Ongoing.gd" id="17_wkk3s"]
+[ext_resource type="Script" path="res://Scenes/BattleScenes/battlescene/battlescene.gd" id="1_n8ose"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleManager.gd" id="2_x8hym"]
+[ext_resource type="Script" path="res://Scripts/Managers/StateMachine.gd" id="3_n8q0w"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Start.gd" id="4_ah2ow"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Deploy.gd" id="5_lewvu"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Status.gd" id="6_o5pau"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Turn.gd" id="7_v5oy1"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Anim.gd" id="8_mhvo8"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/End.gd" id="9_saeub"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Inter.gd" id="10_l5wnu"]
+[ext_resource type="PackedScene" uid="uid://b4niqx0ika4y" path="res://Scenes/Battlefields/forest/forest.tscn" id="11_uuj7c"]
+[ext_resource type="Script" path="res://Scripts/Spellbook.gd" id="12_ml2tb"]
+[ext_resource type="Script" path="res://Scripts/UI/UIManager.gd" id="13_i8apy"]
+[ext_resource type="Script" path="res://Scripts/UI/BattleLog.gd" id="14_lgqmy"]
+[ext_resource type="Script" path="res://Scripts/Managers/AnimationManager.gd" id="15_27a2c"]
+[ext_resource type="Script" path="res://Scripts/Managers/AnimState/Free.gd" id="16_i6t3l"]
+[ext_resource type="Script" path="res://Scripts/Managers/AnimState/Ongoing.gd" id="17_o8v8q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_guiso"]
 
 [node name="BattleScene" type="Node2D"]
-script = ExtResource("1_ppw18")
+script = ExtResource("1_n8ose")
 
 [node name="BackGround" type="ColorRect" parent="."]
 offset_left = -352.0
@@ -33,44 +33,44 @@ color = Color(0.101961, 0.180392, 0.0588235, 1)
 metadata/_edit_lock_ = true
 
 [node name="BattleManager" type="Node" parent="."]
-script = ExtResource("1_5o2ef")
+script = ExtResource("2_x8hym")
 
 [node name="BattleState" type="Node" parent="BattleManager"]
-script = ExtResource("2_0fcss")
+script = ExtResource("3_n8q0w")
 
 [node name="Start" type="Node" parent="BattleManager/BattleState"]
-script = ExtResource("2_31kk1")
+script = ExtResource("4_ah2ow")
 
 [node name="Deploy" type="Node" parent="BattleManager/BattleState"]
-script = ExtResource("3_emtwa")
+script = ExtResource("5_lewvu")
 
 [node name="Status" type="Node" parent="BattleManager/BattleState"]
-script = ExtResource("4_n7lyx")
+script = ExtResource("6_o5pau")
 
 [node name="Turn" type="Node" parent="BattleManager/BattleState"]
-script = ExtResource("5_4sts2")
+script = ExtResource("7_v5oy1")
 
 [node name="Anim" type="Node" parent="BattleManager/BattleState"]
-script = ExtResource("6_6fjw4")
+script = ExtResource("8_mhvo8")
 
 [node name="End" type="Node" parent="BattleManager/BattleState"]
-script = ExtResource("7_se17b")
+script = ExtResource("9_saeub")
 
 [node name="Inter" type="Node" parent="BattleManager/BattleState"]
-script = ExtResource("9_rlkip")
+script = ExtResource("10_l5wnu")
 
-[node name="Battlefield" parent="." instance=ExtResource("4_dxvth")]
-metadata/_edit_lock_ = true
+[node name="Battlefield" parent="." instance=ExtResource("11_uuj7c")]
+layer_0/tile_data = PackedInt32Array(0, 65536, 15, 65536, 196608, 13, 131072, 196608, 13, 196608, 0, 17, 262144, 0, 17, 327680, 131072, 12, 393216, 131072, 12, 1, 65536, 15, 65537, 65536, 15, 131073, 196608, 13, 196609, 0, 17, 262145, 0, 17, 327681, 131072, 12, 393217, 131072, 12, 2, 65536, 15, 65538, 196608, 13, 131074, 196608, 13, 196610, 131072, 15, 262146, 196608, 13, 327682, 131072, 12, 393218, 131072, 12, 3, 65536, 15, 65539, 196608, 13, 131075, 196608, 13, 196611, 196608, 13, 262147, 196608, 13, 327683, 196608, 13, 393219, 196608, 13, 4, 65536, 15, 65540, 196608, 13, 131076, 196608, 13, 196612, 196608, 13, 262148, 196608, 13, 327684, 196608, 13, 393220, 196608, 13, 5, 196608, 13, 65541, 65536, 15, 131077, 196608, 13, 196613, 196608, 13, 262149, 131072, 15, 327685, 196608, 13, 393221, 196608, 13, 6, 65536, 15, 65542, 196608, 13, 131078, 196608, 13, 196614, 196608, 13, 262150, 196608, 13, 327686, 196608, 13, 393222, 196608, 13)
 
 [node name="Spellbook" type="Node" parent="."]
-script = ExtResource("15_pm17h")
+script = ExtResource("12_ml2tb")
 
 [node name="UIManager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("6_tbgf5")
+script = ExtResource("13_i8apy")
 
 [node name="ActionsContainer" type="VBoxContainer" parent="UIManager"]
 layout_mode = 0
@@ -143,7 +143,7 @@ layout_mode = 0
 offset_right = 320.0
 offset_bottom = 448.0
 scroll_following = true
-script = ExtResource("3_gbne2")
+script = ExtResource("14_lgqmy")
 
 [node name="BattleStart" type="Control" parent="UIManager"]
 visible = false
@@ -201,17 +201,24 @@ metadata/_edit_lock_ = true
 
 [node name="HighlightSprite" type="Sprite2D" parent="UIManager/BattleFieldAnchor"]
 
+[node name="Change BF" type="Button" parent="UIManager"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 128.0
+
 [node name="AnimationManager" type="Node" parent="."]
-script = ExtResource("12_dt3ki")
+script = ExtResource("15_27a2c")
 
 [node name="AnimState" type="Node" parent="AnimationManager"]
-script = ExtResource("2_0fcss")
+script = ExtResource("3_n8q0w")
 
 [node name="Free" type="Node" parent="AnimationManager/AnimState"]
-script = ExtResource("16_tbdb7")
+script = ExtResource("16_i6t3l")
 
 [node name="Ongoing" type="Node" parent="AnimationManager/AnimState"]
-script = ExtResource("17_wkk3s")
+script = ExtResource("17_o8v8q")
 
 [connection signal="pressed" from="UIManager/ActionsContainer/Move" to="BattleManager" method="_on_move_button_pressed"]
 [connection signal="pressed" from="UIManager/ActionsContainer/Move" to="UIManager" method="_on_move_pressed"]
+[connection signal="pressed" from="UIManager/Change BF" to="." method="_on_change_bf_pressed"]

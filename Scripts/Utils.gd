@@ -38,6 +38,9 @@ func get_unit_by_name(unit_name: String):
 func get_unit_data_by_name(unit_name: String):
 	var unit_data = load("res://Scenes/units/"+unit_name+"/"+unit_name+".tres")
 	return unit_data
+func get_battlefield_by_name(battlefield_name: String):
+	var BF = load("res://Scenes/Battlefields/"+battlefield_name+"/"+battlefield_name+".tscn").instantiate()
+	return BF
 
 func array_unique(array: Array) -> Array:
 	var unique: Array = []

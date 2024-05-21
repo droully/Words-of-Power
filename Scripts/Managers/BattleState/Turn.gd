@@ -16,7 +16,6 @@ func initialize(_FSM):
 func enter():
 	BM.current_unit = BM.turn_queue[0]
 	
-	
 	Events.emit_signal("turn_start",BM.current_unit)
 
 func exit():

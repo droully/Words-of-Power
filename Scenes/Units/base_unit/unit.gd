@@ -10,6 +10,7 @@ enum Orientation {
 }
 
 @onready var ui = $UI
+@onready var ai = $AI
 @onready var status_effects = $StatusEffects
 
 # Enemy properties
@@ -32,11 +33,10 @@ var tags : Array
 
 @export var party: String = "enemy"
 
-@export var side: String
-
 var BF : BattleField
 var tile_position: Vector2i = Vector2i(-1,-1)
-var orientation = Orientation.LEFT
+
+@export var orientation = Orientation.LEFT
 
 func _ready():
 	pass
@@ -55,14 +55,16 @@ func initialize(_BF: BattleField):
 	self.max_shield = unit_data.max_shield
 	self.priority = unit_data.priority
 	self.tags = unit_data.tags
-
+	
+	ai.set_script(unit_data.AI)
+	
 	if tile_position == Vector2i(-1,-1):
 		tile_position = BF.position_to_tile(position)
 	if position == Vector2(0,0):
 		position = BF.tile_to_position(tile_position)
 	
 func walkable_tiles():
-	return BF.tiles_in_aoe(tile_position,speed,false,false)
+	return BF.tiles_in_aoe(tile_position,speed,false,false,false)
 	
 func move_through(path):
 	var to_coord=path[-1]
@@ -79,8 +81,17 @@ func move_through(path):
 		tween.tween_property(self, "position", point, .3)
 	
 #	position=to_coord	#position:absoluto
-
-
+func get_orientation():
+	return Orientation.find_key(self.orientation)
+func reverse_orientation():
+	if self.orientation==Orientation.LEFT:
+		self.orientation=Orientation.RIGHT
+	elif self.orientation==Orientation.RIGHT:
+		self.orientation=Orientation.LEFT
+	elif self.orientation==Orientation.UP:
+		self.orientation=Orientation.DOWN
+	elif self.orientation==Orientation.DOWN:
+		self.orientation=Orientation.UP
 func take_damage(damage_amount: int,_damage_type="neutral"):
 	if shield>0:
 		shield -=1

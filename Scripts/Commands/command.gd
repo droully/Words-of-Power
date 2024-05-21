@@ -72,3 +72,11 @@ class Deploy:
 
 		Events.emit_signal("command_unit_deployed",unit)
 		return true
+
+class Skip: 
+	var unit
+	
+	func _init(_unit):
+		self.unit=_unit
+	func execute():
+		return true
