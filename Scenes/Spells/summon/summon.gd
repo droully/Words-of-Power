@@ -9,12 +9,12 @@ func _process(_delta):
 	
 
 func targetable_tiles(_caster=caster,_BF=BF):
-	return _BF.tiles_in_aoe(_caster.tile_position,srange,false,true)
+	return _BF.map.tiles_in_aoe(_caster.tile_position,srange,false,true)
 	
 func affected_tiles(target_tile,_caster=caster,_BF=BF):
-	if _BF.is_tile_solid(target_tile):
+	if _BF.map.is_tile_solid(target_tile):
 		return []
-	return _BF.tiles_in_aoe(target_tile, radius,false,true)
+	return _BF.map.tiles_in_aoe(target_tile, radius,false,true)
 
 func callbackOnFloor(BF,tile):
 	BF.summon(tile,"unit")

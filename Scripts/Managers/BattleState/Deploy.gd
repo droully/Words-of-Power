@@ -18,7 +18,7 @@ func enter():
 	
 
 func process(_delta):
-	BF.highlight_tiles(BF.deployment_area,Vector2i(2,0))
+	BF.map.highlight_tiles(BF.deployment_area,Vector2i(2,0))
 	
 	
 	

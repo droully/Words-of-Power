@@ -19,7 +19,7 @@ func enter():
 	Events.emit_signal("turn_start",BM.current_unit)
 
 func exit():
-	BF.reset_highlight()
+	BF.map.reset_highlight()
 
 
 func process(_delta):
@@ -32,12 +32,12 @@ func process(_delta):
 		"player":
 			match BM.user_current_action:
 				BM.UserActionState.Move:
-					BF.highlight_tiles(BM.current_unit.walkable_tiles(),Vector2i(2,0))
+					BF.map.highlight_tiles(BM.current_unit.walkable_tiles(),Vector2i(2,0))
 				BM.UserActionState.Cast:
 					var l =targeting.targetable_tiles(current_unit, BM.spell_to_cast, BF)
-					BF.highlight_tiles(l,Vector2i(2,0))
+					BF.map.highlight_tiles(l,Vector2i(2,0))
 				_:
-					BF.reset_highlight()
+					BF.map.reset_highlight()
 
 		"enemy":
 			BM.enemy_turn.call(current_unit)

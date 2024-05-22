@@ -59,12 +59,12 @@ func initialize(_BF: BattleField):
 	ai.set_script(unit_data.AI)
 	
 	if tile_position == Vector2i(-1,-1):
-		tile_position = BF.position_to_tile(position)
+		tile_position = BF.map.position_to_tile(position)
 	if position == Vector2(0,0):
-		position = BF.tile_to_position(tile_position)
+		position = BF.map.tile_to_position(tile_position)
 	
 func walkable_tiles():
-	return BF.tiles_in_aoe(tile_position,speed,false,false,false)
+	return BF.map.tiles_in_aoe(tile_position,speed,false,false,false)
 	
 func move_through(path):
 	var to_coord = path[-1]
@@ -125,10 +125,10 @@ func remove_status_effect(status):
 func push( direction: Vector2i):	
 	#retorna true si empuja, y la unidad con la que coliciona si coliciona 
 	var target_tile = tile_position + direction  # chequear colisiones
-	var target_unit =  BF.get_unit_in_tile(target_tile)
+	var target_unit =  BF.map.get_unit_in_tile(target_tile)
 	if target_unit:
 		return target_unit
-	return BF.place_unit_on_tile(self, target_tile.x, target_tile.y)
+	return BF.map.place_unit_on_tile(self, target_tile.x, target_tile.y)
 	
 func pull(direction: Vector2i):	
 	return push(-direction)

@@ -28,7 +28,7 @@ func initialize(_Battlefield,_caster:Unit,_target_pos:Vector2):
 	self.BF=_Battlefield
 	self.caster=_caster
 	self.target_pos=_target_pos
-	self.target_tile=BF.local_to_map(target_pos)
+	self.target_tile=BF.map.local_to_map(target_pos)
 	
 	self.spell_name = spell_data.spell_name
 	self.spell_name_UI = spell_data.spell_name_UI
@@ -38,7 +38,7 @@ func initialize(_Battlefield,_caster:Unit,_target_pos:Vector2):
 	self.damage = spell_data.damage
 	self.radius = spell_data.radius
 	 
-	self.dir = BF.get_direction_from_unit_to_tile(caster,target_tile)
+	self.dir = BF.map.get_direction_from_unit_to_tile(caster,target_tile)
 
 	
 	
@@ -46,7 +46,7 @@ func affect_tiles():
 	var affecting=Affecting.new()
 	var l= affecting.affected_tiles(target_tile,caster, spell_data, BF)
 	for tile in l:
-		var unit_target= BF.get_unit_in_tile(tile)
+		var unit_target= BF.map.get_unit_in_tile(tile)
 		if unit_target:
 			callbackOnHit(unit_target)
 		callbackOnFloor(BF,tile)

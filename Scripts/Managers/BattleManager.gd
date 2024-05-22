@@ -42,7 +42,7 @@ func _input(event):
 
 func deploy_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		var cursor_position = BF.mouse_to_tile(event.position)
+		var cursor_position = BF.map.mouse_to_tile(event.position)
 		var deployCommand = Command.Deploy.new(player_data,cursor_position, BF)
 		setCommand(deployCommand)
 		if not cursor_position in BF.deployment_area:
@@ -80,7 +80,7 @@ func move_input(event):
 
 func cast_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		var cursor_position = BF.mouse_to_tile(event.position)
+		var cursor_position = BF.map.mouse_to_tile(event.position)
 		var castCommand = Command.Cast.new(current_unit,spell_to_cast,cursor_position, BF)
 		setCommand(castCommand)
 		

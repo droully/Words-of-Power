@@ -20,7 +20,7 @@ func targetable_tiles(_caster,_spell_data,_BF):
 	
 	
 func AOE():
-	return BF.tiles_in_aoe(caster.tile_position,spell_data.srange,false,true)
+	return BF.map.tiles_in_aoe(caster.tile_position,spell_data.srange,false,true)
 
 func Cross():
-	return BF.tiles_in_cross(caster.tile_position,spell_data.srange)
+	return BF.map.tiles_in_cross(caster.tile_position,spell_data.srange)

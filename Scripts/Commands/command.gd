@@ -22,8 +22,8 @@ class Cast:
 		
 	func execute():
 		self.spell=Utils.get_spell_by_name(spell_data.spell_name)
-		spell.initialize(BF,caster,BF.map_to_local(target_tile))
-		BF.add_child(spell)
+		spell.initialize(BF,caster,BF.map.map_to_local(target_tile))
+		BF.map.add_child(spell)
 
 		Events.emit_signal("command_spell_casted",caster,spell,target_tile)
 		#affect target
