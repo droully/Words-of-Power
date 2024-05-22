@@ -9,19 +9,29 @@ var size_y
 var Highlight_Layer = Layer.Highlight
 
 var grid= AStarGrid2D.new()
+
 func _ready():
 	
 	Events.unit_moved_global_coord.connect(_on_unit_moved_global_coord)
-	setup(7,7)
+	Events.debug.connect(_on_debug)
+	setup(30,30)
 
+func _on_debug():
+	for tile in all_tiles():
+		print(tile,get_collision_on_tile(tile))
+		
 func setup(x,y):
 
 	size_x=x
-	size_y=y	
+	size_y=y
 
-	tile_set.add_custom_data_layer()
+	tile_set.add_custom_data_layer(0)
 	tile_set.set_custom_data_layer_name(0,"UnitTracking")
-	tile_set.set_custom_data_layer_type(0,22) #22=NodePath
+	tile_set.set_custom_data_layer_type(0,TYPE_NODE_PATH) 
+	 #TODO cachar que wea esto de los layers 
+	tile_set.add_custom_data_layer(1)
+	tile_set.set_custom_data_layer_name(1,"Collision")
+	tile_set.set_custom_data_layer_type(1,TYPE_BOOL) 
 
 	#set_per_tile_data(size_x,size_y)
 	set_layer_z_index(Layer.PerTileData,-1)
@@ -39,9 +49,9 @@ func set_grid(x_lim,y_lim):
 
 	grid.set_point_solid(Vector2i(2,3))
 	grid.set_point_solid(Vector2i(5,4))
-	
+
 func path_between_tiles(from_tile,to_tile):
-	return grid.get_id_path(from_tile,to_tile)
+	return grid.get_point_path(from_tile,to_tile)
 
 func all_tiles():
 	var tiles: Array = []
@@ -175,13 +185,17 @@ func get_cell_in_tile(tile_position: Vector2i):
 
 func get_unit_in_tile(tile_position: Vector2i):
 	if tile_inside_BF(tile_position):
-		
 		var unit = get_cell_in_tile(tile_position).get_custom_data("UnitTracking")
-
 		if is_instance_valid(unit):
 			return unit
 	return null
-
+	
+func set_unit_on_tile(tile:Vector2i,unit=NodePath()):
+	get_cell_in_tile(tile).set_custom_data("UnitTracking",unit)
+	
+func get_collision_on_tile(tile_position:Vector2i):
+	return get_cell_in_tile(tile_position).get_custom_data("Collision")
+	
 func is_tile_solid(tile):
 	return grid.is_point_solid(tile)
 	
@@ -192,11 +206,7 @@ func is_tile_solid(tile):
 			#set_cell(Layer.PerTileData,Vector2i(x,y),TileSetID.Coordinates,Vector2i(x,y))
 
 func _on_unit_moved_global_coord(unit,from_coord:Vector2,to_coord:Vector2):
-	var from_cell_coord=local_to_map(from_coord)
-	var to_cell_coord=local_to_map(to_coord)
-	
-	var from_cell = get_cell_in_tile(from_cell_coord)
-	var to_cell = get_cell_in_tile(to_cell_coord)
-	
-	from_cell.set_custom_data("UnitTracking",NodePath())
-	to_cell.set_custom_data("UnitTracking",unit)
+	var from_tile=local_to_map(from_coord)
+	var to_tile=local_to_map(to_coord)
+	set_unit_on_tile(from_tile)
+	set_unit_on_tile(to_tile,unit)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://4p848qpx0xxm"]
+[gd_scene load_steps=11 format=3 uid="uid://4p848qpx0xxm"]
 
 [ext_resource type="Texture2D" uid="uid://clcckii0evvcf" path="res://Resources/Spritesheet/Battleground.png" id="1_yb0or"]
 [ext_resource type="Texture2D" uid="uid://cml1v15d86kyu" path="res://Resources/Spritesheet/Highlight.png" id="2_my5qa"]
 [ext_resource type="Texture2D" uid="uid://wspxr3ru27yk" path="res://Resources/Spritesheet/Coordinates.png" id="3_2ojd6"]
 [ext_resource type="Script" path="res://Scenes/Battlefields/Battlefield.gd" id="4_v1135"]
 [ext_resource type="Script" path="res://Scenes/Battlefields/Map.gd" id="5_hs8jx"]
+[ext_resource type="PackedScene" uid="uid://bbn20xwnsrr55" path="res://Scenes/Units/snake/snake.tscn" id="6_e3hdp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4ky1"]
 texture = ExtResource("1_yb0or")
@@ -1046,3 +1047,6 @@ layer_2/tile_data = PackedInt32Array(0, 2, 0, 65536, 2, 1, 131072, 2, 2, 196608,
 script = ExtResource("5_hs8jx")
 
 [node name="Units" type="Node2D" parent="."]
+
+[node name="Snake" parent="Units" instance=ExtResource("6_e3hdp")]
+position = Vector2(224, 96)

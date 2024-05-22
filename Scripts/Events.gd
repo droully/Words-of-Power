@@ -3,7 +3,9 @@ extends Node
 signal battle_start()
 signal turn_start(unit)
 
-signal battlefield_changed(BF)
+
+
+signal debug()
 
 signal spell_button_pressed(spell_name)
 

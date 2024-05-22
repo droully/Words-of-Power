@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bl8iglk1xnwbs"]
+[gd_scene load_steps=20 format=3 uid="uid://bl8iglk1xnwbs"]
 
 [ext_resource type="Script" path="res://Scenes/BattleScenes/battlescene/battlescene.gd" id="1_n8ose"]
 [ext_resource type="Script" path="res://Scripts/Managers/BattleManager.gd" id="2_x8hym"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/UIManager.gd" id="13_i8apy"]
 [ext_resource type="Script" path="res://Scripts/UI/BattleLog.gd" id="14_lgqmy"]
 [ext_resource type="Script" path="res://Scripts/Managers/AnimationManager.gd" id="15_27a2c"]
+[ext_resource type="Script" path="res://Scripts/Debug Button.gd" id="15_ndovi"]
 [ext_resource type="Script" path="res://Scripts/Managers/AnimState/Free.gd" id="16_i6t3l"]
 [ext_resource type="Script" path="res://Scripts/Managers/AnimState/Ongoing.gd" id="17_o8v8q"]
 
@@ -64,6 +65,24 @@ script = ExtResource("10_l5wnu")
 script = ExtResource("12_ml2tb")
 
 [node name="Battlefield" parent="." instance=ExtResource("12_xn2xm")]
+
+[node name="BackGround2" type="ColorRect" parent="."]
+offset_left = 640.0
+offset_top = -272.0
+offset_right = 680.0
+offset_bottom = -232.0
+scale = Vector2(56.9114, 31.4082)
+color = Color(0.101961, 0.180392, 0.0588235, 1)
+metadata/_edit_lock_ = true
+
+[node name="BackGround3" type="ColorRect" parent="."]
+offset_left = -344.0
+offset_top = 640.0
+offset_right = -304.0
+offset_bottom = 680.0
+scale = Vector2(56.9114, 31.4082)
+color = Color(0.101961, 0.180392, 0.0588235, 1)
+metadata/_edit_lock_ = true
 
 [node name="UIManager" type="Control" parent="."]
 layout_mode = 3
@@ -198,13 +217,14 @@ metadata/_edit_use_anchors_ = true
 
 [node name="HighlightSprite" type="Sprite2D" parent="UIManager/BattleFieldAnchor"]
 
-[node name="Change BF" type="Button" parent="UIManager"]
+[node name="Debug Button" type="Button" parent="UIManager"]
 layout_mode = 0
 offset_left = 448.0
 offset_top = 64.0
 offset_right = 512.0
 offset_bottom = 128.0
-text = "skip"
+text = "Debug"
+script = ExtResource("15_ndovi")
 
 [node name="AnimationManager" type="Node" parent="."]
 script = ExtResource("15_27a2c")
@@ -220,4 +240,3 @@ script = ExtResource("17_o8v8q")
 
 [connection signal="pressed" from="UIManager/ActionsContainer/Move" to="BattleManager" method="_on_move_button_pressed"]
 [connection signal="pressed" from="UIManager/ActionsContainer/Move" to="UIManager" method="_on_move_pressed"]
-[connection signal="pressed" from="UIManager/Change BF" to="." method="_on_change_bf_pressed"]

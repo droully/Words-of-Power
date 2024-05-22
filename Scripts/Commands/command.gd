@@ -51,7 +51,7 @@ class Move:
 		original_tile = unit.tile_position  # Store the original position before the move
 		if target_tile in unit.walkable_tiles():
 			Events.emit_signal("command_unit_moved",unit,original_tile,target_tile)
-			return BF.place_unit_on_tile(unit, target_tile.x, target_tile.y)
+			return BF.place_unit_on_tile(unit, target_tile)
 		return false
 
 class Deploy:

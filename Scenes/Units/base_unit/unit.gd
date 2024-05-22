@@ -128,7 +128,7 @@ func push( direction: Vector2i):
 	var target_unit =  BF.map.get_unit_in_tile(target_tile)
 	if target_unit:
 		return target_unit
-	return BF.map.place_unit_on_tile(self, target_tile.x, target_tile.y)
+	return BF.map.place_unit_on_tile(self, target_tile)
 	
 func pull(direction: Vector2i):	
 	return push(-direction)
