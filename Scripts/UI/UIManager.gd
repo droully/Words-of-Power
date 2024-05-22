@@ -36,7 +36,7 @@ func move_highlight(event):
 		BF.reset_highlight(last_highlighted_tiles)
 		
 		if  tile_position in BM.current_unit.walkable_tiles():	
-			var path = BF.grid.get_id_path(BM.current_unit.tile_position,tile_position)
+			var path = BF.path_between_tiles(BM.current_unit.tile_position,tile_position)
 			BF.highlight_tiles(path,Vector2i(0,0))
 			last_highlighted_tiles = path
 		else:

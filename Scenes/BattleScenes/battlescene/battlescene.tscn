@@ -22,6 +22,7 @@
 
 [node name="BattleScene" type="Node2D"]
 script = ExtResource("1_n8ose")
+metadata/_edit_lock_ = true
 
 [node name="BackGround" type="ColorRect" parent="."]
 offset_left = -352.0
@@ -59,27 +60,25 @@ script = ExtResource("9_saeub")
 [node name="Inter" type="Node" parent="BattleManager/BattleState"]
 script = ExtResource("10_l5wnu")
 
-[node name="Battlefield" parent="." instance=ExtResource("11_uuj7c")]
-layer_0/tile_data = PackedInt32Array(0, 65536, 15, 65536, 196608, 13, 131072, 196608, 13, 196608, 0, 17, 262144, 0, 17, 327680, 131072, 12, 393216, 131072, 12, 1, 65536, 15, 65537, 65536, 15, 131073, 196608, 13, 196609, 0, 17, 262145, 0, 17, 327681, 131072, 12, 393217, 131072, 12, 2, 65536, 15, 65538, 196608, 13, 131074, 196608, 13, 196610, 131072, 15, 262146, 196608, 13, 327682, 131072, 12, 393218, 131072, 12, 3, 65536, 15, 65539, 196608, 13, 131075, 196608, 13, 196611, 196608, 13, 262147, 196608, 13, 327683, 196608, 13, 393219, 196608, 13, 4, 65536, 15, 65540, 196608, 13, 131076, 196608, 13, 196612, 196608, 13, 262148, 196608, 13, 327684, 196608, 13, 393220, 196608, 13, 5, 196608, 13, 65541, 65536, 15, 131077, 196608, 13, 196613, 196608, 13, 262149, 131072, 15, 327685, 196608, 13, 393221, 196608, 13, 6, 65536, 15, 65542, 196608, 13, 131078, 196608, 13, 196614, 196608, 13, 262150, 196608, 13, 327686, 196608, 13, 393222, 196608, 13)
-
 [node name="Spellbook" type="Node" parent="."]
 script = ExtResource("12_ml2tb")
 
 [node name="UIManager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
+offset_left = 640.0
+offset_right = 680.0
 offset_bottom = 40.0
 script = ExtResource("13_i8apy")
 
 [node name="ActionsContainer" type="VBoxContainer" parent="UIManager"]
+clip_contents = true
 layout_mode = 0
-offset_left = 592.0
-offset_top = 128.0
-offset_right = 650.0
-offset_bottom = 194.0
+offset_left = -6.10352e-05
+offset_top = 4.0
+offset_right = 71.9999
+offset_bottom = 360.0
 scale = Vector2(1.76908, 1.76279)
-metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="Move" type="Button" parent="UIManager/ActionsContainer"]
@@ -88,20 +87,18 @@ text = "Move"
 
 [node name="TurnQueue" type="TextEdit" parent="UIManager"]
 layout_mode = 2
-offset_left = 328.0
-offset_top = 48.0
-offset_right = 784.0
-offset_bottom = 104.0
+offset_left = 192.0
+offset_right = 512.0
+offset_bottom = 56.0
 text = "asdasd"
 
 [node name="TurnTracker" type="Control" parent="UIManager"]
 anchors_preset = 0
-offset_left = 128.0
-offset_top = 40.0
-offset_right = 168.0
-offset_bottom = 80.0
+offset_left = 192.0
+offset_top = 72.0
+offset_right = 232.0
+offset_bottom = 112.0
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="UIManager/TurnTracker"]
 layout_mode = 0
@@ -125,17 +122,16 @@ text = "state"
 
 [node name="BattleLog" type="Control" parent="UIManager"]
 anchors_preset = 0
-offset_left = 768.0
+offset_left = 192.0
 offset_top = 128.0
-offset_right = 808.0
-offset_bottom = 168.0
+offset_right = 512.0
+offset_bottom = 640.0
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UIManager/BattleLog"]
 layout_mode = 0
 offset_right = 320.0
-offset_bottom = 448.0
+offset_bottom = 512.0
 color = Color(0.47451, 0.611765, 0.65098, 1)
 
 [node name="Log" type="RichTextLabel" parent="UIManager/BattleLog"]
@@ -152,7 +148,6 @@ offset_top = 192.0
 offset_right = 40.0
 offset_bottom = 232.0
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="BattleStart" type="ColorRect" parent="UIManager/BattleStart"]
 layout_mode = 0
@@ -175,7 +170,6 @@ offset_top = 192.0
 offset_right = 40.0
 offset_bottom = 232.0
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="BattleEnd" type="ColorRect" parent="UIManager/BattleEnd"]
 layout_mode = 0
@@ -193,19 +187,20 @@ text = "BATTLE END"
 
 [node name="BattleFieldAnchor" type="Control" parent="UIManager"]
 anchors_preset = 0
-offset_left = 128.0
-offset_top = 128.0
-offset_right = 168.0
-offset_bottom = 168.0
-metadata/_edit_lock_ = true
+offset_left = -640.0
+offset_right = -600.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="HighlightSprite" type="Sprite2D" parent="UIManager/BattleFieldAnchor"]
 
 [node name="Change BF" type="Button" parent="UIManager"]
 layout_mode = 0
+offset_left = 448.0
 offset_top = 64.0
-offset_right = 64.0
+offset_right = 512.0
 offset_bottom = 128.0
+text = "skip"
 
 [node name="AnimationManager" type="Node" parent="."]
 script = ExtResource("15_27a2c")
@@ -218,6 +213,9 @@ script = ExtResource("16_i6t3l")
 
 [node name="Ongoing" type="Node" parent="AnimationManager/AnimState"]
 script = ExtResource("17_o8v8q")
+
+[node name="Battlefield" parent="." instance=ExtResource("11_uuj7c")]
+position = Vector2(0, 0)
 
 [connection signal="pressed" from="UIManager/ActionsContainer/Move" to="BattleManager" method="_on_move_button_pressed"]
 [connection signal="pressed" from="UIManager/ActionsContainer/Move" to="UIManager" method="_on_move_pressed"]

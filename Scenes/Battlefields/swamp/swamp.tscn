@@ -1049,23 +1049,25 @@ layer_2/name = "PerTileData"
 layer_2/tile_data = PackedInt32Array()
 script = ExtResource("4_ogv62")
 
-[node name="Blood Reed" parent="." instance=ExtResource("6_evoii")]
+[node name="units" type="Node2D" parent="."]
+
+[node name="Blood Reed" parent="units" instance=ExtResource("6_evoii")]
 position = Vector2(160, 160)
 
-[node name="Blood Reed2" parent="." instance=ExtResource("6_evoii")]
+[node name="Blood Reed2" parent="units" instance=ExtResource("6_evoii")]
 position = Vector2(288, 352)
 
-[node name="Frog" parent="." instance=ExtResource("5_mm0j1")]
+[node name="Frog" parent="units" instance=ExtResource("5_mm0j1")]
 position = Vector2(32, 416)
 
-[node name="Frog2" parent="." instance=ExtResource("5_mm0j1")]
+[node name="Frog2" parent="units" instance=ExtResource("5_mm0j1")]
 position = Vector2(96, 32)
 
-[node name="Sanguisuge" parent="." instance=ExtResource("7_js6c4")]
+[node name="Sanguisuge" parent="units" instance=ExtResource("7_js6c4")]
 position = Vector2(32, 224)
 
-[node name="Sanguisuge2" parent="." instance=ExtResource("7_js6c4")]
+[node name="Sanguisuge2" parent="units" instance=ExtResource("7_js6c4")]
 position = Vector2(160, 352)
 
-[node name="Sanguisuge3" parent="." instance=ExtResource("7_js6c4")]
+[node name="Sanguisuge3" parent="units" instance=ExtResource("7_js6c4")]
 position = Vector2(352, 160)

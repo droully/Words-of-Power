@@ -19,8 +19,7 @@ func _ready():
 			current_state=$Free
 		"BattleState":
 			current_state=$Start
-		
-		
+
 	for state in get_children():
 		state.initialize(self)
 		states[state.name] = state

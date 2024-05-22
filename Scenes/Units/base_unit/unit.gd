@@ -67,8 +67,8 @@ func walkable_tiles():
 	return BF.tiles_in_aoe(tile_position,speed,false,false,false)
 	
 func move_through(path):
-	var to_coord=path[-1]
-	var from_coord= path[0] 
+	var to_coord = path[-1]
+	var from_coord = path[0] 
 	
 	Events.emit_signal("unit_moved_global_coord",self,from_coord,to_coord)
 	
@@ -83,6 +83,7 @@ func move_through(path):
 #	position=to_coord	#position:absoluto
 func get_orientation():
 	return Orientation.find_key(self.orientation)
+	
 func reverse_orientation():
 	if self.orientation==Orientation.LEFT:
 		self.orientation=Orientation.RIGHT

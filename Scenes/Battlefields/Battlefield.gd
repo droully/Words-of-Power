@@ -15,14 +15,19 @@ var size_y
 var deployment_area = tiles_in_box(2,4,4,5)
 func _ready():
 	#set_layer_modulate(Layer.PerTileData,Color(1, 1, 1, 0))
+	
 	Events.unit_moved_global_coord.connect(_on_unit_moved_global_coord)
 	setup(7,7)
 
 func setup(x,y):
-	
+
 	size_x=x
-	size_y=y
-	
+	size_y=y	
+
+	tile_set.add_custom_data_layer()
+	tile_set.set_custom_data_layer_name(0,"UnitTracking")
+	tile_set.set_custom_data_layer_type(0,22) #22=NodePath
+
 	#set_per_tile_data(size_x,size_y)
 	set_layer_z_index(Layer.PerTileData,-1)
 	set_grid(size_x,size_y)	
@@ -211,6 +216,12 @@ func get_unit_in_tile(tile_position: Vector2i):
 		if is_instance_valid(unit):
 			return unit
 	return null
+
+func is_tile_solid(tile):
+	return grid.is_point_solid(tile)
+
+func path_between_tiles(from_tile,to_tile):
+	return grid.get_id_path(from_tile,to_tile)
 
 func distance(tile1: Vector2i, tile2: Vector2i):
 	return abs(tile1.x - tile2.x) + abs(tile1.y - tile2.y)

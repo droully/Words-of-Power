@@ -8,8 +8,6 @@ var player
 @onready var BS = $BattleState
 @onready var turn_queue = [] 
 
-#enum BattleState {Status,Turn,Anim}
-
 enum UserActionState {None,Move,Cast,Deploy}
 var user_current_action = UserActionState.None
 
@@ -22,8 +20,6 @@ func _ready():
 	Events.spell_button_pressed.connect(_on_spell_button_pressed)
 	Events.unit_die.connect(_on_unit_die)
 	Events.command_unit_deployed.connect(_on_unit_deployed)
-	
-	
 
 func _process(_delta):
 
@@ -107,7 +103,6 @@ func executeCommand():
 		if command.execute():
 			return true
 	return false
-
 
 func _on_move_button_pressed():
 	user_current_action=UserActionState.Move

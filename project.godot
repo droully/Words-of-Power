@@ -25,6 +25,10 @@ buses/default_bus_layout=""
 Events="*res://Scripts/Events.gd"
 Utils="*res://Scripts/Utils.gd"
 
+[display]
+
+window/size/viewport_height=640
+
 [input]
 
 undo={

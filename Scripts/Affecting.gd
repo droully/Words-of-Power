@@ -28,7 +28,7 @@ func SingleTarget():
 	return [target_tile]
 	
 func AreaOfEffect():
-	if BF.grid.is_point_solid(target_tile):
+	if BF.is_tile_solid(target_tile):
 		return []
 	return BF.tiles_in_aoe(target_tile, spell_data.radius,false,true)
 
