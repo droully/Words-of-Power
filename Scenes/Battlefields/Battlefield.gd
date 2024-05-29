@@ -2,8 +2,9 @@ extends Node
 
 class_name BattleField
 
-@onready var map=$Map
+@onready var map:Map=$Map
 @onready var units= $Units
+@onready var hazards= $Hazards
 @onready var deployment_area = map.tiles_in_box(2,4,4,5)
 
 
@@ -11,11 +12,17 @@ func _ready():
 	#set_layer_modulate(Layer.PerTileData,Color(1, 1, 1, 0))
 	
 	initialize_units()
-
+	initialize_hazards()
+	
 func initialize_units():
 	for unit in units.get_children():
 		unit.initialize(self)
 		map.set_unit_on_tile(unit.tile_position,unit)
+		
+func initialize_hazards():
+	for hazard in hazards.get_children():
+		hazard.initialize(self)
+		map.set_hazard_on_tile(hazard.tile_position,hazard)
 
 func spawn_unit(unit : Unit,tile_position):
 	unit.tile_position = tile_position

@@ -1,12 +1,17 @@
 extends TileMap
 
+class_name Map
 
-enum Layer {Base,Highlight,PerTileData}
-enum TileSetID {Battleground,Highlight,Coordinates}
+enum MapLayer {Base,Highlight,PerTileData}
+
+#estan el map layer que son las capas de lo que se printea en pantalla
+#estan el custom data layers que es la info del juego: Collision, UnitTracking,HazardTracking
+
+
 var size_x
 var size_y
 
-var Highlight_Layer = Layer.Highlight
+var Highlight_Layer = MapLayer.Highlight
 
 var grid= AStarGrid2D.new()
 
@@ -25,16 +30,17 @@ func setup(x,y):
 	size_x=x
 	size_y=y
 
-	tile_set.add_custom_data_layer(0)
-	tile_set.set_custom_data_layer_name(0,"UnitTracking")
-	tile_set.set_custom_data_layer_type(0,TYPE_NODE_PATH) 
-	 #TODO cachar que wea esto de los layers 
+	
 	tile_set.add_custom_data_layer(1)
-	tile_set.set_custom_data_layer_name(1,"Collision")
-	tile_set.set_custom_data_layer_type(1,TYPE_BOOL) 
+	tile_set.set_custom_data_layer_name(1,"UnitTracking")
+	tile_set.set_custom_data_layer_type(1,TYPE_NODE_PATH) 
+	tile_set.add_custom_data_layer(2)
+	tile_set.set_custom_data_layer_name(2,"HazardTracking")
+	tile_set.set_custom_data_layer_type(2,TYPE_NODE_PATH) 
+	
 
 	#set_per_tile_data(size_x,size_y)
-	set_layer_z_index(Layer.PerTileData,-1)
+	set_layer_z_index(MapLayer.PerTileData,-1)
 	set_grid(size_x,size_y)	
 
 func set_grid(x_lim,y_lim):
@@ -47,8 +53,9 @@ func set_grid(x_lim,y_lim):
 	grid.diagonal_mode=1
 	grid.update()
 
-	grid.set_point_solid(Vector2i(2,3))
-	grid.set_point_solid(Vector2i(5,4))
+	for tile in all_tiles():
+		if get_collision_on_tile(tile):
+			grid.set_point_solid(tile)
 
 func path_between_tiles(from_tile,to_tile):
 	return grid.get_point_path(from_tile,to_tile)
@@ -180,10 +187,17 @@ func get_direction_from_unit_to_tile(unit: Unit, target_tile: Vector2i) -> Vecto
 	else:
 		return Vector2i(0, 0)
 
-func get_cell_in_tile(tile_position: Vector2i): 
-	return get_cell_tile_data(Layer.PerTileData,tile_position)
+func get_cell_in_tile(tile_position: Vector2i, maplayer= MapLayer.PerTileData): 
+	return get_cell_tile_data(maplayer,tile_position)
 
-func get_unit_in_tile(tile_position: Vector2i):
+func get_hazard_in_tile(tile_position: Vector2i)->Hazard:
+	if tile_inside_BF(tile_position):
+		var hazard = get_cell_in_tile(tile_position).get_custom_data("HazardTracking")
+		if is_instance_valid(hazard):
+			return hazard
+	return null
+
+func get_unit_in_tile(tile_position: Vector2i)->Unit:
 	if tile_inside_BF(tile_position):
 		var unit = get_cell_in_tile(tile_position).get_custom_data("UnitTracking")
 		if is_instance_valid(unit):
@@ -193,8 +207,11 @@ func get_unit_in_tile(tile_position: Vector2i):
 func set_unit_on_tile(tile:Vector2i,unit=NodePath()):
 	get_cell_in_tile(tile).set_custom_data("UnitTracking",unit)
 	
+func set_hazard_on_tile(tile:Vector2i,hazard=NodePath()):
+	get_cell_in_tile(tile).set_custom_data("HazardTracking",hazard)
+	
 func get_collision_on_tile(tile_position:Vector2i):
-	return get_cell_in_tile(tile_position).get_custom_data("Collision")
+	return get_cell_in_tile(tile_position,MapLayer.Base).get_custom_data("Collision")
 	
 func is_tile_solid(tile):
 	return grid.is_point_solid(tile)
@@ -210,3 +227,4 @@ func _on_unit_moved_global_coord(unit,from_coord:Vector2,to_coord:Vector2):
 	var to_tile=local_to_map(to_coord)
 	set_unit_on_tile(from_tile)
 	set_unit_on_tile(to_tile,unit)
+	

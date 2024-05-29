@@ -1,17 +1,18 @@
-[gd_scene load_steps=20 format=3 uid="uid://bl8iglk1xnwbs"]
+[gd_scene load_steps=21 format=3 uid="uid://bl8iglk1xnwbs"]
 
 [ext_resource type="Script" path="res://Scenes/BattleScenes/battlescene/battlescene.gd" id="1_n8ose"]
 [ext_resource type="Script" path="res://Scripts/Managers/BattleManager.gd" id="2_x8hym"]
 [ext_resource type="Script" path="res://Scripts/Managers/StateMachine.gd" id="3_n8q0w"]
-[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Start.gd" id="4_ah2ow"]
-[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Deploy.gd" id="5_lewvu"]
-[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Status.gd" id="6_o5pau"]
-[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Turn.gd" id="7_v5oy1"]
-[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Anim.gd" id="8_mhvo8"]
-[ext_resource type="Script" path="res://Scripts/Managers/BattleState/End.gd" id="9_saeub"]
-[ext_resource type="Script" path="res://Scripts/Managers/BattleState/Inter.gd" id="10_l5wnu"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/StartState.gd" id="4_ah2ow"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/DeployState.gd" id="5_lewvu"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/StatusState.gd" id="6_o5pau"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/TurnState.gd" id="7_v5oy1"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/AnimState.gd" id="8_mhvo8"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/EndState.gd" id="9_saeub"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/InterState.gd" id="10_l5wnu"]
+[ext_resource type="Script" path="res://Scripts/Managers/BattleState/HazardState.gd" id="11_v3ffk"]
 [ext_resource type="Script" path="res://Scripts/Spellbook.gd" id="12_ml2tb"]
-[ext_resource type="PackedScene" uid="uid://4p848qpx0xxm" path="res://Scenes/Battlefields/BattlefieldNew.tscn" id="12_xn2xm"]
+[ext_resource type="PackedScene" uid="uid://4p848qpx0xxm" path="res://Scenes/Battlefields/Battlefield.tscn" id="12_xn2xm"]
 [ext_resource type="Script" path="res://Scripts/UI/UIManager.gd" id="13_i8apy"]
 [ext_resource type="Script" path="res://Scripts/UI/BattleLog.gd" id="14_lgqmy"]
 [ext_resource type="Script" path="res://Scripts/Managers/AnimationManager.gd" id="15_27a2c"]
@@ -54,6 +55,9 @@ script = ExtResource("7_v5oy1")
 
 [node name="Anim" type="Node" parent="BattleManager/BattleState"]
 script = ExtResource("8_mhvo8")
+
+[node name="Hazard" type="Node" parent="BattleManager/BattleState"]
+script = ExtResource("11_v3ffk")
 
 [node name="End" type="Node" parent="BattleManager/BattleState"]
 script = ExtResource("9_saeub")

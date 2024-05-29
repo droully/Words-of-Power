@@ -84,15 +84,11 @@ func move_through(path):
 func get_orientation():
 	return Orientation.find_key(self.orientation)
 	
-func reverse_orientation():
-	if self.orientation==Orientation.LEFT:
-		self.orientation=Orientation.RIGHT
-	elif self.orientation==Orientation.RIGHT:
-		self.orientation=Orientation.LEFT
-	elif self.orientation==Orientation.UP:
-		self.orientation=Orientation.DOWN
-	elif self.orientation==Orientation.DOWN:
-		self.orientation=Orientation.UP
+func rotate_orientation(deg):
+	var orientations = [Orientation.UP, Orientation.RIGHT, Orientation.DOWN, Orientation.LEFT]
+	self.orientation = orientations[(orientations.find(self.orientation) + deg / 90) % 4]
+		
+		
 func take_damage(damage_amount: int,_damage_type="neutral"):
 	if shield>0:
 		shield -=1
@@ -128,7 +124,7 @@ func push( direction: Vector2i):
 	var target_unit =  BF.map.get_unit_in_tile(target_tile)
 	if target_unit:
 		return target_unit
-	return BF.map.place_unit_on_tile(self, target_tile)
+	return BF.place_unit_on_tile(self, target_tile)
 	
 func pull(direction: Vector2i):	
 	return push(-direction)

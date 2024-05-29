@@ -14,7 +14,7 @@ func exit():
 	
 func process(_delta):
 	if not FSM.BM.AM.is_animation_ongoing():
-		FSM.change_to("Inter")
+		FSM.change_to("Hazard")
 
 func input(_event):
 	pass

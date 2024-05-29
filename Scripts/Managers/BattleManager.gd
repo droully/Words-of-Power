@@ -14,6 +14,8 @@ var user_current_action = UserActionState.None
 var spell_to_cast : SpellData
 var current_unit : Unit
 
+enum Parties {Player,Enemies}
+
 var command #no :Command
 
 func _ready():

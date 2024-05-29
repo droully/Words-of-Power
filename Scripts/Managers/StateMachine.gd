@@ -3,7 +3,7 @@ extends Node
 class_name StateMachine
 
 @onready var BM = $".."
-@onready var BF = $"../../Battlefield"
+@onready var BF :BattleField= $"../../Battlefield" 
 @onready var AM = $"../../AnimationManager"
 @onready var UI = $"../../UIManager"
 
