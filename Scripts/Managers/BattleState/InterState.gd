@@ -1,7 +1,7 @@
 extends Node
 
 var FSM: StateMachine
-var tq
+var current_party
 
 func initialize(_FSM):
 	FSM=_FSM
@@ -9,18 +9,14 @@ func initialize(_FSM):
 
 
 func process(_delta):
-	var enemies=0
-	for unit in tq:
-		if unit.party=="enemy":
-			enemies+=1
-	if enemies==0:
-		FSM.change_to("End")
-	else:
-		tq.append(tq.pop_front())
-		FSM.change_to("Status")
+	FSM.BM.change_current_party()
+	
+	FSM.change_to("Status")
+
+	#FSM.change_to("End")
 
 func enter():
-	tq= FSM.BM.turn_queue	
+	current_party= FSM.BM.current_party	
 
 func exit():
 	pass

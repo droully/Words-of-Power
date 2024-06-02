@@ -12,7 +12,7 @@ func enter():
 func process(delta):
 	timer += delta
 	if timer >1:
-		FSM.change_to("Deploy")
+		FSM.change_to("Turn")
 		
 
 

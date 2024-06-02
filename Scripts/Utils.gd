@@ -6,6 +6,7 @@ var current_scene = null
 var dir2vector={"LEFT":Vector2i(-1,0),"RIGHT":Vector2i(1,0),"UP":Vector2i(0,-1),"DOWN":Vector2i(0,1)}
 var dirinputs=["move_left", "move_right", "move_up", "move_down"]
 
+
 func _ready():
 	var root = get_tree().root
 	current_scene=root.get_child(root.get_child_count()-1)

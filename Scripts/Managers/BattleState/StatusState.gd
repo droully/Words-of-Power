@@ -6,14 +6,7 @@ func initialize(_FSM):
 	FSM=_FSM
 
 func enter():
-	var current_unit=FSM.BM.current_unit
-	
-	var status_list=current_unit.get_node("StatusEffects").get_children()
-	
-	for status in status_list:
-		status.per_turn_effect()
-	for status in status_list:
-		status.pass_turn()
+	get_tree().call_group(FSM.BM.current_party,"apply_status_effect")
 
 func exit():
 	pass

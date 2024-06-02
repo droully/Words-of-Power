@@ -3,6 +3,7 @@ extends Node
 class_name Command
 
 class Cast:
+	var command_name= "Caster"
 
 	var caster
 	var spell: Spell
@@ -36,6 +37,7 @@ class Cast:
 			return true
 
 class Move:
+	var command_name= "Move"
 
 	var unit
 	var target_tile
@@ -49,13 +51,14 @@ class Move:
 
 	func execute():
 		original_tile = unit.tile_position  # Store the original position before the move
-		if target_tile in unit.walkable_tiles():
+		if not BF.map.is_tile_solid(target_tile):
 			Events.emit_signal("command_unit_moved",unit,original_tile,target_tile)
+			#on_unit_collide()
 			return BF.place_unit_on_tile(unit, target_tile)
 		return false
 
 class Deploy:
-
+	var command_name= "Deploy"
 	var unit : Unit
 	var unit_data : UnitData
 	var target_tile
@@ -74,6 +77,7 @@ class Deploy:
 		return true
 
 class Skip: 
+	var command_name= "Skip"
 	var unit
 	
 	func _init(_unit):

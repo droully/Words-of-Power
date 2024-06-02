@@ -29,7 +29,7 @@ enum affecting_methods {
 @export var max_shield: int = 1
 @export var priority: int = 2
 
-@export var AI: Script
+@export var behavior: Script
 
 @export var tags: Array[String] = []
 @export var sprite: Texture 

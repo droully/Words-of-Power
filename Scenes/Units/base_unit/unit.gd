@@ -10,7 +10,7 @@ enum Orientation {
 }
 
 @onready var ui = $UI
-@onready var ai = $AI
+@onready var beh = $Behavior
 @onready var status_effects = $StatusEffects
 
 # Enemy properties
@@ -56,12 +56,21 @@ func initialize(_BF: BattleField):
 	self.priority = unit_data.priority
 	self.tags = unit_data.tags
 	
-	ai.set_script(unit_data.AI)
+	beh.set_script(unit_data.behavior)
 	
 	if tile_position == Vector2i(-1,-1):
 		tile_position = BF.map.position_to_tile(position)
 	if position == Vector2(0,0):
 		position = BF.map.tile_to_position(tile_position)
+	add_to_group(party)
+	
+func get_action(commands_list=[]):
+	commands_list.append(beh.choose_command(BF))
+	
+	
+func under_unit(unit):
+	unit.die()
+	self.die()
 	
 func walkable_tiles():
 	return BF.map.tiles_in_aoe(tile_position,speed,false,false,false)
@@ -118,7 +127,14 @@ func remove_status_effect(status):
 	status.remove_effect()
 	ui.refresh()
 
-func push( direction: Vector2i):	
+func apply_status_effect():
+	var status_list=get_node("StatusEffects").get_children()
+	for status in status_list:
+		status.per_turn_effect()
+	for status in status_list:
+		status.pass_turn()
+		
+func push(direction: Vector2i):	
 	#retorna true si empuja, y la unidad con la que coliciona si coliciona 
 	var target_tile = tile_position + direction  # chequear colisiones
 	var target_unit =  BF.map.get_unit_in_tile(target_tile)
@@ -131,7 +147,6 @@ func pull(direction: Vector2i):
 
 func die():
 	Events.emit_signal("unit_die",self)
-	# Handle enemy death, e.g., play an animation, drop loot, etc.
 	queue_free() # or handle in another way
 
 func has_tag(tag:String):

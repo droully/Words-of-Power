@@ -50,7 +50,7 @@ func cast_highlight(event):
 		if BF.map.tile_inside_BF(tile_position):
 			
 			var affecting = Affecting.new()
-			var affected_tiles= affecting.affected_tiles(tile_position,BM.current_unit, BM.spell_to_cast, BF)
+			var affected_tiles= affecting.affected_tiles(tile_position,BM.player, BM.spell_to_cast, BF)
 			for tile in affected_tiles:
 				BF.map.set_cell(Highlight_Layer,tile,1,Vector2i(1,0))
 
@@ -68,15 +68,16 @@ func deploy_highlight(event):
 			highlight_sprite.position=BF.map.tile_to_position(tile_position)
 
 func _process(_delta):
-	if len(BM.turn_queue)>0:
-		turn_label.text=BM.turn_queue[0].unit_name
+	turn_label.text=BM.current_party
+
 	state_label.text=BM.BS.current_state.name
 	
 	var TurnQueue=$TurnQueue
 	var tq=PackedStringArray([])
-	for unit in BM.turn_queue:
-		#check if dead
-		tq.append(unit.unit_name)
+	#for unit in BM.turn_queue:
+	#	tq.append(unit.unit_name)
+	
+	#añadir las unidades
 	TurnQueue.text=" ".join(tq)
 
 

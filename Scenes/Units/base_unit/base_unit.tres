@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="UnitData" load_steps=4 format=3 uid="uid://bn7i3fnhbvo0k"]
 
-[ext_resource type="Script" path="res://Scripts/AI/base_AI.gd" id="1_spx55"]
+[ext_resource type="Script" path="res://Scripts/Behaviors/base_beh.gd" id="1_spx55"]
 [ext_resource type="Script" path="res://Scenes/Units/base_unit/unit_data.gd" id="1_wx68j"]
 [ext_resource type="Texture2D" uid="uid://dfoebsetmgtbh" path="res://Resources/Enemies/base_unit.png" id="2_g48f6"]
 

@@ -59,11 +59,11 @@ script = ExtResource("8_mhvo8")
 [node name="Hazard" type="Node" parent="BattleManager/BattleState"]
 script = ExtResource("11_v3ffk")
 
-[node name="End" type="Node" parent="BattleManager/BattleState"]
-script = ExtResource("9_saeub")
-
 [node name="Inter" type="Node" parent="BattleManager/BattleState"]
 script = ExtResource("10_l5wnu")
+
+[node name="End" type="Node" parent="BattleManager/BattleState"]
+script = ExtResource("9_saeub")
 
 [node name="Spellbook" type="Node" parent="."]
 script = ExtResource("12_ml2tb")
@@ -106,6 +106,7 @@ offset_right = 71.9999
 offset_bottom = 360.0
 scale = Vector2(1.76908, 1.76279)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Move" type="Button" parent="UIManager/ActionsContainer"]
 layout_mode = 2
@@ -125,6 +126,7 @@ offset_top = 72.0
 offset_right = 232.0
 offset_bottom = 112.0
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="UIManager/TurnTracker"]
 layout_mode = 0

@@ -10,8 +10,9 @@ func _ready():
 func _on_battle_start():
 	text += "Battle Start \n"
 	
-func _on_turn_start(unit):
-	text += unit.unit_name +" turn: \n"
+func _on_turn_start(party):
+
+	text += party +" turn: \n"
 
 func _on_command_unit_moved(unit,from_tile,to_tile):
 	text += unit.unit_name +" moved from " + str(from_tile) + " to " + str(to_tile)+"\n"

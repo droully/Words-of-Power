@@ -1,8 +1,8 @@
 extends Node
-@onready var unit= get_parent()
 
-func execute_turn(BM, BF):
-	var player_tile = BM.player.tile_position  
+func choose_command(BF):
+	var unit= get_parent() 
+	var player_tile = BF.player.tile_position  
 	var unit_tile = unit.tile_position  
 	
 	var targeting = Targeting.new()
@@ -10,7 +10,7 @@ func execute_turn(BM, BF):
 	var spell_to_cast=Utils.get_spell_data_by_name("fire_ball")
 
 	for tile in targeting.targetable_tiles(unit, spell_to_cast, BF):
-		if BF.map.get_unit_in_tile(tile) == BM.player:  # identifies player
+		if BF.map.get_unit_in_tile(tile) == BF.player:  # identifies player
 			var castCommand = Command.Cast.new(unit,spell_to_cast,tile, BF,false)
 			return  castCommand
 
@@ -24,3 +24,5 @@ func execute_turn(BM, BF):
 			var moveCommand = Command.Move.new(unit, best_tile, BF)
 			return moveCommand
 
+func callbackUnitOverlap(unit_on_top):
+	pass

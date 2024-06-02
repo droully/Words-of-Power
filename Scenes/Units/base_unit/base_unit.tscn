@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scenes/Units/base_unit/unit.gd" id="1_un0e8"]
 [ext_resource type="Resource" uid="uid://bn7i3fnhbvo0k" path="res://Scenes/Units/base_unit/base_unit.tres" id="2_ycbl4"]
 [ext_resource type="Texture2D" uid="uid://dfoebsetmgtbh" path="res://Resources/Enemies/base_unit.png" id="3_hyw0f"]
+[ext_resource type="Script" path="res://Scripts/Behaviors/base_beh.gd" id="4_doung"]
 [ext_resource type="Script" path="res://Scripts/UI/UI.gd" id="4_eajtp"]
-[ext_resource type="Script" path="res://Scripts/AI/base_AI.gd" id="4_mox6r"]
 
 [node name="BaseUnit" type="Node2D"]
 script = ExtResource("1_un0e8")
@@ -13,8 +13,8 @@ unit_data = ExtResource("2_ycbl4")
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_hyw0f")
 
-[node name="AI" type="Node" parent="."]
-script = ExtResource("4_mox6r")
+[node name="Behavior" type="Node" parent="."]
+script = ExtResource("4_doung")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

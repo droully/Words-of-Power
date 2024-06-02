@@ -23,9 +23,9 @@ func process(_delta):
 	
 	
 func exit():
-	BM.turn_queue = BF.units.get_children()
-	BM.turn_queue.sort_custom(Utils.priority_compare)
-	
+	#BM.turn_queue = BF.units.get_children()
+	#BM.turn_queue.sort_custom(Utils.priority_compare)
+	pass
 
 func input(event):
 	UI.deploy_highlight(event)

@@ -71,4 +71,3 @@ func callbackOnFloor(_BF,_tile):
 func _on_finished_animation(_anim_name):	
 	Events.emit_signal("spell_cast_anim_end",self)	
 	queue_free()
-
