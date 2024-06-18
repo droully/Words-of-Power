@@ -18,4 +18,3 @@ func affected_tiles(target_tile,_caster=caster,_BF=BF):
 
 func callbackOnFloor(BF,tile):
 	BF.summon(tile,"unit")
-

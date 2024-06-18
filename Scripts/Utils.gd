@@ -5,7 +5,7 @@ var current_scene = null
 
 var dir2vector={"LEFT":Vector2i(-1,0),"RIGHT":Vector2i(1,0),"UP":Vector2i(0,-1),"DOWN":Vector2i(0,1)}
 var dirinputs=["move_left", "move_right", "move_up", "move_down"]
-
+var player
 
 func _ready():
 	var root = get_tree().root
@@ -14,6 +14,15 @@ func _ready():
 func switch_scene(res_path):
 	call_deferred("_defferred_switch_scene",res_path)
 	
+func compare_elements(ele1:String,ele2:String):
+	var elem_dict={"water": {"weakTo": 'earth', "strongTo": 'fire'},
+	"fire": {"weakTo": 'water', "strongTo": 'earth'},
+	"earth": {"weakTo": 'fire', "strongTo": 'water'}}
+	
+	if elem_dict[ele1]["weakTo"]==ele2:
+		return ele2
+	if elem_dict[ele1]["strongTo"]==ele2:
+		return ele1
 func _defferred_switch_scene(res_path):
 	current_scene.free()
 	var s=load(res_path)
@@ -35,6 +44,9 @@ func get_spell_data_by_name(spell_name: String):
 func get_unit_by_name(unit_name: String):
 	var unit = load("res://Scenes/units/"+unit_name+"/"+unit_name+".tscn").instantiate()
 	return unit
+func get_hazard_by_name(hazard_name: String):
+	var hazard = load("res://Scenes/hazards/"+hazard_name+"/"+hazard_name+".tscn").instantiate()
+	return hazard
 	
 func get_unit_data_by_name(unit_name: String):
 	var unit_data = load("res://Scenes/units/"+unit_name+"/"+unit_name+".tres")

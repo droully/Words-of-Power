@@ -28,17 +28,17 @@ func SingleTarget():
 	return [target_tile]
 	
 func AreaOfEffect():
-	if BF.map.is_tile_solid(target_tile):
+	if BF.is_tile_solid(target_tile):
 		return []
 	return BF.map.tiles_in_aoe(target_tile, spell_data.radius,false,true)
 
 func ForwardSegment():
-	var dir = BF.map.get_direction_from_unit_to_tile(caster,target_tile)
+	var dir = BF.map.get_direction_from_tile_to_tile(caster.tile_position,target_tile)
 	var tiles=BF.map.tiles_in_line(target_tile,dir, spell_data.radius)
 	return tiles
 	
 func PerpTShape():
-	var dir = BF.map.get_direction_from_unit_to_tile(caster,target_tile)
+	var dir = BF.map.get_direction_from_tile_to_tile(caster.tile_position,target_tile)
 	var tiles=BF.map.tiles_perpendicular(target_tile,dir, spell_data.radius)
 
 	return tiles

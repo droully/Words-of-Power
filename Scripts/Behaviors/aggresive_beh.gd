@@ -10,7 +10,7 @@ func choose_command(BF):
 	var spell_to_cast=Utils.get_spell_data_by_name("fire_ball")
 
 	for tile in targeting.targetable_tiles(unit, spell_to_cast, BF):
-		if BF.map.get_unit_in_tile(tile) == BF.player:  # identifies player
+		if BF.get_unit_on_tile(tile) == BF.player:  # identifies player
 			var castCommand = Command.Cast.new(unit,spell_to_cast,tile, BF,false)
 			return  castCommand
 

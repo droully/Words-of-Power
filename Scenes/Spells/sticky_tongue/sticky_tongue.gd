@@ -9,7 +9,7 @@ func animation():
 	var t = dist/anim_speed
 	$Body.rotation = atan2(dir.y, dir.x)
 	$End.rotation =atan2(dir.y, dir.x)
-	Events.emit_signal("spell_cast_anim_start",self)
+	Events.emit_signal("spell_cast_anim_start",self,anim_player)
 	anim_player.animation_finished.connect(_on_finished_animation)
 
 	var anim_fw = anim_player.get_animation("forward")

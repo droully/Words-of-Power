@@ -28,6 +28,7 @@ enum affecting_methods {
 @export var shield: int = 0
 @export var max_shield: int = 1
 @export var priority: int = 2
+@export var element: String
 
 @export var behavior: Script
 

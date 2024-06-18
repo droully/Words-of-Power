@@ -7,7 +7,7 @@ extends Control
 @onready var turn_label= $TurnTracker/Turn
 @onready var state_label=$TurnTracker/State
 @onready var actions_container= $ActionsContainer
-@onready var Highlight_Layer = BF.map.Highlight_Layer
+@onready var Highlight_Layer = BF.highlight
 @onready var SpellBook = $"../Spellbook"
 
 @onready var spells_UI = SpellBook.spell_names_UI
@@ -33,11 +33,11 @@ func _input(_event):
 func move_highlight(event):
 	if event is InputEventMouseMotion :
 		var tile_position = BF.map.mouse_to_tile(event.position)
-		BF.map.reset_highlight(last_highlighted_tiles)
+		BF.highlight.reset_highlight(last_highlighted_tiles)
 		
 		if  tile_position in BM.current_unit.walkable_tiles():	
-			var path = BF.map.path_between_tiles(BM.current_unit.tile_position,tile_position)
-			BF.map.highlight_tiles(path,Vector2i(0,0))
+			var path = []#BF.map.path_between_tiles(BM.current_unit.tile_position,tile_position)
+			BF.highlight.highlight_tiles(path,Vector2i(0,0))
 			last_highlighted_tiles = path
 		else:
 			last_highlighted_tiles = []
@@ -45,14 +45,14 @@ func move_highlight(event):
 func cast_highlight(event):
 	if event is InputEventMouseMotion :
 		var tile_position = BF.map.mouse_to_tile(event.position)
-		BF.map.reset_highlight(last_highlighted_tiles)
+		BF.highlight.reset_highlight(last_highlighted_tiles)
 		
 		if BF.map.tile_inside_BF(tile_position):
 			
 			var affecting = Affecting.new()
 			var affected_tiles= affecting.affected_tiles(tile_position,BM.player, BM.spell_to_cast, BF)
-			for tile in affected_tiles:
-				BF.map.set_cell(Highlight_Layer,tile,1,Vector2i(1,0))
+
+			BF.highlight.highlight_tiles(affected_tiles,Vector2i(1,0))
 
 			last_highlighted_tiles = affected_tiles
 		else:
@@ -68,7 +68,6 @@ func deploy_highlight(event):
 			highlight_sprite.position=BF.map.tile_to_position(tile_position)
 
 func _process(_delta):
-	turn_label.text=BM.current_party
 
 	state_label.text=BM.BS.current_state.name
 	

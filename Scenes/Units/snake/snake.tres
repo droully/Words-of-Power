@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_yi6n4")
-unit_name = "unit"
+unit_name = "snake"
 hp = 100
 max_hp = 100
 temporal_hp = 0

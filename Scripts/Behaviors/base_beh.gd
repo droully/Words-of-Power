@@ -5,5 +5,5 @@ func choose_command(_BF):
 	var skipCommand = Command.Skip.new(unit)
 	return skipCommand
 
-func callbackUnitOverlap(unit_on_top):
+func callbackUnitOverlap(_unit_on_top):
 	pass

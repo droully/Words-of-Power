@@ -22,5 +22,6 @@ func choose_command(BF):
 	
 func callbackUnitOverlap(unit_on_top):
 	var unit = get_parent() 
-	unit_on_top.die()
-	unit.die()
+	var winner_element = Utils.compare_elements(unit.element,unit_on_top.element)
+	if winner_element == unit_on_top.element:
+		unit.die()

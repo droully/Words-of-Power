@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhdupka03v5qo"]
+
+[ext_resource type="PackedScene" uid="uid://dwciaemefunni" path="res://Scenes/Units/base_unit/base_unit.tscn" id="1_uydrj"]
+[ext_resource type="Resource" uid="uid://cwbxwidlxm734" path="res://Scenes/Units/earth_elemental/earth_elemental.tres" id="2_e58g7"]
+[ext_resource type="Texture2D" uid="uid://bgf854m6njkwt" path="res://Resources/Enemies/earth_elemental.png" id="3_cdk0l"]
+[ext_resource type="Script" path="res://Scripts/Behaviors/earth_elemental_beh.gd" id="4_pqdoi"]
+
+[node name="EarthElemental" instance=ExtResource("1_uydrj")]
+unit_data = ExtResource("2_e58g7")
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_cdk0l")
+
+[node name="Behavior" parent="." index="1"]
+script = ExtResource("4_pqdoi")

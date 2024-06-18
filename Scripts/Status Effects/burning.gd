@@ -7,4 +7,3 @@ var damage=5
 
 func per_turn_effect():
 	unit.take_damage(damage,"fire")
-

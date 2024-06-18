@@ -42,6 +42,3 @@ func set_state(state_name):
 	current_state = states[state_name]
 	add_child(current_state)
 	current_state.enter()
-
-
-

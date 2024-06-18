@@ -6,7 +6,7 @@ func initialize(_FSM):
 	FSM=_FSM
 
 func enter():
-	get_tree().call_group(FSM.BM.current_party,"apply_status_effect")
+	get_tree().call_group("units","apply_status_effect")
 
 func exit():
 	pass

@@ -24,7 +24,7 @@ class Cast:
 	func execute():
 		self.spell=Utils.get_spell_by_name(spell_data.spell_name)
 		spell.initialize(BF,caster,BF.map.map_to_local(target_tile))
-		BF.map.add_child(spell)
+		BF.add_child(spell)
 
 		Events.emit_signal("command_spell_casted",caster,spell,target_tile)
 		#affect target
@@ -50,8 +50,8 @@ class Move:
 		self.BF = _battlefield
 
 	func execute():
-		original_tile = unit.tile_position  # Store the original position before the move
-		if not BF.map.is_tile_solid(target_tile):
+		original_tile = unit.tile_position 
+		if not BF.is_tile_solid(target_tile):
 			Events.emit_signal("command_unit_moved",unit,original_tile,target_tile)
 			#on_unit_collide()
 			return BF.place_unit_on_tile(unit, target_tile)

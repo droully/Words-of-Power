@@ -5,31 +5,25 @@ extends Node
 @onready var AM = get_node("../AnimationManager")
 @onready var BS = $BattleState
 
-@onready var player = $"../Battlefield/Units/Player"
+@onready var player
 @onready var player_data = preload("res://Scenes/Units/player/player.tres")
 
-@onready var current_party="player"
 
-var current_units:Array
 
 enum UserActionState {None,Move,Cast,Deploy}
 var user_current_action = UserActionState.None
 
 var spell_to_cast : SpellData
-
-
 var command #no :Command
 
 func _ready():
 
-	
+	Events.player_created.connect(_on_player_created)
 	Events.spell_button_pressed.connect(_on_spell_button_pressed)
 	Events.unit_die.connect(_on_unit_die)
 	Events.command_unit_deployed.connect(_on_unit_deployed)
 
 func _process(_delta):
-	
-
 	BS.current_state.process(_delta)
 
 func set_and_execute_command(cmd):
@@ -63,20 +57,6 @@ func move_input(event):
 			setCommand(moveCommand)
 			if executeCommand():
 				return true
-#
-	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		#var cursor_position = BF.mouse_to_tile(event.position)
-		#var moveCommand = Command.Move.new(current_unit, cursor_position, BF)
-		#setCommand(moveCommand)
-		#if  BF.get_unit_in_tile(cursor_position) or not BF.tile_inside_BF(cursor_position): #no mover a unidad ni afuera
-			#pass
-		#elif len(BF.grid.get_point_path(cursor_position, current_unit.tile_position))-1 > current_unit.speed:
-			#pass
-		#elif executeCommand(): 
-			#user_current_action=UserActionState.None
-			#return true
-	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			#user_current_action=UserActionState.None
 
 func cast_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -104,17 +84,6 @@ func executeCommand():
 			return true
 	return false
 
-func change_current_party():
-	if current_party=="player":
-		current_party="enemy"
-	elif current_party=="enemy":
-		current_party="player"
-
-func is_player_turn():
-	return current_party=="player"
-	
-func is_enemy_turn():
-	return current_party=="enemy"
 
 func _on_move_button_pressed():
 	user_current_action=UserActionState.Move
@@ -123,7 +92,7 @@ func _on_spell_button_pressed(spell):
 	user_current_action=UserActionState.Cast
 	spell_to_cast=spell
 
-func _on_unit_die(unit):
+func _on_unit_die(_unit):
 	pass
 	#turn_queue.erase(unit)
 	
@@ -131,3 +100,6 @@ func _on_unit_deployed(unit):
 	#turn_queue.append(unit)
 	if unit.unit_name=="player":
 		player=unit
+		
+func _on_player_created(unit):
+	player=unit

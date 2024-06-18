@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://7k21av0cli75"]
+
+[ext_resource type="PackedScene" uid="uid://dwciaemefunni" path="res://Scenes/Units/base_unit/base_unit.tscn" id="1_6dopd"]
+[ext_resource type="Resource" uid="uid://bcg71tnagstwg" path="res://Scenes/Units/fire_elemental/fire_elemental.tres" id="2_u4a7g"]
+[ext_resource type="Texture2D" uid="uid://c8fmciinm0ofy" path="res://Resources/Enemies/fire_elemental.png" id="3_5isa1"]
+[ext_resource type="Script" path="res://Scripts/Behaviors/fire_elemental_beh.gd" id="4_moeoj"]
+
+[node name="FireElemental" instance=ExtResource("1_6dopd")]
+unit_data = ExtResource("2_u4a7g")
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_5isa1")
+
+[node name="Behavior" parent="." index="1"]
+script = ExtResource("4_moeoj")

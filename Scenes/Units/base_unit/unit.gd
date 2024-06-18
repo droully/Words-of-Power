@@ -2,12 +2,7 @@ extends Node2D
 
 class_name Unit
 
-enum Orientation {
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-}
+enum Orientation {UP,DOWN,LEFT,RIGHT}
 
 @onready var ui = $UI
 @onready var beh = $Behavior
@@ -28,20 +23,30 @@ var speed : int
 var shield : int
 var max_shield : int
 var priority : int
+var element: String
+
 
 var tags : Array
+var initialized= false
 
 @export var party: String = "enemy"
 
 var BF : BattleField
 var tile_position: Vector2i = Vector2i(-1,-1)
+@onready var sprite=$Sprite
 
+var tween: Tween
 @export var orientation = Orientation.LEFT
 
 func _ready():
-	pass
+	var bf=get_parent().get_parent()
+	if bf.is_node_ready():
+		initialize(bf)
 
 func initialize(_BF: BattleField):
+	if self.initialized:
+		return
+	
 	self.BF=_BF
 	
 	self.unit_name = unit_data.unit_name
@@ -55,49 +60,49 @@ func initialize(_BF: BattleField):
 	self.max_shield = unit_data.max_shield
 	self.priority = unit_data.priority
 	self.tags = unit_data.tags
+	self.element = unit_data.element
+	self.initialized=true
 	
-	beh.set_script(unit_data.behavior)
+	#beh.set_script(unit_data.behavior)
 	
 	if tile_position == Vector2i(-1,-1):
-		tile_position = BF.map.position_to_tile(position)
+		tile_position = BF.units.position_to_tile(position)
 	if position == Vector2(0,0):
-		position = BF.map.tile_to_position(tile_position)
-	add_to_group(party)
+		position = BF.units.tile_to_position(tile_position)
+	BF.set_unit_on_tile(self,tile_position)
 	
+	add_to_group(party)
+	add_to_group("units")
+	
+	if name=="Player":
+		Events.emit_signal("player_created",self)
 func get_action(commands_list=[]):
 	commands_list.append(beh.choose_command(BF))
-	
-	
-func under_unit(unit):
-	unit.die()
-	self.die()
-	
+
 func walkable_tiles():
 	return BF.map.tiles_in_aoe(tile_position,speed,false,false,false)
 	
-func move_through(path):
-	var to_coord = path[-1]
-	var from_coord = path[0] 
+func move_through(path:Array):
+	#var to_coord = path[-1]
+	#var from_coord = path[0] 
 	
-	Events.emit_signal("unit_moved_global_coord",self,from_coord,to_coord)
+	tween = self.create_tween()
+	tween.finished.connect(_on_finished_animation.bind(tween))
 	
-	var tween = create_tween()
-	tween.finished.connect(_on_finished_animation)
-	
-	Events.emit_signal("unit_move_anim_start",self)
-	
+	Events.emit_signal("unit_move_anim_start",self,tween)
 	for point in path.slice(1):
 		tween.tween_property(self, "position", point, .3)
 	
 #	position=to_coord	#position:absoluto
 func get_orientation():
 	return Orientation.find_key(self.orientation)
-	
+
+
 func rotate_orientation(deg):
 	var orientations = [Orientation.UP, Orientation.RIGHT, Orientation.DOWN, Orientation.LEFT]
 	self.orientation = orientations[(orientations.find(self.orientation) + deg / 90) % 4]
-		
-		
+	 # Mirror the sprite horizontally
+	
 func take_damage(damage_amount: int,_damage_type="neutral"):
 	if shield>0:
 		shield -=1
@@ -137,7 +142,7 @@ func apply_status_effect():
 func push(direction: Vector2i):	
 	#retorna true si empuja, y la unidad con la que coliciona si coliciona 
 	var target_tile = tile_position + direction  # chequear colisiones
-	var target_unit =  BF.map.get_unit_in_tile(target_tile)
+	var target_unit =  BF.get_unit_on_tile(target_tile)
 	if target_unit:
 		return target_unit
 	return BF.place_unit_on_tile(self, target_tile)
@@ -153,5 +158,6 @@ func has_tag(tag:String):
 	return tag in tags
 	
 
-func _on_finished_animation():
-	Events.emit_signal("unit_move_anim_end",self)
+func _on_finished_animation(anim):
+	Events.emit_signal("unit_move_anim_end",self,anim)
+	

@@ -15,12 +15,14 @@ func _ready():
 	Events.spell_cast_anim_end.connect(_on_object_finished_animation)
 	Events.spell_cast_anim_start.connect(_on_object_started_animation)
 
+	Events.unit_die.connect(_on_unit_die)
+	Events.debug.connect(_on_debug)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	#print(ongoing_animations)
 	pass
-
 func check_anim_state():
 	if len(ongoing_animations)>0:
 		AS.change_to("Ongoing")
@@ -32,13 +34,23 @@ func is_animation_ongoing() -> bool:
 	
 	
 	
-func _on_object_started_animation(object):
-	ongoing_animations.append(object)
+func _on_object_started_animation(object,anim):
+	ongoing_animations.append([object,anim])
 	check_anim_state()
 
-func _on_object_finished_animation(object):
+func _on_object_finished_animation(object,anim):
 	
-	ongoing_animations.erase(object)
+	ongoing_animations.erase([object,anim])
+	check_anim_state()
+
+func _on_unit_die(unit):
+	for p in ongoing_animations:
+		var object= p[0]
+		var anim=p[1]
+		if unit==object:
+			ongoing_animations.erase([unit,anim])
 	check_anim_state()
 	
-
+func _on_debug():
+	print(ongoing_animations)
+		

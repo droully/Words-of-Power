@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=4 format=3 uid="uid://cwbxwidlxm734"]
+
+[ext_resource type="Script" path="res://Scripts/Behaviors/earth_elemental_beh.gd" id="1_dwd01"]
+[ext_resource type="Script" path="res://Scenes/Units/base_unit/unit_data.gd" id="1_jvian"]
+[ext_resource type="Texture2D" uid="uid://bgf854m6njkwt" path="res://Resources/Enemies/earth_elemental.png" id="2_da7sq"]
+
+[resource]
+script = ExtResource("1_jvian")
+unit_name = "earth_elemental"
+hp = 100
+max_hp = 100
+temporal_hp = 0
+att = 10
+def = 5
+speed = 2
+shield = 0
+max_shield = 1
+priority = 2
+element = "earth"
+behavior = ExtResource("1_dwd01")
+tags = Array[String]([])
+sprite = ExtResource("2_da7sq")

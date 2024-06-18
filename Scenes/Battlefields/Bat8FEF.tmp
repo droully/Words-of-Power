@@ -157,14 +157,6 @@ texture_region_size = Vector2i(64, 64)
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_3d61s")
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_kj3i4"]
-scenes/1/scene = ExtResource("8_spgup")
-scenes/2/scene = ExtResource("6_k2nky")
-
-[sub_resource type="TileSet" id="TileSet_x1slw"]
-tile_size = Vector2i(64, 64)
-sources/0 = SubResource("TileSetScenesCollectionSource_kj3i4")
-
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5uh4y"]
 resource_name = "Enemies"
 scenes/1/scene = ExtResource("6_e3hdp")
@@ -180,6 +172,14 @@ scenes/1/scene = ExtResource("9_g1rc8")
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetScenesCollectionSource_5uh4y")
 sources/1 = SubResource("TileSetScenesCollectionSource_1nwas")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_kj3i4"]
+scenes/1/scene = ExtResource("8_spgup")
+scenes/2/scene = ExtResource("6_k2nky")
+
+[sub_resource type="TileSet" id="TileSet_x1slw"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetScenesCollectionSource_kj3i4")
 
 [node name="Battlefield" type="Node2D"]
 script = ExtResource("4_v1135")
@@ -210,18 +210,18 @@ scale = Vector2(1, 0.962727)
 tile_set = SubResource("TileSet_x2pe6")
 script = ExtResource("9_2hr4v")
 
+[node name="Units" type="TileMapLayer" parent="."]
+use_parent_material = true
+scale = Vector2(1, 0.962727)
+tile_map_data = PackedByteArray("AAAFAAcAAQAAAAAAAQACAAYAAAAAAAAABAADAAYAAAAAAAAAAwA=")
+tile_set = SubResource("TileSet_ndrej")
+script = ExtResource("10_ygrq0")
+
 [node name="Hazards" type="TileMapLayer" parent="."]
 use_parent_material = true
 scale = Vector2(1, 0.962727)
 tile_map_data = PackedByteArray("AAAEAAUAAAAAAAAAAgA=")
 tile_set = SubResource("TileSet_x1slw")
 script = ExtResource("12_gm42w")
-
-[node name="Units" type="TileMapLayer" parent="."]
-use_parent_material = true
-scale = Vector2(1, 0.962727)
-tile_map_data = PackedByteArray("AAAFAAcAAQAAAAAAAQACAAYAAAAAAAAABAADAAYAAAAAAAAAAgA=")
-tile_set = SubResource("TileSet_ndrej")
-script = ExtResource("10_ygrq0")
 
 [node name="Spells" type="Node2D" parent="."]

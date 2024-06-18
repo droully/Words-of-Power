@@ -1,7 +1,7 @@
 extends Spell
 
 func animation():
-	Events.emit_signal("spell_cast_anim_start",self)
+	Events.emit_signal("spell_cast_anim_start",self,anim_player)
 	anim_player.animation_finished.connect(_on_finished_animation)
 
 	
