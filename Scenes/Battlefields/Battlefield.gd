@@ -67,7 +67,8 @@ func distance(tile1: Vector2i, tile2: Vector2i):
 func get_unit_on_tile(tile_position:Vector2i):
 	return unit_tracker.get(tile_position)
 	#return map.get_cell_tile_data(tile_position).get_custom_data("Units")
-	
+
+
 func set_unit_on_tile(unit:Unit,target_tile:Vector2i):
 
 	unit_tracker.erase(unit.tile_position)
@@ -82,5 +83,5 @@ func set_hazard_on_tile(hazard :Hazard,tile_position:Vector2i):
 	hazard_tracker.erase(hazard.tile_position)
 	hazard_tracker[tile_position] = hazard
 
-func _on_player_created(unit):
-	player=unit
+func _on_player_created(_player):
+	player=_player

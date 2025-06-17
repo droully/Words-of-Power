@@ -29,7 +29,7 @@ var element: String
 var tags : Array
 var initialized= false
 
-@export var party: String = "enemy"
+var party: String = "enemy"
 
 var BF : BattleField
 var tile_position: Vector2i = Vector2i(-1,-1)
@@ -76,6 +76,7 @@ func initialize(_BF: BattleField):
 	
 	if name=="Player":
 		Events.emit_signal("player_created",self)
+
 func get_action(commands_list=[]):
 	commands_list.append(beh.choose_command(BF))
 

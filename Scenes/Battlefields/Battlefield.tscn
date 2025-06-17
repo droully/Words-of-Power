@@ -2,18 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://clcckii0evvcf" path="res://Resources/Spritesheet/Battleground.png" id="1_yb0or"]
 [ext_resource type="Texture2D" uid="uid://cml1v15d86kyu" path="res://Resources/Spritesheet/Highlight.png" id="2_my5qa"]
-[ext_resource type="Script" path="res://Scripts/TileMapLayers/walls_maplayer.gd" id="4_mh2wp"]
-[ext_resource type="Script" path="res://Scenes/Battlefields/Battlefield.gd" id="4_v1135"]
+[ext_resource type="Script" uid="uid://cnpeqojviivvu" path="res://Scripts/TileMapLayers/walls_maplayer.gd" id="4_mh2wp"]
+[ext_resource type="Script" uid="uid://c3rrcl7ea05tf" path="res://Scenes/Battlefields/Battlefield.gd" id="4_v1135"]
 [ext_resource type="PackedScene" uid="uid://bbn20xwnsrr55" path="res://Scenes/Units/snake/snake.tscn" id="6_e3hdp"]
 [ext_resource type="PackedScene" uid="uid://c2x2uafqyrgvv" path="res://Scenes/Hazards/fire_hazard/fire_hazard.tscn" id="6_k2nky"]
 [ext_resource type="PackedScene" uid="uid://dmqsh3h4xhhmf" path="res://Scenes/Units/water_elemental/water_elemental.tscn" id="8_4f7jc"]
-[ext_resource type="Script" path="res://Scripts/TileMapLayers/base_maplayer.gd" id="8_8b41d"]
+[ext_resource type="Script" uid="uid://do21r14dv1k4a" path="res://Scripts/TileMapLayers/base_maplayer.gd" id="8_8b41d"]
 [ext_resource type="PackedScene" uid="uid://03l7widey6q6" path="res://Scenes/Hazards/rotating_hazard/rotating_hazard.tscn" id="8_spgup"]
-[ext_resource type="Script" path="res://Scripts/TileMapLayers/highlight_maplayer.gd" id="9_2hr4v"]
-[ext_resource type="PackedScene" uid="uid://2jfs83fgxv2c" path="res://Scenes/Units/player/player.tscn" id="9_g1rc8"]
+[ext_resource type="Script" uid="uid://dbtm273poaph5" path="res://Scripts/TileMapLayers/highlight_maplayer.gd" id="9_2hr4v"]
+[ext_resource type="PackedScene" uid="uid://2jfs83fgxv2c" path="res://Scenes/Player/player.tscn" id="9_g1rc8"]
 [ext_resource type="PackedScene" uid="uid://dhdupka03v5qo" path="res://Scenes/Units/earth_elemental/earth_elemental.tscn" id="10_llpvs"]
-[ext_resource type="Script" path="res://Scripts/TileMapLayers/units_maplayer.gd" id="10_ygrq0"]
-[ext_resource type="Script" path="res://Scripts/TileMapLayers/hazards_maplayer.gd" id="12_gm42w"]
+[ext_resource type="Script" uid="uid://cql8j3csf51lj" path="res://Scripts/TileMapLayers/units_maplayer.gd" id="10_ygrq0"]
+[ext_resource type="Script" uid="uid://caruutq2rqrdk" path="res://Scripts/TileMapLayers/hazards_maplayer.gd" id="12_gm42w"]
 [ext_resource type="PackedScene" uid="uid://7k21av0cli75" path="res://Scenes/Units/fire_elemental/fire_elemental.tscn" id="13_lohln"]
 
 [sub_resource type="TileSet" id="TileSet_0m8lh"]
@@ -213,14 +213,13 @@ script = ExtResource("9_2hr4v")
 [node name="Hazards" type="TileMapLayer" parent="."]
 use_parent_material = true
 scale = Vector2(1, 0.962727)
-tile_map_data = PackedByteArray("AAAEAAUAAAAAAAAAAgA=")
 tile_set = SubResource("TileSet_x1slw")
 script = ExtResource("12_gm42w")
 
 [node name="Units" type="TileMapLayer" parent="."]
 use_parent_material = true
 scale = Vector2(1, 0.962727)
-tile_map_data = PackedByteArray("AAAFAAcAAQAAAAAAAQACAAYAAAAAAAAABAADAAYAAAAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAAEAAYAAQAAAAAAAQA=")
 tile_set = SubResource("TileSet_ndrej")
 script = ExtResource("10_ygrq0")
 

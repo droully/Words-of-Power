@@ -19,6 +19,7 @@ enum affecting_methods {
 
 @export var spell_name: String = "base_spell"
 @export var spell_name_UI: String = "Base Spell"
+@export var spell_input: String
 
 @export var player_usable: bool = false
 @export var sprite: SpriteFrames

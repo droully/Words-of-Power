@@ -43,19 +43,22 @@ func process(_delta):
 			BF.highlight.reset_highlight()
 
 
-func input(event):
+func input(event:InputEvent):
 	
 	if BM.move_input(event):
 		FSM.change_to("Anim")
+	if BM.cast_input(event):
+		FSM.change_to("Anim")
 
-	match BM.user_current_action:
-		#BM.UserActionState.Move:
-			#UI.move_highlight(event)
-				
-		BM.UserActionState.Cast:
-			UI.cast_highlight(event)
-			if BM.cast_input(event):
-				FSM.change_to("Anim")
-				
-#		_:
-#			BF.set_cell(Highlight_Layer,last_highlighted_tile)
+#
+	#match BM.user_current_action:
+		##BM.UserActionState.Move:
+			##UI.move_highlight(event)
+				#
+		#BM.UserActionState.Cast:
+			#UI.cast_highlight(event)
+			#if BM.cast_input(event):
+				#FSM.change_to("Anim")
+				#
+##		_:
+##			BF.set_cell(Highlight_Layer,last_highlighted_tile)

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3 uid="uid://bo0enfq3uvbab"]
 
-[ext_resource type="Script" path="res://Scenes/Spells/spell_data.gd" id="1_dwusv"]
+[ext_resource type="Script" uid="uid://cisjomfhuakui" path="res://Scenes/Spells/spell_data.gd" id="1_dwusv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gby6s"]
 
@@ -8,6 +8,7 @@
 script = ExtResource("1_dwusv")
 spell_name = "air_slash"
 spell_name_UI = "Air Slash"
+spell_input = "spell_2"
 player_usable = true
 sprite = SubResource("SpriteFrames_gby6s")
 cost = 1

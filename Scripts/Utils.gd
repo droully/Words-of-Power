@@ -3,8 +3,9 @@ extends Node
 
 var current_scene = null
 
-var dir2vector={"LEFT":Vector2i(-1,0),"RIGHT":Vector2i(1,0),"UP":Vector2i(0,-1),"DOWN":Vector2i(0,1)}
-var dirinputs=["move_left", "move_right", "move_up", "move_down"]
+var dir2vector={"LEFT":Vector2i.LEFT,"RIGHT":Vector2i.RIGHT,"UP":Vector2i.UP,"DOWN":Vector2i.DOWN}
+var move_inputs=["move_left", "move_right", "move_up", "move_down"]
+var spell_inputs=["spell_1","spell_2","spell_3"]
 var player
 
 func _ready():
@@ -23,6 +24,7 @@ func compare_elements(ele1:String,ele2:String):
 		return ele2
 	if elem_dict[ele1]["strongTo"]==ele2:
 		return ele1
+		
 func _defferred_switch_scene(res_path):
 	current_scene.free()
 	var s=load(res_path)

@@ -21,6 +21,3 @@ func _ready():
 				
 			file_name = dir.get_next()
 			
-
-
-

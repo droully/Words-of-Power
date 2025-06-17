@@ -6,20 +6,18 @@ extends Node
 @onready var BS = $BattleState
 
 @onready var player
-@onready var player_data = preload("res://Scenes/Units/player/player.tres")
+@onready var player_data = preload("res://Scenes/Player/player.tres")
 
 
 
 enum UserActionState {None,Move,Cast,Deploy}
 var user_current_action = UserActionState.None
 
-var spell_to_cast : SpellData
 var command #no :Command
 
 func _ready():
 
 	Events.player_created.connect(_on_player_created)
-	Events.spell_button_pressed.connect(_on_spell_button_pressed)
 	Events.unit_die.connect(_on_unit_die)
 	Events.command_unit_deployed.connect(_on_unit_deployed)
 
@@ -29,11 +27,11 @@ func _process(_delta):
 func set_and_execute_command(cmd):
 	setCommand(cmd)
 	executeCommand()
+	
 
-
-func _input(event):	
+func _input(event: InputEvent):
 	BS.current_state.input(event)
-
+	
 func deploy_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var cursor_position = BF.map.mouse_to_tile(event.position)
@@ -48,32 +46,23 @@ func deploy_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			user_current_action=UserActionState.None
 
-func move_input(event):
-	for move in Utils.dirinputs:
-		if event.is_action_pressed(move):
-			var target_tile= player.tile_position+Utils.dir2vector[move.split("_")[1].to_upper()]
-			
+func move_input(event:InputEvent):
+	for move_input in Utils.move_inputs:
+		if event.is_action_pressed(move_input, true):			
+			var target_tile= player.tile_position+Utils.dir2vector[move_input.split("_")[1].to_upper()]
 			var moveCommand = Command.Move.new(player, target_tile, BF)
 			setCommand(moveCommand)
-			if executeCommand():
-				return true
+			return executeCommand()
 
-func cast_input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		var cursor_position = BF.map.mouse_to_tile(event.position)
-		var castCommand = Command.Cast.new(player,spell_to_cast,cursor_position, BF)
-		setCommand(castCommand)
-		
-		var targeting = Targeting.new()		
-		if cursor_position not in targeting.targetable_tiles(player, spell_to_cast, BF):
-			pass
-		elif executeCommand():
-			user_current_action=UserActionState.None
-			spell_to_cast=null
-			return true
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			user_current_action=UserActionState.None
-			spell_to_cast=null
+func cast_input(event:InputEvent):
+	for spell_input in Utils.spell_inputs:
+		if event.is_action_pressed(spell_input, true):
+			var spell_to_cast = Utils.get_spell_data_by_name("air_slash")
+
+			var castCommand = Command.Cast.new(player,spell_to_cast, BF)
+			setCommand(castCommand)
+			return executeCommand()
+
 
 func setCommand(_command):
 	self.command = _command
@@ -88,10 +77,6 @@ func executeCommand():
 func _on_move_button_pressed():
 	user_current_action=UserActionState.Move
 
-func _on_spell_button_pressed(spell):
-	user_current_action=UserActionState.Cast
-	spell_to_cast=spell
-
 func _on_unit_die(_unit):
 	pass
 	#turn_queue.erase(unit)
@@ -101,5 +86,5 @@ func _on_unit_deployed(unit):
 	if unit.unit_name=="player":
 		player=unit
 		
-func _on_player_created(unit):
-	player=unit
+func _on_player_created(_player):
+	player=_player

@@ -13,6 +13,7 @@ func initialize(_FSM):
 	UI= FSM.UI
 
 func enter():
+	
 	pass
 	
 	

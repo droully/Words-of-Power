@@ -14,10 +14,10 @@ class Cast:
 	var AM
 	var fast
 
-	func _init(_caster:Unit,_spell_data:SpellData,_target_tile,_battlefield,_fast=false):
+	func _init(_caster:Unit,_spell_data:SpellData,_battlefield,_fast=false):
 		self.caster = _caster
 		self.spell_data = _spell_data
-		self.target_tile = _target_tile
+		self.target_tile = _caster.tile_position+Vector2i(0,1)
 		self.BF = _battlefield
 		self.fast = _fast
 		
@@ -31,7 +31,6 @@ class Cast:
 		if fast:
 			spell.affect_tiles()
 			return true
-
 		else:
 			spell.animation()
 			return true
