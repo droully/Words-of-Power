@@ -22,6 +22,7 @@ func position_to_tile(pos: Vector2):
 
 func tile_to_position(tile_pos: Vector2i):
 	return map_to_local(tile_pos)
+	
 func map_to_global(tile_pos:Vector2i)->Vector2:
 	return to_global(map_to_local(tile_pos))
 	
@@ -73,7 +74,10 @@ func get_neighbors(tile: Vector2i):
 		neighbors.append(neighbor)
 	return neighbors
 	
-	
+func get_sides(tile: Vector2i,front_dir:Vector2i):
+	var sides= [tile+Utils.rotate_dir(front_dir,1),tile+Utils.rotate_dir(front_dir,-1)]
+	return sides
+
 func get_direction_from_tile_to_tile(from_tile: Vector2i, to_tile: Vector2i) -> Vector2i:
 
 	if from_tile.y == to_tile.y:
@@ -91,7 +95,9 @@ func get_direction_from_tile_to_tile(from_tile: Vector2i, to_tile: Vector2i) -> 
 	# Not on the same line
 	else:
 		return Vector2i(0, 0)
-
+		
+func tile_in_front(from_tile: Vector2i, dir: Vector2i):
+	return from_tile+dir
 
 func tiles_in_box(x_start,y_start,x_end,y_end):
 	var tiles = []

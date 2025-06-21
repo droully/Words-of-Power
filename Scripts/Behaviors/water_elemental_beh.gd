@@ -5,8 +5,8 @@ func choose_command(BF):
 	var unit_tile = unit.tile_position  
 	
 	
-	var front_tile=unit_tile+Utils.dir2vector[unit.get_orientation()]
-	var back_tile=unit_tile-Utils.dir2vector[unit.get_orientation()]
+	var front_tile=unit_tile+unit.orientation_dir
+	var back_tile=unit_tile-unit.orientation_dir
 	var target_tile=null
 	
 	if not BF.is_tile_solid(front_tile):

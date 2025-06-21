@@ -1,10 +1,9 @@
 extends Node2D
-
 class_name Spell
 
-@onready var anim_player= $AnimationPlayer
+@onready var anim_player : AnimationPlayer = $AnimationPlayer 
 
-@export var spell_data: SpellData 
+@export var spell_data : SpellData 
 
 var spell_name: String 
 var spell_name_UI: String 
@@ -16,8 +15,7 @@ var radius: int
 
 var dir
 
-
-var BF
+var BF : BattleField
 var caster:Unit
 var target_pos:Vector2
 var target_tile:Vector2i
@@ -29,7 +27,7 @@ func initialize(_Battlefield,_caster:Unit,_target_pos:Vector2):
 	self.caster=_caster
 	self.target_pos=_target_pos
 	self.target_tile=BF.map.local_to_map(target_pos)
-	
+
 	self.spell_name = spell_data.spell_name
 	self.spell_name_UI = spell_data.spell_name_UI
 	self.cost = spell_data.cost
@@ -37,19 +35,20 @@ func initialize(_Battlefield,_caster:Unit,_target_pos:Vector2):
 	self.duration = spell_data.duration
 	self.damage = spell_data.damage
 	self.radius = spell_data.radius
-	 
+
 	self.dir = BF.map.get_direction_from_tile_to_tile(caster.tile_position,target_tile)
 
-	
-	
+
+
 func affect_tiles():
 	var affecting=Affecting.new()
 	var l= affecting.affected_tiles(target_tile,caster, spell_data, BF)
 	for tile in l:
-		var unit_target= BF.get_unit_on_tile(tile)
+		var unit_target= BF.units.get_on_tile(tile)
 		if unit_target:
 			callbackOnHit(unit_target)
 		callbackOnFloor(BF,tile)
+
 
 func animation():
 	return 

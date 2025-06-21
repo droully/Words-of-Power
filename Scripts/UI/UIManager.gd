@@ -6,27 +6,20 @@ extends Control
 @onready var highlight_sprite=$BattleFieldAnchor/HighlightSprite
 @onready var turn_label= $TurnTracker/Turn
 @onready var state_label=$TurnTracker/State
-@onready var actions_container= $ActionsContainer
+#@onready var actions_container= $ActionsContainer
 @onready var Highlight_Layer = BF.highlight
-@onready var SpellBook = $"../Spellbook"
+#@onready var SpellBook = $"../Spellbook"
 
-@onready var spells_UI = SpellBook.spell_names_UI
-@onready var spells_Name = SpellBook.spell_names
+#@onready var spells_UI = SpellBook.spell_names_UI
+#@onready var spells_Name = SpellBook.spell_names
 
 
 var last_highlighted_tiles: Array = []
 
-signal spell_button_pressed(spell_name)
+#signal spell_button_pressed(spell_name)
 
 func _ready():
-	for i in range(len(spells_UI)):
-		var button = Button.new()
-		button.text = spells_UI[i] 
-		
-		actions_container.add_child(button)
-		button.pressed.connect(_on_spell_button_pressed.bind(spells_Name[i]))
-
-
+	pass
 func _input(_event):
 	pass
 	
@@ -78,10 +71,3 @@ func _process(_delta):
 	
 	#añadir las unidades
 	TurnQueue.text=" ".join(tq)
-
-
-func _on_spell_button_pressed(spell_name):	
-	Events.emit_signal("spell_button_pressed",Utils.get_spell_data_by_name(spell_name))
-
-func _on_move_pressed():
-	pass

@@ -31,9 +31,21 @@ signal command_spell_casted(caster,spell,target_tile)
 signal command_unit_deployed(unit,target_tile)
 
 @warning_ignore("unused_signal")
+signal groundbutton_pressed(groundbutton,tile_position)
+@warning_ignore("unused_signal")
+signal groundbutton_unpressed(groundbutton,tile_position)
+
+
+@warning_ignore("unused_signal")
+signal pressed_groundbutton(groundbutton)
+
+@warning_ignore("unused_signal")
 signal unit_move_anim_start(unit,anim)
 @warning_ignore("unused_signal")
 signal unit_move_anim_end(unit,anim)
-
+@warning_ignore("unused_signal")
+signal unit_rotate(unit,orientation)
+@warning_ignore("unused_signal")
+signal unit_set_on_tile(unit,from_tile,to_tile)
 @warning_ignore("unused_signal")
 signal unit_die(unit)

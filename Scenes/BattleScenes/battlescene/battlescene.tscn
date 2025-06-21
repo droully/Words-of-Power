@@ -65,7 +65,7 @@ script = ExtResource("10_l5wnu")
 [node name="End" type="Node" parent="BattleManager/BattleState"]
 script = ExtResource("9_saeub")
 
-[node name="Spellbook" type="Node" parent="."]
+[node name="SpellBook" type="Node" parent="."]
 script = ExtResource("12_ml2tb")
 
 [node name="Battlefield" parent="." instance=ExtResource("12_xn2xm")]
@@ -96,21 +96,6 @@ offset_right = 680.0
 offset_bottom = 40.0
 script = ExtResource("13_i8apy")
 metadata/_edit_lock_ = true
-
-[node name="ActionsContainer" type="VBoxContainer" parent="UIManager"]
-clip_contents = true
-layout_mode = 0
-offset_left = -6.10352e-05
-offset_top = 4.0
-offset_right = 71.9999
-offset_bottom = 360.0
-scale = Vector2(1.76908, 1.76279)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="Move" type="Button" parent="UIManager/ActionsContainer"]
-layout_mode = 2
-text = "Move"
 
 [node name="TurnQueue" type="TextEdit" parent="UIManager"]
 layout_mode = 0
@@ -243,6 +228,3 @@ script = ExtResource("16_i6t3l")
 
 [node name="Ongoing" type="Node" parent="AnimationManager/AnimState"]
 script = ExtResource("17_o8v8q")
-
-[connection signal="pressed" from="UIManager/ActionsContainer/Move" to="BattleManager" method="_on_move_button_pressed"]
-[connection signal="pressed" from="UIManager/ActionsContainer/Move" to="UIManager" method="_on_move_pressed"]

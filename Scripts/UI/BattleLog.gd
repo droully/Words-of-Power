@@ -7,19 +7,29 @@ func _ready():
 	Events.command_unit_moved.connect(_on_command_unit_moved)
 	Events.command_spell_casted.connect(_on_command_spell_casted)
 	Events.unit_die.connect(_on_unit_die)
+	Events.groundbutton_pressed.connect(_on_groudbutton_pressed)
+	Events.groundbutton_unpressed.connect(_on_groudbutton_unpressed)
+
+func log_text(text_input):
+	text += text_input+"\n"
 
 func _on_battle_start():
-	text += "Battle Start \n"
+	log_text("Battle Start")
 	
 func _on_turn_start():
-
-	text += "turn start: \n"
+	log_text("Turn Start:")
 
 func _on_command_unit_moved(unit,from_tile,to_tile):
-	text += unit.unit_name +" moved from " + str(from_tile) + " to " + str(to_tile)+"\n"
+	log_text(unit.unit_name +" moved from " + str(from_tile) + " to " + str(to_tile))
 
 func _on_command_spell_casted(caster,spell,target_tile):
-	text += caster.unit_name +" casted " +spell.name + " on " + str(target_tile) +"\n"
+	log_text(caster.unit_name +" casted " +spell.name + " on " + str(target_tile))
 
 func _on_unit_die(unit):
-	text +=unit.unit_name+" died"
+	log_text(unit.unit_name+" died")
+
+func _on_groudbutton_pressed(_groundbutton,tile_position):
+	log_text("Button pressed at " + str(tile_position))
+	
+func _on_groudbutton_unpressed(_groundbutton,tile_position):
+	log_text("Button unpressed at " + str(tile_position))

@@ -1,14 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://2jfs83fgxv2c"]
+[gd_scene load_steps=9 format=3 uid="uid://2jfs83fgxv2c"]
 
 [ext_resource type="Script" uid="uid://dv2cf06g3a1d0" path="res://Scenes/Units/base_unit/unit.gd" id="1_mtuoh"]
 [ext_resource type="Script" uid="uid://crg12kt4f1sfs" path="res://Scenes/Units/base_unit/unit_data.gd" id="2_htcer"]
 [ext_resource type="Texture2D" uid="uid://rtj6h8s6px02" path="res://Resources/Enemies/player.png" id="3_xcqgg"]
 [ext_resource type="Script" uid="uid://bqy8mc31225eg" path="res://Scripts/Behaviors/player_behavior.gd" id="4_aqr48"]
 [ext_resource type="Script" uid="uid://bcgvp28qevemp" path="res://Scripts/UI/UI.gd" id="4_htcer"]
+[ext_resource type="Texture2D" uid="uid://b1yt1nsan5hwb" path="res://Resources/UI/arrow.png" id="6_dd0ac"]
 
 [sub_resource type="Resource" id="Resource_dd0ac"]
 script = ExtResource("2_htcer")
-unit_name = "base_unit"
+unit_name = "player"
 hp = 100
 max_hp = 100
 temporal_hp = 0
@@ -22,9 +23,17 @@ element = ""
 tags = Array[String]([])
 metadata/_custom_type_script = "uid://crg12kt4f1sfs"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd0ac"]
+size = Vector2(64, 64)
+
 [node name="Player" type="Node2D"]
 script = ExtResource("1_mtuoh")
 unit_data = SubResource("Resource_dd0ac")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_dd0ac")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_xcqgg")
@@ -78,3 +87,8 @@ value = 100.0
 metadata/_edit_use_anchors_ = true
 
 [node name="StatusEffects" type="Node" parent="."]
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-1, -16)
+scale = Vector2(0.11767578, 0.119140625)
+texture = ExtResource("6_dd0ac")

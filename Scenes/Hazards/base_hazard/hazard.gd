@@ -33,7 +33,7 @@ func pass_turn():
 			queue_free()
 
 func affect_unit_on_top():
-	var target =BF.get_unit_on_tile(tile_position)
+	var target =BF.units.get_on_tile(tile_position)
 	if target:
 		affect(target)
 

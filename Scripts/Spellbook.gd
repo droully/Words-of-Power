@@ -1,23 +1,24 @@
 extends Node
 
-var spell_names =[]
-var spell_names_UI=[]
-var spell_data =[]
+var spell_names = []
+var spell_data ={}
+var spell_inputs = {}
 
 
 func _ready():
 	var dir =  DirAccess.open("res://Scenes/Spells/")
 	if dir:
 		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
+		var spell_name = dir.get_next()
+		while spell_name != "":
 			if dir.current_is_dir():
-				var spell_res=Utils.get_spell_data_by_name(file_name)
+				var spell_res=Utils.get_spell_data_by_name(spell_name)
 				if spell_res.player_usable==true:
 
-					spell_data.append(spell_res)
-					spell_names_UI.append(spell_res.spell_name_UI)
-					spell_names.append(file_name)
-				
-			file_name = dir.get_next()
+					spell_names.append(spell_name)
+					spell_inputs[spell_res.spell_input]=spell_name
+					spell_data[spell_name]=spell_res
+			spell_name = dir.get_next()
 			
+func get_spell_data_from_input(spell_input):
+	return spell_data.get(spell_inputs.get(spell_input))

@@ -14,7 +14,8 @@ enum affecting_methods {
 	AreaOfEffect,
 	ForwardSegment,
 	PerpTShape,
-	SingleTarget
+	SingleTarget,
+	Sides
 }
 
 @export var spell_name: String = "base_spell"

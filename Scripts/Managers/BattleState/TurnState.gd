@@ -45,9 +45,7 @@ func process(_delta):
 
 func input(event:InputEvent):
 	
-	if BM.move_input(event):
-		FSM.change_to("Anim")
-	if BM.cast_input(event):
+	if BM.turn_input(event):
 		FSM.change_to("Anim")
 
 #

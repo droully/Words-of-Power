@@ -1,14 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbn20xwnsrr55"]
+[gd_scene load_steps=6 format=3 uid="uid://bbn20xwnsrr55"]
 
 [ext_resource type="PackedScene" uid="uid://dwciaemefunni" path="res://Scenes/Units/base_unit/base_unit.tscn" id="1_ulucx"]
-[ext_resource type="Resource" uid="uid://dk44gm3vejf48" path="res://Scenes/Units/snake/snake.tres" id="2_mo6bn"]
+[ext_resource type="Script" uid="uid://cg0cinqvq7gf0" path="res://Scripts/Behaviors/snake_beh.gd" id="2_yhb3c"]
+[ext_resource type="Script" uid="uid://crg12kt4f1sfs" path="res://Scenes/Units/base_unit/unit_data.gd" id="3_dykyn"]
 [ext_resource type="Texture2D" uid="uid://blbp6fj3dsj4i" path="res://Resources/Enemies/snake.png" id="3_hrvo6"]
 
+[sub_resource type="Resource" id="Resource_l4jws"]
+script = ExtResource("3_dykyn")
+unit_name = "snake"
+hp = 100
+max_hp = 100
+temporal_hp = 0
+att = 10
+def = 5
+speed = 1
+shield = 0
+max_shield = 1
+priority = 2
+element = ""
+behavior = ExtResource("2_yhb3c")
+tags = Array[String](["insect"])
+sprite = ExtResource("3_hrvo6")
+
 [node name="Snake" instance=ExtResource("1_ulucx")]
-unit_data = ExtResource("2_mo6bn")
+unit_data = SubResource("Resource_l4jws")
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("3_hrvo6")
 
 [node name="Behavior" parent="." index="1"]
-script = null
+script = ExtResource("2_yhb3c")

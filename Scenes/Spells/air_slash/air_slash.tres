@@ -17,4 +17,4 @@ duration = 1.0
 damage = 10
 radius = 2
 targeting = 3
-affecting = 1
+affecting = 4

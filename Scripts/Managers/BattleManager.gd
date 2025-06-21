@@ -4,7 +4,7 @@ extends Node
 @onready var BF :BattleField = get_node("../Battlefield")  
 @onready var AM = get_node("../AnimationManager")
 @onready var BS = $BattleState
-
+@onready var SpellBook = $"../SpellBook"
 @onready var player
 @onready var player_data = preload("res://Scenes/Player/player.tres")
 
@@ -26,7 +26,7 @@ func _process(_delta):
 
 func set_and_execute_command(cmd):
 	setCommand(cmd)
-	executeCommand()
+	return executeCommand()
 	
 
 func _input(event: InputEvent):
@@ -46,22 +46,20 @@ func deploy_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			user_current_action=UserActionState.None
 
-func move_input(event:InputEvent):
+func turn_input(event:InputEvent):
 	for move_input in Utils.move_inputs:
 		if event.is_action_pressed(move_input, true):			
 			var target_tile= player.tile_position+Utils.dir2vector[move_input.split("_")[1].to_upper()]
 			var moveCommand = Command.Move.new(player, target_tile, BF)
-			setCommand(moveCommand)
-			return executeCommand()
+			return set_and_execute_command(moveCommand)
 
-func cast_input(event:InputEvent):
 	for spell_input in Utils.spell_inputs:
 		if event.is_action_pressed(spell_input, true):
-			var spell_to_cast = Utils.get_spell_data_by_name("air_slash")
-
+			var spell_to_cast = SpellBook.get_spell_data_from_input(spell_input)
+			if spell_to_cast == null:
+				return
 			var castCommand = Command.Cast.new(player,spell_to_cast, BF)
-			setCommand(castCommand)
-			return executeCommand()
+			return set_and_execute_command(castCommand)
 
 
 func setCommand(_command):

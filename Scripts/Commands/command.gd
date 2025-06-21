@@ -14,16 +14,17 @@ class Cast:
 	var AM
 	var fast
 
-	func _init(_caster:Unit,_spell_data:SpellData,_battlefield,_fast=false):
+	func _init(_caster:Unit,_spell_data:SpellData,_battlefield:BattleField,_fast=false):
 		self.caster = _caster
 		self.spell_data = _spell_data
-		self.target_tile = _caster.tile_position+Vector2i(0,1)
 		self.BF = _battlefield
+		self.target_tile = BF.map.tile_in_front(_caster.tile_position,_caster.orientation_dir)
 		self.fast = _fast
 		
 	func execute():
 		self.spell=Utils.get_spell_by_name(spell_data.spell_name)
 		spell.initialize(BF,caster,BF.map.map_to_local(target_tile))
+		
 		BF.add_child(spell)
 
 		Events.emit_signal("command_spell_casted",caster,spell,target_tile)
@@ -38,10 +39,10 @@ class Cast:
 class Move:
 	var command_name= "Move"
 
-	var unit
+	var unit:Unit
 	var target_tile
 	var original_tile
-	var BF
+	var BF:BattleField
 
 	func _init(_unit, _target_tile, _battlefield):
 		self.unit = _unit
@@ -50,8 +51,9 @@ class Move:
 
 	func execute():
 		original_tile = unit.tile_position 
-		if not BF.is_tile_solid(target_tile):
+		if not BF.walls.is_tile_solid(target_tile):
 			Events.emit_signal("command_unit_moved",unit,original_tile,target_tile)
+			unit.orientation_string=Utils.dir2vector.find_key(target_tile - original_tile)
 			#on_unit_collide()
 			return BF.place_unit_on_tile(unit, target_tile)
 		return false

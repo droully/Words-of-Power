@@ -3,7 +3,11 @@ extends Node
 
 var current_scene = null
 
-var dir2vector={"LEFT":Vector2i.LEFT,"RIGHT":Vector2i.RIGHT,"UP":Vector2i.UP,"DOWN":Vector2i.DOWN}
+var dir2vector = {"UP":Vector2i.UP,"RIGHT":Vector2i.RIGHT,"DOWN":Vector2i.DOWN,"LEFT":Vector2i.LEFT}
+enum Orientations { UP, RIGHT, DOWN, LEFT }
+
+
+
 var move_inputs=["move_left", "move_right", "move_up", "move_down"]
 var spell_inputs=["spell_1","spell_2","spell_3"]
 var player
@@ -11,20 +15,31 @@ var player
 func _ready():
 	var root = get_tree().root
 	current_scene=root.get_child(root.get_child_count()-1)
+
+func rotate_dir(dir:Vector2i,steps: int):
+	var effective_steps = steps % 4
+	if effective_steps < 0:
+		effective_steps += 4
+	var rotated_dir = dir
+	for _i in range(effective_steps):
+		rotated_dir = Vector2i(rotated_dir.y, -rotated_dir.x)
+	return rotated_dir
+	
+	
 	
 func switch_scene(res_path):
 	call_deferred("_defferred_switch_scene",res_path)
-	
+
 func compare_elements(ele1:String,ele2:String):
 	var elem_dict={"water": {"weakTo": 'earth', "strongTo": 'fire'},
 	"fire": {"weakTo": 'water', "strongTo": 'earth'},
 	"earth": {"weakTo": 'fire', "strongTo": 'water'}}
-	
+
 	if elem_dict[ele1]["weakTo"]==ele2:
 		return ele2
 	if elem_dict[ele1]["strongTo"]==ele2:
 		return ele1
-		
+
 func _defferred_switch_scene(res_path):
 	current_scene.free()
 	var s=load(res_path)
@@ -46,13 +61,15 @@ func get_spell_data_by_name(spell_name: String):
 func get_unit_by_name(unit_name: String):
 	var unit = load("res://Scenes/units/"+unit_name+"/"+unit_name+".tscn").instantiate()
 	return unit
+
 func get_hazard_by_name(hazard_name: String):
 	var hazard = load("res://Scenes/hazards/"+hazard_name+"/"+hazard_name+".tscn").instantiate()
 	return hazard
-	
+
 func get_unit_data_by_name(unit_name: String):
 	var unit_data = load("res://Scenes/units/"+unit_name+"/"+unit_name+".tres")
 	return unit_data
+
 func get_battlefield_by_name(battlefield_name: String):
 	var BF = load("res://Scenes/Battlefields/"+battlefield_name+"/"+battlefield_name+".tscn").instantiate()
 	return BF
