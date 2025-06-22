@@ -42,6 +42,7 @@ texture = ExtResource("3_xcqgg")
 script = ExtResource("4_aqr48")
 
 [node name="UI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

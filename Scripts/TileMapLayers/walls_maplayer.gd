@@ -3,7 +3,8 @@ extends CustomTileMapLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Events.groundbutton_pressed.connect(_on_groundbutton_pressed)
+	Events.button_pressed.connect(_on_button_pressed)
+	Events.button_unpressed.connect(_on_button_unpressed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -17,12 +18,12 @@ func is_tile_solid(tile):
 		return solid
 	return false
 
-func _on_groundbutton_pressed(_groundbutton,_tile_position):
-	var cd=get_closed_doors()
-	var od=get_open_doors()
-	for door in cd:
+func _on_button_pressed(_button,_tile_position):
+	for door in get_closed_doors():
 		open_door(door)
-	for door in od:
+		
+func _on_button_unpressed(_button,_tile_position):
+	for door in get_open_doors():
 		close_door(door)
 
 func get_closed_doors():

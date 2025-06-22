@@ -1,18 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://bl8iglk1xnwbs"]
+[gd_scene load_steps=20 format=3 uid="uid://bl8iglk1xnwbs"]
 
 [ext_resource type="Script" uid="uid://b4ftn3u5fdmgc" path="res://Scenes/BattleScenes/battlescene/battlescene.gd" id="1_n8ose"]
 [ext_resource type="Script" uid="uid://dajmxir36gn1o" path="res://Scripts/Managers/BattleManager.gd" id="2_x8hym"]
 [ext_resource type="Script" uid="uid://cyomhjw7j71rr" path="res://Scripts/Managers/StateMachine.gd" id="3_n8q0w"]
 [ext_resource type="Script" uid="uid://brr3d8xgkvj6v" path="res://Scripts/Managers/BattleState/StartState.gd" id="4_ah2ow"]
-[ext_resource type="Script" uid="uid://c5m0m1s3dks82" path="res://Scripts/Managers/BattleState/DeployState.gd" id="5_lewvu"]
 [ext_resource type="Script" uid="uid://bc7w7gysy2mjj" path="res://Scripts/Managers/BattleState/StatusState.gd" id="6_o5pau"]
 [ext_resource type="Script" uid="uid://cphxlcs2g3vrs" path="res://Scripts/Managers/BattleState/TurnState.gd" id="7_v5oy1"]
 [ext_resource type="Script" uid="uid://kfqsb38cg1qf" path="res://Scripts/Managers/BattleState/AnimState.gd" id="8_mhvo8"]
 [ext_resource type="Script" uid="uid://c3hxucmrcmo6h" path="res://Scripts/Managers/BattleState/EndState.gd" id="9_saeub"]
 [ext_resource type="Script" uid="uid://ccx3j2hlelg1o" path="res://Scripts/Managers/BattleState/InterState.gd" id="10_l5wnu"]
 [ext_resource type="Script" uid="uid://t7jprwp0o1fa" path="res://Scripts/Managers/BattleState/HazardState.gd" id="11_v3ffk"]
+[ext_resource type="PackedScene" uid="uid://4p848qpx0xxm" path="res://Scenes/Battlefields/Battlefield.tscn" id="12_6yqig"]
 [ext_resource type="Script" uid="uid://ca007xgtqpi64" path="res://Scripts/Spellbook.gd" id="12_ml2tb"]
-[ext_resource type="PackedScene" uid="uid://4p848qpx0xxm" path="res://Scenes/Battlefields/Battlefield.tscn" id="12_xn2xm"]
 [ext_resource type="Script" uid="uid://cdm7bheeqigfs" path="res://Scripts/UI/UIManager.gd" id="13_i8apy"]
 [ext_resource type="Script" uid="uid://6xbxnyjh2rca" path="res://Scripts/UI/BattleLog.gd" id="14_lgqmy"]
 [ext_resource type="Script" uid="uid://bqhp45l21n1vv" path="res://Scripts/Managers/AnimationManager.gd" id="15_27a2c"]
@@ -44,9 +43,6 @@ script = ExtResource("3_n8q0w")
 [node name="Start" type="Node" parent="BattleManager/BattleState"]
 script = ExtResource("4_ah2ow")
 
-[node name="Deploy" type="Node" parent="BattleManager/BattleState"]
-script = ExtResource("5_lewvu")
-
 [node name="Status" type="Node" parent="BattleManager/BattleState"]
 script = ExtResource("6_o5pau")
 
@@ -68,7 +64,7 @@ script = ExtResource("9_saeub")
 [node name="SpellBook" type="Node" parent="."]
 script = ExtResource("12_ml2tb")
 
-[node name="Battlefield" parent="." instance=ExtResource("12_xn2xm")]
+[node name="Battlefield" parent="." instance=ExtResource("12_6yqig")]
 
 [node name="BackGround2" type="ColorRect" parent="."]
 offset_left = 640.0
@@ -91,49 +87,26 @@ metadata/_edit_lock_ = true
 [node name="UIManager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 640.0
-offset_right = 680.0
+offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("13_i8apy")
-metadata/_edit_lock_ = true
 
-[node name="TurnQueue" type="TextEdit" parent="UIManager"]
-layout_mode = 0
-offset_left = 192.0
-offset_right = 512.0
-offset_bottom = 56.0
-text = "asdasd"
-
-[node name="TurnTracker" type="Control" parent="UIManager"]
+[node name="RightPane" type="Control" parent="UIManager"]
 anchors_preset = 0
-offset_left = 192.0
-offset_top = 72.0
-offset_right = 232.0
-offset_bottom = 112.0
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="ColorRect2" type="ColorRect" parent="UIManager/TurnTracker"]
-layout_mode = 0
-offset_right = 184.0
+offset_left = 576.0
+offset_right = 616.0
 offset_bottom = 40.0
-color = Color(0.309804, 0.533333, 0.411765, 1)
 
-[node name="Turn" type="Label" parent="UIManager/TurnTracker"]
+[node name="Debug Button" type="Button" parent="UIManager/RightPane"]
 layout_mode = 0
-offset_right = 64.0
-offset_bottom = 30.0
-text = "unit turn"
-label_settings = SubResource("LabelSettings_guiso")
+offset_left = 384.0
+offset_top = 64.0
+offset_right = 448.0
+offset_bottom = 128.0
+text = "Debug"
+script = ExtResource("15_ndovi")
 
-[node name="State" type="Label" parent="UIManager/TurnTracker"]
-layout_mode = 0
-offset_left = 128.0
-offset_right = 176.0
-offset_bottom = 30.0
-text = "state"
-
-[node name="BattleLog" type="Control" parent="UIManager"]
+[node name="BattleLog" type="Control" parent="UIManager/RightPane"]
 anchors_preset = 0
 offset_left = 192.0
 offset_top = 128.0
@@ -141,18 +114,53 @@ offset_right = 512.0
 offset_bottom = 640.0
 metadata/_edit_group_ = true
 
-[node name="ColorRect" type="ColorRect" parent="UIManager/BattleLog"]
+[node name="ColorRect" type="ColorRect" parent="UIManager/RightPane/BattleLog"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 512.0
 color = Color(0.47451, 0.611765, 0.65098, 1)
 
-[node name="Log" type="RichTextLabel" parent="UIManager/BattleLog"]
+[node name="Log" type="RichTextLabel" parent="UIManager/RightPane/BattleLog"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 448.0
 scroll_following = true
 script = ExtResource("14_lgqmy")
+
+[node name="TurnTracker" type="Control" parent="UIManager/RightPane"]
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 72.0
+offset_right = 232.0
+offset_bottom = 112.0
+metadata/_edit_group_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="UIManager/RightPane/TurnTracker"]
+layout_mode = 0
+offset_right = 184.0
+offset_bottom = 40.0
+color = Color(0.309804, 0.533333, 0.411765, 1)
+
+[node name="Turn" type="Label" parent="UIManager/RightPane/TurnTracker"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 30.0
+text = "unit turn"
+label_settings = SubResource("LabelSettings_guiso")
+
+[node name="State" type="Label" parent="UIManager/RightPane/TurnTracker"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 176.0
+offset_bottom = 30.0
+text = "state"
+
+[node name="TurnQueue" type="TextEdit" parent="UIManager/RightPane"]
+layout_mode = 0
+offset_left = 192.0
+offset_right = 512.0
+offset_bottom = 56.0
+text = "asdasd"
 
 [node name="BattleStart" type="Control" parent="UIManager"]
 visible = false
@@ -207,15 +215,6 @@ offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
 [node name="HighlightSprite" type="Sprite2D" parent="UIManager/BattleFieldAnchor"]
-
-[node name="Debug Button" type="Button" parent="UIManager"]
-layout_mode = 0
-offset_left = 448.0
-offset_top = 64.0
-offset_right = 512.0
-offset_bottom = 128.0
-text = "Debug"
-script = ExtResource("15_ndovi")
 
 [node name="AnimationManager" type="Node" parent="."]
 script = ExtResource("15_27a2c")

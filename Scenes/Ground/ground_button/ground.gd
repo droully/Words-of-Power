@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name GroundButton
+class_name Ground
 
 var BF : BattleField
 var initialized = false
@@ -18,13 +18,14 @@ func initialize(_BF: BattleField):
 	if self.initialized:
 		return
 	BF=_BF
-	tile_position = BF.groundbuttons.position_to_tile(position)
-	BF.groundbuttons.set_groundbutton_on_tile(self,tile_position)
+	tile_position = BF.grounds.position_to_tile(position)
+	BF.grounds.set_ground_on_tile(self,tile_position)
 	self.initialized=true
 
-func press():
+func step():
 	pressed = true
-	Events.emit_signal("groundbutton_pressed",self,tile_position)
-func unpress():
+	Events.emit_signal("button_pressed",self,tile_position)
+	
+func unstep():
 	pressed = false
-	Events.emit_signal("groundbutton_unpressed",self,tile_position)
+	Events.emit_signal("button_unpressed",self,tile_position)

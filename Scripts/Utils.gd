@@ -15,6 +15,7 @@ var player
 func _ready():
 	var root = get_tree().root
 	current_scene=root.get_child(root.get_child_count()-1)
+	pass
 
 func rotate_dir(dir:Vector2i,steps: int):
 	var effective_steps = steps % 4
@@ -27,8 +28,6 @@ func rotate_dir(dir:Vector2i,steps: int):
 	
 	
 	
-func switch_scene(res_path):
-	call_deferred("_defferred_switch_scene",res_path)
 
 func compare_elements(ele1:String,ele2:String):
 	var elem_dict={"water": {"weakTo": 'earth', "strongTo": 'fire'},
@@ -46,7 +45,21 @@ func _defferred_switch_scene(res_path):
 	current_scene = s.instantiate()
 	get_tree().root.add_child(current_scene)
 	get_tree().current_scene=current_scene
-
+	return current_scene
+	
+func switch_scene(res_path):
+	call_deferred("_defferred_switch_scene",res_path)
+	
+func switch_level(level_path):
+	if current_scene:
+		current_scene.queue_free()
+#	get_tree().process_frame  # wait 1 frame if necessary
+	var s = load(level_path)
+	current_scene = s.instantiate()
+	get_tree().root.add_child(current_scene)
+	get_tree().current_scene = current_scene
+	return current_scene
+	
 func priority_compare(a:Unit, b:Unit):
 	return a.priority < b.priority
 
@@ -69,6 +82,10 @@ func get_hazard_by_name(hazard_name: String):
 func get_unit_data_by_name(unit_name: String):
 	var unit_data = load("res://Scenes/units/"+unit_name+"/"+unit_name+".tres")
 	return unit_data
+
+func get_level_by_number(number):
+	var level = load("res://Scenes/Battlefields/Level"+str(number)+"/Level"+str(number)+".tscn").instantiate()
+	return level
 
 func get_battlefield_by_name(battlefield_name: String):
 	var BF = load("res://Scenes/Battlefields/"+battlefield_name+"/"+battlefield_name+".tscn").instantiate()

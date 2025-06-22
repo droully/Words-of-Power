@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=2 format=3 uid="uid://68pqmuksq67g"]
+
+[ext_resource type="Script" uid="uid://crg12kt4f1sfs" path="res://Scenes/Units/base_unit/unit_data.gd" id="1_1nghk"]
+
+[resource]
+script = ExtResource("1_1nghk")
+unit_name = "base_unit"
+hp = 100
+max_hp = 100
+temporal_hp = 0
+att = 10
+def = 5
+speed = 1
+shield = 0
+max_shield = 1
+priority = 2
+element = ""
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://crg12kt4f1sfs"

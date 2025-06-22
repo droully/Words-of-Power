@@ -91,7 +91,9 @@ func initialize(_BF: BattleField):
 		Events.emit_signal("player_created",self)
 
 func get_action(commands_list=[]):
-	commands_list.append(beh.choose_command(BF))
+
+	if beh.has_method("choose_command"):
+		commands_list.append(beh.choose_command(BF))
 
 func walkable_tiles():
 	return BF.map.tiles_in_aoe(tile_position,speed,false,false,false)

@@ -10,6 +10,8 @@ signal player_created(player)
 
 @warning_ignore("unused_signal")
 signal debug()
+@warning_ignore("unused_signal")
+signal battlefield_changed(bf)
 
 @warning_ignore("unused_signal")
 signal spell_button_pressed(spell_name)
@@ -31,13 +33,10 @@ signal command_spell_casted(caster,spell,target_tile)
 signal command_unit_deployed(unit,target_tile)
 
 @warning_ignore("unused_signal")
-signal groundbutton_pressed(groundbutton,tile_position)
+signal button_pressed(button,tile_position)
 @warning_ignore("unused_signal")
-signal groundbutton_unpressed(groundbutton,tile_position)
+signal button_unpressed(button,tile_position)
 
-
-@warning_ignore("unused_signal")
-signal pressed_groundbutton(groundbutton)
 
 @warning_ignore("unused_signal")
 signal unit_move_anim_start(unit,anim)

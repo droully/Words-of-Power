@@ -1,8 +1,9 @@
 extends Node
 
+class_name BattleManager
 
-@onready var BF :BattleField = get_node("../Battlefield")  
-@onready var AM = get_node("../AnimationManager")
+@onready var BF  :BattleField = $"../Battlefield"
+@onready var AM = $"../AnimationManager"
 @onready var BS = $BattleState
 @onready var SpellBook = $"../SpellBook"
 @onready var player
@@ -10,8 +11,8 @@ extends Node
 
 
 
-enum UserActionState {None,Move,Cast,Deploy}
-var user_current_action = UserActionState.None
+#enum UserActionState {None,Move,Cast,Deploy}
+#var user_current_action = UserActionState.None
 
 var command #no :Command
 
@@ -32,19 +33,6 @@ func set_and_execute_command(cmd):
 func _input(event: InputEvent):
 	BS.current_state.input(event)
 	
-func deploy_input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		var cursor_position = BF.map.mouse_to_tile(event.position)
-		var deployCommand = Command.Deploy.new(player_data,cursor_position, BF)
-		setCommand(deployCommand)
-		if not cursor_position in BF.deployment_area:
-			pass 
-			
-		elif executeCommand():
-			user_current_action=UserActionState.None
-			return true
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			user_current_action=UserActionState.None
 
 func turn_input(event:InputEvent):
 	for move_input in Utils.move_inputs:
@@ -73,7 +61,8 @@ func executeCommand():
 
 
 func _on_move_button_pressed():
-	user_current_action=UserActionState.Move
+	pass
+	#user_current_action=UserActionState.Move
 
 func _on_unit_die(_unit):
 	pass

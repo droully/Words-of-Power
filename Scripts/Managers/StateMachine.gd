@@ -2,8 +2,7 @@ extends Node
 
 class_name StateMachine
 
-@onready var BM = $".."
-@onready var BF :BattleField= $"../../Battlefield" 
+@onready var BM :BattleManager = $"../../BattleManager"
 @onready var AM = $"../../AnimationManager"
 @onready var UI = $"../../UIManager"
 
@@ -13,6 +12,7 @@ var states = {}
 
 
 func _ready():
+	AM = BM.AM
 	
 	match name:
 		"AnimState":

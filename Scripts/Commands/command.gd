@@ -52,10 +52,12 @@ class Move:
 	func execute():
 		original_tile = unit.tile_position 
 		if not BF.walls.is_tile_solid(target_tile):
-			Events.emit_signal("command_unit_moved",unit,original_tile,target_tile)
 			unit.orientation_string=Utils.dir2vector.find_key(target_tile - original_tile)
 			#on_unit_collide()
-			return BF.place_unit_on_tile(unit, target_tile)
+			var placement = BF.place_unit_on_tile(unit, target_tile)
+			if placement:
+				Events.emit_signal("command_unit_moved",unit,original_tile,target_tile)
+			return placement
 		return false
 
 class Deploy:

@@ -7,29 +7,29 @@ class_name BattleField
 @onready var bg = $Background
 @onready var highlight = $Highlight
 @onready var units = $Units
-@onready var groundbuttons = $GroundButtons
+@onready var grounds = $Grounds
 @onready var hazards = $Hazards
 @onready var player
 
-var size_x
-var size_y
+var size_x = 30
+var size_y = 30
 var hazard_tracker ={}
 
 func _ready():
 	#set_layer_modulate(Layer.PerTileData,Color(1, 1, 1, 0))
 	Events.player_created.connect(_on_player_created)
-	setup(30,30)
 
-func setup(x,y):
-
-	size_x=x
-	size_y=y
 
 func place_unit_on_tile(unit: Unit, target_tile:Vector2i):
 	#acepta posicion en tile desde el 0	
 	
 	var unit_in_target_tile = units.get_on_tile(target_tile)
 	var path = [map.tile_to_position(unit.tile_position),map.tile_to_position(target_tile)]
+	if unit_in_target_tile:
+		return false #por mientras todo colisiona
+	if unit_in_target_tile==unit:
+		print("unit_in_target_tile = unit")
+	
 
 	if len(path)>0:	
 		unit.move_through(path)
@@ -37,16 +37,15 @@ func place_unit_on_tile(unit: Unit, target_tile:Vector2i):
 			unit.beh.callbackMovementFrom(self)
 		units.set_on_tile(unit,target_tile)
 		if unit_in_target_tile and unit_in_target_tile!=unit:
-			collide_units(unit,unit_in_target_tile)
-
-
+			return collide_units(unit,unit_in_target_tile)
+			
 		return true
 	return false
 	
-func collide_units(unit1:Unit,unit2:Unit):
-	var _result1=unit1.beh.callbackUnitOverlap(unit2)
-	var _result2=unit2.beh.callbackUnitOverlap(unit1)
-	#colisionar con info de units o no? 
+func collide_units(_unit1:Unit,_unit2:Unit):
+	#var _result1=unit1.beh.callbackUnitOverlap(unit2)
+	#var _result2=unit2.beh.callbackUnitOverlap(unit1)aaaaa
+	return false
 
 
 func distance(tile1: Vector2i, tile2: Vector2i):
