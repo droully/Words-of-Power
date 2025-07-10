@@ -6,6 +6,13 @@ var caster:Unit
 var BF
 var spell_data :SpellData
 
+enum targeting_methods {
+	AreaOfEffect,
+	PerpLine,
+	PerpTShape,
+	Cross
+}
+
 func targetable_tiles(_caster,_spell_data,_BF):
 	self.caster=_caster
 	self.spell_data=_spell_data
@@ -13,9 +20,9 @@ func targetable_tiles(_caster,_spell_data,_BF):
 	
 	
 	match spell_data.targeting:
-		SpellData.targeting_methods.AreaOfEffect:
+		targeting_methods.AreaOfEffect:
 			return AOE()
-		SpellData.targeting_methods.Cross:
+		targeting_methods.Cross:
 			return Cross()
 	
 	

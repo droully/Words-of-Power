@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://qw2wsmvv2hd2"]
 
-[ext_resource type="Script" path="res://Scenes/Spells/sticky_tongue/sticky_tongue.gd" id="1_8q0qa"]
+[ext_resource type="Script" uid="uid://d3p5bvnhxpcjv" path="res://Scenes/Spells/sticky_tongue/sticky_tongue.gd" id="1_8q0qa"]
 [ext_resource type="Resource" uid="uid://b1axjpb710rms" path="res://Scenes/Spells/sticky_tongue/sticky_tongue.tres" id="2_x0yig"]
 [ext_resource type="Texture2D" uid="uid://c5gxgn603jd1i" path="res://Scenes/Spells/sticky_tongue/sticky_tongue_body.png" id="3_2fs7e"]
 [ext_resource type="Texture2D" uid="uid://btky6mmy4quvq" path="res://Scenes/Spells/sticky_tongue/sticky_tongue_end.png" id="4_ogbam"]
@@ -99,9 +99,9 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hvq16"]
 _data = {
-"RESET": SubResource("Animation_gi4xl"),
-"backward": SubResource("Animation_bidnu"),
-"forward": SubResource("Animation_4apga")
+&"RESET": SubResource("Animation_gi4xl"),
+&"backward": SubResource("Animation_bidnu"),
+&"forward": SubResource("Animation_4apga")
 }
 
 [node name="StickyTongue" type="Node2D"]
@@ -110,7 +110,7 @@ spell_data = ExtResource("2_x0yig")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_hvq16")
+&"": SubResource("AnimationLibrary_hvq16")
 }
 
 [node name="Body" type="Sprite2D" parent="."]

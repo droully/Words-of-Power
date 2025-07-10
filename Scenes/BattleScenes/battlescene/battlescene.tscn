@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bl8iglk1xnwbs"]
+[gd_scene load_steps=21 format=3 uid="uid://bl8iglk1xnwbs"]
 
 [ext_resource type="Script" uid="uid://b4ftn3u5fdmgc" path="res://Scenes/BattleScenes/battlescene/battlescene.gd" id="1_n8ose"]
 [ext_resource type="Script" uid="uid://dajmxir36gn1o" path="res://Scripts/Managers/BattleManager.gd" id="2_x8hym"]
@@ -10,12 +10,13 @@
 [ext_resource type="Script" uid="uid://c3hxucmrcmo6h" path="res://Scripts/Managers/BattleState/EndState.gd" id="9_saeub"]
 [ext_resource type="Script" uid="uid://ccx3j2hlelg1o" path="res://Scripts/Managers/BattleState/InterState.gd" id="10_l5wnu"]
 [ext_resource type="Script" uid="uid://t7jprwp0o1fa" path="res://Scripts/Managers/BattleState/HazardState.gd" id="11_v3ffk"]
-[ext_resource type="PackedScene" uid="uid://4p848qpx0xxm" path="res://Scenes/Battlefields/Battlefield.tscn" id="12_6yqig"]
+[ext_resource type="PackedScene" uid="uid://4p848qpx0xxm" path="res://Scenes/Battlefields/base_battlefield/base_battlefield.tscn" id="12_6yqig"]
 [ext_resource type="Script" uid="uid://ca007xgtqpi64" path="res://Scripts/Spellbook.gd" id="12_ml2tb"]
 [ext_resource type="Script" uid="uid://cdm7bheeqigfs" path="res://Scripts/UI/UIManager.gd" id="13_i8apy"]
 [ext_resource type="Script" uid="uid://6xbxnyjh2rca" path="res://Scripts/UI/BattleLog.gd" id="14_lgqmy"]
 [ext_resource type="Script" uid="uid://bqhp45l21n1vv" path="res://Scripts/Managers/AnimationManager.gd" id="15_27a2c"]
 [ext_resource type="Script" uid="uid://i0m2n3347mej" path="res://Scripts/Debug Button.gd" id="15_ndovi"]
+[ext_resource type="PackedScene" uid="uid://eikd502lgm23" path="res://Scenes/Main/level_selector.tscn" id="16_3n5hp"]
 [ext_resource type="Script" uid="uid://df12nuge1cu3t" path="res://Scripts/Managers/AnimState/Free.gd" id="16_i6t3l"]
 [ext_resource type="Script" uid="uid://dmsvvwjgiik0u" path="res://Scripts/Managers/AnimState/Ongoing.gd" id="17_o8v8q"]
 
@@ -182,7 +183,7 @@ offset_left = 504.0
 offset_top = 66.0
 offset_right = 624.0
 offset_bottom = 106.0
-text = "BATTLE START"
+text = "LEVEL START"
 
 [node name="BattleEnd" type="Control" parent="UIManager"]
 visible = false
@@ -200,11 +201,18 @@ color = Color(0.690196, 0.345098, 0.415686, 1)
 
 [node name="TextEdit" type="TextEdit" parent="UIManager/BattleEnd"]
 layout_mode = 0
-offset_left = 504.0
-offset_top = 66.0
-offset_right = 624.0
-offset_bottom = 106.0
-text = "BATTLE END"
+offset_left = 456.0
+offset_top = 64.0
+offset_right = 616.0
+offset_bottom = 104.0
+text = "LEVEL COMPLETED"
+
+[node name="LevelSelector" parent="UIManager/BattleEnd" instance=ExtResource("16_3n5hp")]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 32.0
+offset_right = 698.0
+offset_bottom = 168.0
 
 [node name="BattleFieldAnchor" type="Control" parent="UIManager"]
 layout_mode = 1

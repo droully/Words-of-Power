@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp6luu6ofv6vl"]
+
+[ext_resource type="Script" uid="uid://dr543c3oq3mpj" path="res://Scenes/Ground/end_portal/end_portal.gd" id="1_iiepj"]
+[ext_resource type="Texture2D" uid="uid://d4gtnt8hair2o" path="res://Resources/Mios/portal.png" id="2_7qho2"]
+
+[node name="EndPortal" type="Node2D"]
+script = ExtResource("1_iiepj")
+walkable = true
+tags = Array[String](["Portal"])
+metadata/_custom_type_script = "uid://c5ujrb3vo6d5h"
+
+[node name="Portal" type="Sprite2D" parent="."]
+texture = ExtResource("2_7qho2")

@@ -6,7 +6,7 @@ func initialize(_FSM):
 	FSM=_FSM
 
 func process(_delta):
-	print("weeena")
+	pass
 
 func enter():
 	FSM.UI.find_child("BattleEnd").visible=true

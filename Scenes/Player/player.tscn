@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dv2cf06g3a1d0" path="res://Scenes/Units/base_unit/unit.gd" id="1_mtuoh"]
 [ext_resource type="Script" uid="uid://crg12kt4f1sfs" path="res://Scenes/Units/base_unit/unit_data.gd" id="2_htcer"]
-[ext_resource type="Texture2D" uid="uid://rtj6h8s6px02" path="res://Resources/Enemies/player.png" id="3_xcqgg"]
+[ext_resource type="Texture2D" uid="uid://b8fxbpvyxpth" path="res://Resources/Enemies/frog.png" id="3_dd0ac"]
 [ext_resource type="Script" uid="uid://bqy8mc31225eg" path="res://Scripts/Behaviors/player_behavior.gd" id="4_aqr48"]
 [ext_resource type="Script" uid="uid://bcgvp28qevemp" path="res://Scripts/UI/UI.gd" id="4_htcer"]
 [ext_resource type="Texture2D" uid="uid://b1yt1nsan5hwb" path="res://Resources/UI/arrow.png" id="6_dd0ac"]
@@ -10,17 +10,6 @@
 [sub_resource type="Resource" id="Resource_dd0ac"]
 script = ExtResource("2_htcer")
 unit_name = "player"
-hp = 100
-max_hp = 100
-temporal_hp = 0
-att = 10
-def = 5
-speed = 1
-shield = 0
-max_shield = 1
-priority = 2
-element = ""
-tags = Array[String]([])
 metadata/_custom_type_script = "uid://crg12kt4f1sfs"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dd0ac"]
@@ -36,7 +25,7 @@ unit_data = SubResource("Resource_dd0ac")
 shape = SubResource("RectangleShape2D_dd0ac")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("3_xcqgg")
+texture = ExtResource("3_dd0ac")
 
 [node name="Behavior" type="Node" parent="."]
 script = ExtResource("4_aqr48")

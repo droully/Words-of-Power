@@ -21,7 +21,7 @@ func initialize(_BF: BattleField):
 		tile_position = BF.hazards.position_to_tile(position)
 	if position == Vector2(0,0):
 		position = BF.hazards.tile_to_position(tile_position)
-	BF.set_hazard_on_tile(self,tile_position)
+	BF.hazards.set_on_tile(self,tile_position)
 	add_to_group("hazard")
 		
 func pass_turn():

@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://eikd502lgm23"]
+
+[ext_resource type="Script" uid="uid://ce4m7yboxpefc" path="res://Scenes/Main/level_selector.gd" id="1_fpr5m"]
+
+[node name="LevelSelector" type="VBoxContainer"]
+offset_left = 75.0
+offset_top = 31.0
+offset_right = 142.0
+offset_bottom = 482.0
+script = ExtResource("1_fpr5m")
+
+[node name="Level1" type="Button" parent="."]
+layout_mode = 2
+text = "Level1"
+
+[node name="Level2" type="Button" parent="."]
+layout_mode = 2
+text = "Level2"
+
+[node name="Level3" type="Button" parent="."]
+layout_mode = 2
+text = "Level3"
+
+[node name="Level4" type="Button" parent="."]
+layout_mode = 2
+text = "Level4"
+
+[node name="Level5" type="Button" parent="."]
+layout_mode = 2
+text = "Level5"
+
+[node name="Level6" type="Button" parent="."]
+layout_mode = 2
+text = "Level6"
+
+[node name="Level7" type="Button" parent="."]
+layout_mode = 2
+text = "Level7"
+
+[node name="Level8" type="Button" parent="."]
+layout_mode = 2
+text = "Level8"
+
+[node name="Level9" type="Button" parent="."]
+layout_mode = 2
+text = "Level9"
+
+[node name="Level10" type="Button" parent="."]
+layout_mode = 2
+text = "Level10"
+
+[node name="Level11" type="Button" parent="."]
+layout_mode = 2
+text = "Level11"
+
+[node name="Level12" type="Button" parent="."]
+layout_mode = 2
+text = "Level12"
+
+[node name="Level13" type="Button" parent="."]
+layout_mode = 2
+text = "Level13"

@@ -16,7 +16,6 @@ func _ready():
 	Events.spell_cast_anim_start.connect(_on_object_started_animation)
 
 	Events.unit_die.connect(_on_unit_die)
-	Events.debug.connect(_on_debug)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,6 +50,4 @@ func _on_unit_die(unit):
 			ongoing_animations.erase([unit,anim])
 	check_anim_state()
 	
-func _on_debug():
-	print(ongoing_animations)
 		

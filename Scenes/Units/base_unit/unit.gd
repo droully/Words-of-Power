@@ -27,11 +27,7 @@ var initialized= false
 
 var party: String = "enemy"
 
-var BF : BattleField
 var tile_position: Vector2i = Vector2i(-1,-1)
-
-
-var tween: Tween
 
 var orientation : Utils.Orientations = Utils.Orientations.UP:
 	set(value): 
@@ -49,38 +45,24 @@ var orientation_dir: Vector2i:
 
 func _ready():
 	var bf=get_parent().get_parent()
-	orientation=orientation
-	if bf.is_node_ready():
+	if bf and bf.is_node_ready():
 		initialize(bf)
 
 func initialize(_BF: BattleField):
 	if self.initialized:
 		return
-	
-	self.BF=_BF
-	
+		
 	self.unit_name = unit_data.unit_name
-	self.hp = unit_data.hp
-	self.max_hp = unit_data.max_hp
-	self.temporal_hp = unit_data.temporal_hp
-	self.att = unit_data.att
-	self.def = unit_data.def
-	self.speed = unit_data.speed
-	self.shield = unit_data.shield
-	self.max_shield = unit_data.max_shield
-	self.priority = unit_data.priority
-	self.tags = unit_data.tags
-	self.element = unit_data.element
 	self.initialized=true
+	
+	orientation=orientation
 	
 	
 	#beh.set_script(unit_data.behavior)
 	
-	if tile_position == Vector2i(-1,-1):
-		tile_position = BF.units.position_to_tile(position)
-	if position == Vector2(0,0):
-		position = BF.units.tile_to_position(tile_position)
-	BF.units.set_on_tile(self,tile_position)
+	tile_position = _BF.units.position_to_tile(position)
+	
+	_BF.units.set_on_tile(self,tile_position)
 	
 	if name=="Player":
 		party = "player"
@@ -90,25 +72,26 @@ func initialize(_BF: BattleField):
 	if name=="Player":
 		Events.emit_signal("player_created",self)
 
-func get_action(commands_list=[]):
-
+func get_action(BM,commands_list=[]):
 	if beh.has_method("choose_command"):
-		commands_list.append(beh.choose_command(BF))
+		commands_list.append(beh.choose_command(BM))
 
-func walkable_tiles():
-	return BF.map.tiles_in_aoe(tile_position,speed,false,false,false)
+func walkable_tiles(BF:BattleField):
+	return BF.map.tiles_in_aoe(tile_position,1,false,false,false)
 	
 func move_through(path:Array):
 	#var to_coord = path[-1]
 	#var from_coord = path[0] 
 	
-	tween = self.create_tween()
+	var tween = self.create_tween()
 	tween.finished.connect(_on_finished_animation.bind(tween))
 	
 	Events.emit_signal("unit_move_anim_start",self,tween)
 	for point in path.slice(1):
 		tween.tween_property(self, "position", point, .3)
-	
+	if beh.has_method("callbackMovementFrom"):
+		beh.callbackMovementFrom(self)
+
 #	position=to_coord	#position:absoluto
 
 
@@ -151,17 +134,6 @@ func apply_status_effect():
 		status.per_turn_effect()
 	for status in status_list:
 		status.pass_turn()
-		
-func push(direction: Vector2i):	
-	#retorna true si empuja, y la unidad con la que coliciona si coliciona 
-	var target_tile = tile_position + direction  # chequear colisiones
-	var target_unit =  BF.units.get_on_tile(target_tile)
-	if target_unit:
-		return target_unit
-	return BF.place_unit_on_tile(self, target_tile)
-	
-func pull(direction: Vector2i):	
-	return push(-direction)
 
 func die():
 	Events.emit_signal("unit_die",self)

@@ -1,16 +1,17 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=2 format=3 uid="uid://b1axjpb710rms"]
 
-[ext_resource type="Script" path="res://Scenes/Spells/spell_data.gd" id="1_vfmri"]
+[ext_resource type="Script" uid="uid://cisjomfhuakui" path="res://Scenes/Spells/spell_data.gd" id="1_vfmri"]
 
 [resource]
 script = ExtResource("1_vfmri")
 spell_name = "sticky_tongue"
 spell_name_UI = "Sticky Tongue"
+spell_input = "spell_1"
 player_usable = true
-cost = 1
+cost = null
 srange = 10
-duration = 1.0
-damage = 10
-radius = 1
+duration = null
+damage = null
+radius = 2
 targeting = 3
-affecting = 3
+affecting = 5

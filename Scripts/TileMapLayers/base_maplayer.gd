@@ -1,6 +1,6 @@
 extends TileMapLayer
 
-class_name CustomTileMapLayer
+class_name BaseMapLayer
 
 var size_x = 30
 var size_y = 30
@@ -94,7 +94,7 @@ func get_direction_from_tile_to_tile(from_tile: Vector2i, to_tile: Vector2i) -> 
 
 	# Not on the same line
 	else:
-		return Vector2i(0, 0)
+		return Vector2i(1, 0)
 		
 func tile_in_front(from_tile: Vector2i, dir: Vector2i):
 	return from_tile+dir

@@ -4,7 +4,6 @@ extends Node
 var FSM: StateMachine
 var BM
 var UI
-var player_chose_action: bool
 var player
 
 var commands=[]
@@ -23,7 +22,7 @@ func exit():
 	#BF.highlight.reset_highlight()
 	commands = []
 	
-	get_tree().call_group("enemy","get_action",commands)
+	get_tree().call_group("enemy","get_action",BM,commands)
 	for command in commands:
 		BM.set_and_execute_command(command) 
 

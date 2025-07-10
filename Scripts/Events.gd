@@ -28,6 +28,8 @@ signal spell_effect(arg_dict)
 @warning_ignore("unused_signal")
 signal command_unit_moved(unit,from_cell,to_cell)
 @warning_ignore("unused_signal")
+signal command_unit_jumped(unit,from_cell,to_cell)
+@warning_ignore("unused_signal")
 signal command_spell_casted(caster,spell,target_tile)
 @warning_ignore("unused_signal")
 signal command_unit_deployed(unit,target_tile)
@@ -37,6 +39,14 @@ signal button_pressed(button,tile_position)
 @warning_ignore("unused_signal")
 signal button_unpressed(button,tile_position)
 
+@warning_ignore("unused_signal")
+signal end_portal_stepped(portal)
+
+
+@warning_ignore("unused_signal")
+signal ground_move_anim_start(ground,anim)
+@warning_ignore("unused_signal")
+signal ground_move_anim_end(ground,anim)
 
 @warning_ignore("unused_signal")
 signal unit_move_anim_start(unit,anim)

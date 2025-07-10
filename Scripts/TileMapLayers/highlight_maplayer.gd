@@ -1,6 +1,6 @@
-extends CustomTileMapLayer
+extends BaseMapLayer
 
-
+class_name HighlightMapLayer
 
 	
 func highlight_tiles(tiles,mask_atlas_coord:Vector2i):
