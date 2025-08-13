@@ -50,7 +50,7 @@ func FirstOccupied():
 	for tile in tiles:
 		if BF.units.get_on_tile(tile):
 			return [tile]
-		if BF.walls.is_tile_solid(tile):
+		if BF.is_tile_solid(tile):
 			return[tile]
 	return [tiles[-1]]
 

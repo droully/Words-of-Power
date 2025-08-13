@@ -44,6 +44,8 @@ class Move:
 	var original_tile
 	var BF:BattleField
 
+	var floating=false
+
 	func _init(_unit, _target_tile, _battlefield):
 		self.unit = _unit
 		self.target_tile = _target_tile
@@ -54,7 +56,7 @@ class Move:
 		if original_tile == target_tile:
 			return false
 			
-		if BF.is_tile_walkable(target_tile):
+		if BF.is_tile_walkable(target_tile) or floating:
 			var placement = BF.units.place_on_tile(unit, target_tile)
 			if placement:
 				var dir = BF.map.get_direction_from_tile_to_tile(original_tile,target_tile)

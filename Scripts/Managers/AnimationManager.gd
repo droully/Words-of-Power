@@ -18,6 +18,7 @@ func _ready():
 	Events.unit_die.connect(_on_unit_die)
 
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	#print(ongoing_animations)

@@ -6,7 +6,7 @@ class_name BattleManager
 @onready var AM = $"../AnimationManager"
 @onready var BS = $BattleState
 @onready var SpellBook = $"../SpellBook"
-@onready var player
+@onready var player:Unit
 @onready var player_data = preload("res://Scenes/Player/player.tres")
 
 var won_game = false
@@ -38,21 +38,25 @@ func _input(event: InputEvent):
 
 func turn_input(event:InputEvent):
 	for move_input in Utils.move_inputs:
-		if event.is_action_pressed(move_input, true):			
+		if event.is_action_pressed(move_input, true):
 			var dir =Utils.dir2vector[move_input.split("_")[1].to_upper()]
 			
 			var target_tile= player.tile_position+dir
-			var next_target_tile = player.tile_position+2*dir
 			
 			if BF.is_tile_walkable(target_tile):
 				var moveCommand = Command.Move.new(player, target_tile, BF)
 				player_command_list.append(moveCommand)
 				return set_and_execute_command(moveCommand)
-				
-			if BF.is_tile_walkable(next_target_tile):
-				var jumpCommand = Command.Jump.new(player, next_target_tile, BF)
-				player_command_list.append(jumpCommand)
-				return set_and_execute_command(jumpCommand)
+
+
+
+	if event.is_action_pressed("jump", true):
+		var dir = player.orientation_dir
+		var next_target_tile = player.tile_position+2*dir
+		if BF.is_tile_walkable(next_target_tile):
+			var jumpCommand = Command.Jump.new(player, next_target_tile, BF)
+			player_command_list.append(jumpCommand)
+			return set_and_execute_command(jumpCommand)
 
 
 	for spell_input in Utils.spell_inputs:

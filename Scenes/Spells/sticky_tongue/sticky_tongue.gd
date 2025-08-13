@@ -48,14 +48,11 @@ func build_track():
 	anim_bw.track_set_key_value(pos_body_track,1,caster.position)
 	anim_bw.track_set_key_value(pos_body_track,0,(target_pos+caster.position)/2)
 	anim_bw.track_set_key_time(pos_body_track,1,t)
-	
-	
-	
 
 func animation():
 
 	$Body.rotation = atan2(dir.y, dir.x)
-	$End.rotation =atan2(dir.y, dir.x)
+	$End.rotation = atan2(dir.y, dir.x)
 	Events.emit_signal("spell_cast_anim_start",self,anim_player)
 	anim_player.animation_finished.connect(_on_finished_animation)
 
@@ -63,9 +60,12 @@ func animation():
 	anim_player.play("forward")
 	anim_player.queue("backward")
 
+func callbackOnGround(ground:Ground):
+	if ground.grabable:
+		var _dir=BF.map.get_direction_from_tile_to_tile(caster.tile_position,ground.tile_position)
+		BF.push(caster.tile_position,_dir)
 
 func callbackOnHit(target: Unit):
-
 	if  target not in affected_targets:
 		var _dir=BF.map.get_direction_from_tile_to_tile(caster.tile_position,target.tile_position)
 		BF.pull(target.tile_position,_dir)

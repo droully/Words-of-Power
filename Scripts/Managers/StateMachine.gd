@@ -1,34 +1,34 @@
 extends Node
-
 class_name StateMachine
 
-@onready var BM :BattleManager = $"../../BattleManager"
+var states_dict = {"Battle":BattleState,"Anim":AnimState}
+
+@onready var BM: BattleManager = $"../../BattleManager"
 @onready var AM = $"../../AnimationManager"
 @onready var UI = $"../../UIManager"
+@export_enum("Battle","Anim") var states_type: String
+
 
 var current_state
 var history = []
 var states = {}
 
-
 func _ready():
-	AM = BM.AM
+	# Instantiate state objects
+	var states_source = states_dict[states_type]
+	states = states_source.states
+	current_state = states[states_source.starting_state]
 	
-	match name:
-		"AnimState":
-			current_state=$Free
-		"BattleState":
-			current_state=$Start
 
-	for state in get_children():
+	# Initialize each state
+	for state in states.values():
 		state.initialize(self)
-		states[state.name] = state
-		if current_state.name !=state.name:
-			remove_child(state)
+
+	# Pick initial state
 	current_state.enter()
 
 func change_to(state_name):
-	history.append(current_state.name)
+	history.append(current_state)
 	set_state(state_name)
 
 func back():
@@ -37,8 +37,13 @@ func back():
 
 func set_state(state_name):
 	current_state.exit()
-	remove_child(current_state)
-	
 	current_state = states[state_name]
-	add_child(current_state)
 	current_state.enter()
+
+func _process(delta):
+	if current_state and current_state.has_method("process"):
+		current_state.process(delta)
+
+func _input(event):
+	if current_state and current_state.has_method("input"):
+		current_state.input(event)

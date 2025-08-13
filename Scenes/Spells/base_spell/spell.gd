@@ -43,26 +43,29 @@ func affect_tiles():
 	for tile in affected_tiles:
 		if finished:
 			break
+
 		var unit_target= BF.units.get_on_tile(tile)
 		if unit_target:
 			callbackOnHit(unit_target)
-		callbackOnFloor(BF,tile)
+
+		var ground_target= BF.grounds.get_on_tile(tile)
+		if ground_target:
+			callbackOnGround(ground_target)
 
 
 func animation():
-	return 
-#borrar
+	return
 func targetable_tiles(_caster=caster,_BF=BF):
 	return null
 
 func effect(_target,_callback):
 	return null
 
-func callbackOnHit(_target):
+func callbackOnHit(_unit):
 	return null
-func callbackOnFloor(_BF,_tile):
+func callbackOnGround(_ground):
 	return null
-	
+
 func _on_finished_animation(_anim_name):	
 	Events.emit_signal("spell_cast_anim_end",self,anim_player)	
 	queue_free()

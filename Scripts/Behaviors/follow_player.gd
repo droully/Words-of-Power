@@ -10,5 +10,7 @@ func choose_command(BM:BattleManager):
 		var command = BM.player_command_list[-i-1] #recorrer desde el final
 		if command.command_name in ["Move","Jump"]:
 			command.unit = unit
+			command.floating = true
+			
 			return command
 	return Command.Skip.new(unit)

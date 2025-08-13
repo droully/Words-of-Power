@@ -19,11 +19,10 @@ func set_on_tile(unit:Unit,to_tile:Vector2i):
 
 func place_on_tile(unit: Unit, target_tile:Vector2i):
 	#acepta posicion en tile desde el 0	
-	
+
 	var unit_in_target_tile = get_on_tile(target_tile)
 	var path = [tile_to_position(unit.tile_position),tile_to_position(target_tile)]
-	
-	
+
 	if unit_in_target_tile:
 		return false #por mientras todo colisiona
 	if unit_in_target_tile==unit:

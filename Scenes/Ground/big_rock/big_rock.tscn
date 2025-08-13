@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c06hmsap0my2o"]
+
+[ext_resource type="Script" uid="uid://wf877rgwpc0v" path="res://Scenes/Ground/big_rock/big_rock.gd" id="1_p3dyx"]
+[ext_resource type="Texture2D" uid="uid://dqntjhr0g8w4v" path="res://Resources/Mios/big rock.png" id="2_g4ny3"]
+
+[node name="BigRock" type="Node2D"]
+script = ExtResource("1_p3dyx")
+grabable = true
+solid = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_g4ny3")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bek1qk276xrmf"]
 
 [ext_resource type="Texture2D" uid="uid://c227rsb31jpn" path="res://Resources/Mios/nenufar.png" id="1_5lna6"]
-[ext_resource type="Script" uid="uid://d1b8ooapa8cjq" path="res://Scenes/Ground/water_lily/water_lily.gd" id="1_g48on"]
+[ext_resource type="Script" uid="uid://d1b8ooapa8cjq" path="res://Scenes/Ground/lotus/lotus.gd" id="1_g48on"]
 
 [node name="WaterLily" type="Node2D"]
 script = ExtResource("1_g48on")

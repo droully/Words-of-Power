@@ -1,10 +1,10 @@
-[gd_scene load_steps=42 format=4 uid="uid://4p848qpx0xxm"]
+[gd_scene load_steps=44 format=4 uid="uid://4p848qpx0xxm"]
 
 [ext_resource type="Texture2D" uid="uid://clcckii0evvcf" path="res://Resources/Spritesheet/Battleground.png" id="1_yb0or"]
 [ext_resource type="Texture2D" uid="uid://cml1v15d86kyu" path="res://Resources/Spritesheet/Highlight.png" id="2_my5qa"]
 [ext_resource type="Texture2D" uid="uid://668baqocvr77" path="res://Resources/Mios/doorclosed.png" id="4_ie2t2"]
 [ext_resource type="Script" uid="uid://cnpeqojviivvu" path="res://Scripts/TileMapLayers/walls_maplayer.gd" id="4_mh2wp"]
-[ext_resource type="Script" uid="uid://c3rrcl7ea05tf" path="res://Scenes/Battlefields/base_battlefield/battlefield.gd" id="4_v1135"]
+[ext_resource type="Script" uid="uid://c3rrcl7ea05tf" path="res://Scenes/Levels/battlefield.gd" id="4_v1135"]
 [ext_resource type="Texture2D" uid="uid://bfhb2c345javx" path="res://Resources/Mios/dooropen.png" id="5_syphi"]
 [ext_resource type="PackedScene" uid="uid://bbn20xwnsrr55" path="res://Scenes/Units/snake/snake.tscn" id="6_e3hdp"]
 [ext_resource type="PackedScene" uid="uid://c2x2uafqyrgvv" path="res://Scenes/Hazards/fire_hazard/fire_hazard.tscn" id="6_k2nky"]
@@ -19,10 +19,12 @@
 [ext_resource type="Script" uid="uid://caruutq2rqrdk" path="res://Scripts/TileMapLayers/hazards_maplayer.gd" id="12_gm42w"]
 [ext_resource type="PackedScene" uid="uid://7k21av0cli75" path="res://Scenes/Units/fire_elemental/fire_elemental.tscn" id="13_lohln"]
 [ext_resource type="PackedScene" uid="uid://bp6luu6ofv6vl" path="res://Scenes/Ground/end_portal/end_portal.tscn" id="13_nhftv"]
-[ext_resource type="PackedScene" uid="uid://bek1qk276xrmf" path="res://Scenes/Ground/water_lily/water_lily.tscn" id="14_fns05"]
+[ext_resource type="PackedScene" uid="uid://bek1qk276xrmf" path="res://Scenes/Ground/lotus/lotus.tscn" id="14_fns05"]
 [ext_resource type="PackedScene" uid="uid://du1xc1oqy63o4" path="res://Scenes/Ground/stone/stone.tscn" id="15_yigfd"]
 [ext_resource type="Script" uid="uid://bfvaglpgooc0x" path="res://Scripts/TileMapLayers/grounds_maplayer.gd" id="16_6iwe4"]
+[ext_resource type="PackedScene" uid="uid://kh4h5vxygy5n" path="res://Scenes/Ground/withered_lotus/withered_lotus.tscn" id="16_ccxnv"]
 [ext_resource type="Texture2D" uid="uid://4eq3u1iqox7" path="res://Resources/Spritesheet/Coordinates0.png" id="16_un4up"]
+[ext_resource type="PackedScene" uid="uid://c06hmsap0my2o" path="res://Scenes/Ground/big_rock/big_rock.tscn" id="17_622ag"]
 [ext_resource type="PackedScene" uid="uid://ffc8lyh73o4r" path="res://Scenes/Units/box/box.tscn" id="18_syphi"]
 [ext_resource type="PackedScene" uid="uid://cjryucqookbu" path="res://Scenes/Units/ghost/ghost.tscn" id="19_khycb"]
 
@@ -199,6 +201,8 @@ scenes/1/scene = ExtResource("10_hws73")
 scenes/2/scene = ExtResource("13_nhftv")
 scenes/3/scene = ExtResource("14_fns05")
 scenes/4/scene = ExtResource("15_yigfd")
+scenes/5/scene = ExtResource("16_ccxnv")
+scenes/6/scene = ExtResource("17_622ag")
 
 [sub_resource type="TileSet" id="TileSet_ie2t2"]
 tile_size = Vector2i(64, 64)
@@ -240,7 +244,7 @@ metadata/_edit_lock_ = true
 
 [node name="Walls" type="TileMapLayer" parent="."]
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAAAAAAAAADAA4AAAABAAAAAAADAA4AAAACAAAAAAADAA4AAAADAAAAAAADAA4AAAAEAAAAAAADAA4AAAAFAAAAAAADAA4AAAAGAAAAAAADAA4AAAAHAAAAAAADAA4AAAAIAAAAAAADAA4AAAAJAAAAAAADAA4AAAAJAAEAAAADAA4AAAAJAAIAAAADAA4AAAAJAAMAAAADAA4AAAAJAAQAAAADAA4AAAAJAAUAAAADAA4AAAAJAAYAAAADAA4AAAAJAAcAAAADAA4AAAAJAAgAAAADAA4AAAAJAAkAAAADAA4AAAAIAAkAAAADAA4AAAAHAAkAAAADAA4AAAAGAAkAAAADAA4AAAAFAAkAAAADAA4AAAAEAAkAAAADAA4AAAADAAkAAAADAA4AAAACAAkAAAADAA4AAAABAAkAAAADAA4AAAAAAAkAAAADAA4AAAAAAAgAAAADAA4AAAAAAAcAAAADAA4AAAAAAAYAAAADAA4AAAAAAAUAAAADAA4AAAAAAAQAAAADAA4AAAAAAAMAAAADAA4AAAAAAAIAAAADAA4AAAAAAAEAAAADAA4AAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAADAA4AAAABAAAAAAADAA4AAAACAAAAAAADAA4AAAADAAAAAAADAA4AAAAEAAAAAAADAA4AAAAFAAAAAAADAA4AAAAGAAAAAAADAA4AAAAHAAAAAAADAA4AAAAIAAAAAAADAA4AAAAJAAAAAAADAA4AAAAJAAEAAAADAA4AAAAJAAIAAAADAA4AAAAJAAMAAAADAA4AAAAJAAQAAAADAA4AAAAJAAUAAAADAA4AAAAJAAYAAAADAA4AAAAJAAcAAAADAA4AAAAJAAgAAAADAA4AAAAJAAkAAAADAA4AAAAIAAkAAAADAA4AAAAHAAkAAAADAA4AAAAGAAkAAAADAA4AAAAFAAkAAAADAA4AAAAEAAkAAAADAA4AAAADAAkAAAADAA4AAAACAAkAAAADAA4AAAABAAkAAAADAA4AAAAAAAkAAAADAA4AAAAAAAgAAAADAA4AAAAAAAcAAAADAA4AAAAAAAYAAAADAA4AAAAAAAQAAAADAA4AAAAAAAIAAAADAA4AAAAAAAEAAAADAA4AAAAAAAMAAAADAA4AAAAAAAUAAAADAA4AAAA=")
 tile_set = SubResource("TileSet_d6wxt")
 script = ExtResource("4_mh2wp")
 metadata/_edit_lock_ = true

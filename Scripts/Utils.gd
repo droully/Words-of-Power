@@ -84,11 +84,11 @@ func get_unit_data_by_name(unit_name: String):
 	return unit_data
 
 func get_level_by_number(number):
-	var level = load("res://Scenes/Battlefields/Level"+str(number)+"/Level"+str(number)+".tscn").instantiate()
+	var level = load("res://Scenes/Levels/Level"+str(number)+".tscn").instantiate()
 	return level
 
 func get_battlefield_by_name(battlefield_name: String):
-	var BF = load("res://Scenes/Battlefields/"+battlefield_name+"/"+battlefield_name+".tscn").instantiate()
+	var BF = load("res://Scenes/Levels/"+battlefield_name+".tscn").instantiate()
 	return BF
 
 func array_unique(array: Array) -> Array:

@@ -7,15 +7,21 @@ var initialized = false
 
 var pressed = false
 @export var walkable : bool
-@export var pushable:bool
+@export var pushable : bool
+@export var grabable : bool
+@export var solid : bool
 var tile_position: Vector2i = Vector2i(-1,-1)
 
 @export var tags : Array[String]
 
 func _ready():
 	var bf=get_parent().get_parent()
+
+	Events.unit_set_on_tile.connect(_on_unit_set_on_tile)
+
 	if bf.is_node_ready():
 		initialize(bf)
+
 
 func initialize(_BF: BattleField):
 	if self.initialized:
@@ -41,9 +47,16 @@ func _on_finished_animation(anim):
 	
 func has_tag(tag:String):
 	return tag in tags
+
+func _on_unit_set_on_tile(_unit,from_tile,to_tile):
+	if from_tile == tile_position:
+		on_ground_exited()
+	if to_tile == tile_position:
+		on_ground_entered()
 	
-func step():
+
+func on_ground_entered():
 	pass
-	
-func unstep():
+
+func on_ground_exited():
 	pass

@@ -17,11 +17,19 @@ var previous_player_position
 var size_x = 30
 var size_y = 30
 
+var win=false
 
 func _ready():
 	Events.player_created.connect(_on_player_created)
 	Events.command_unit_moved.connect(_on_command_unit_moved)
+	Events.win_level.connect(_on_win_level)
 	#set_layer_modulate(Layer.PerTileData,Color(1, 1, 1, 0))
+
+func is_tile_solid(tile:Vector2i):
+	var ground = grounds.get_on_tile(tile)
+	if ground:
+		return  ground.solid
+	return false
 
 func is_tile_walkable(tile:Vector2i):
 	var wall = walls.is_tile_solid(tile)
@@ -65,13 +73,11 @@ func pull(tile:Vector2i,dir:Vector2i):
 func distance(tile1: Vector2i, tile2: Vector2i):
 	return abs(tile1.x - tile2.x) + abs(tile1.y - tile2.y)
 
-func check_won_game():
-	
-	for portal in grounds.get_end_portals():
-		if player.tile_position == portal.tile_position:
-			return true
-	return false
-	
+
+
+func _on_win_level():
+	win=true
+
 func _on_command_unit_moved(unit, from_tile,_to_tile):
 	if unit==player:
 		previous_player_position=from_tile
